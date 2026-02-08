@@ -232,6 +232,46 @@
             color: #856404;
         }
 
+        .badge-info {
+            background: #e9f2ff;
+            color: #2b6cb0;
+        }
+
+        .badge-neutral {
+            background: #f1f3f5;
+            color: #495057;
+        }
+
+        .factor-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .tag-filters {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 8px 10px;
+        }
+
+        .tag-filter-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #495057;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .tag-filter-item input {
+            cursor: pointer;
+        }
+
         /* Footer */
         .footer {
             text-align: center;
@@ -383,6 +423,13 @@
                 gap: 12px;
             }
 
+            .factor-controls {
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
             .table-title {
                 font-size: 18px;
             }
@@ -396,6 +443,12 @@
             .search-icon {
                 font-size: 14px;
                 left: 12px;
+            }
+
+            .tag-filters {
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: wrap;
             }
 
             /* Table - Enable horizontal scroll */
@@ -550,28 +603,41 @@
                 <div class="stat-card">
                     <div class="stat-label">Total Factors</div>
                     <div class="stat-value" id="factor-count">--</div>
-                    <div class="stat-subtitle">Registered factors</div>
+                    <div class="stat-subtitle" id="factor-count-subtitle">Visible / total</div>
                 </div>
             </div>
 
             <div class="table-container">
                 <div class="table-header">
                     <div class="table-title">Factor Library</div>
-                    <div class="search-box">
-                        <span class="search-icon">🔍</span>
-                        <input type="text" id="factor-search" placeholder="Search factors...">
+                    <div class="factor-controls">
+                        <div class="tag-filters">
+                            <label class="tag-filter-item">
+                                <input type="checkbox" id="factor-tag-raw" checked>
+                                <span>raw</span>
+                            </label>
+                            <label class="tag-filter-item">
+                                <input type="checkbox" id="factor-tag-neu" checked>
+                                <span>neu</span>
+                            </label>
+                        </div>
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="factor-search" placeholder="Search factors...">
+                        </div>
                     </div>
                 </div>
                 <table>
                     <thead>
                         <tr>
                             <th>Factor Name</th>
+                            <th>Tag</th>
                             <th>Category</th>
                             <th class="sortable" data-sort="ic_mean">IC Mean <span class="sort-icon">↕</span></th>
                             <th class="sortable" data-sort="icir">IC IR <span class="sort-icon">↕</span></th>
+                            <th class="sortable" data-sort="ic_win_rate">IC Win Rate <span class="sort-icon">↕</span></th>
                             <th class="sortable" data-sort="sharpe">Sharpe <span class="sort-icon">↕</span></th>
                             <th class="sortable" data-sort="annual_return">Annual Return <span class="sort-icon">↕</span></th>
-                            <th>Report</th>
                         </tr>
                     </thead>
                     <tbody id="factor-list">
@@ -583,7 +649,7 @@
     </div>
 
     <div class="footer">
-        Generated at 2026-02-09 07:39:34 |
+        Generated at 2026-02-09 07:47:45 |
         Data from datahub/metadata.db
     </div>
 
@@ -738,13 +804,15 @@
     "factors": [
       {
         "name": "alpha101_002_neutralized",
-        "display_name": "alpha101_002 (neutralized)",
+        "display_name": "alpha101_002 (neu)",
         "base_name": "alpha101_002",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_002_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0238,
         "icir": 0.4084,
+        "ic_win_rate": 0.6714,
         "sharpe": 1.5351,
         "annual_return": 12.27,
         "max_drawdown": -22.66
@@ -754,23 +822,27 @@
         "display_name": "alpha101_002 (raw)",
         "base_name": "alpha101_002",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_002_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.024,
         "icir": 0.4117,
+        "ic_win_rate": 0.6728,
         "sharpe": 1.6797,
         "annual_return": 13.42,
         "max_drawdown": -22.4
       },
       {
         "name": "alpha101_003_neutralized",
-        "display_name": "alpha101_003 (neutralized)",
+        "display_name": "alpha101_003 (neu)",
         "base_name": "alpha101_003",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_003_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.001,
         "icir": 0.0171,
+        "ic_win_rate": 0.5066,
         "sharpe": 0.6915,
         "annual_return": 6.61,
         "max_drawdown": -24.3
@@ -780,23 +852,27 @@
         "display_name": "alpha101_003 (raw)",
         "base_name": "alpha101_003",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_003_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0195,
         "icir": 0.3412,
+        "ic_win_rate": 0.6317,
         "sharpe": 3.1159,
         "annual_return": 29.37,
         "max_drawdown": -31.3
       },
       {
         "name": "alpha101_005_neutralized",
-        "display_name": "alpha101_005 (neutralized)",
+        "display_name": "alpha101_005 (neu)",
         "base_name": "alpha101_005",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_005_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0092,
         "icir": 0.1222,
+        "ic_win_rate": 0.5548,
         "sharpe": 1.4259,
         "annual_return": 15.13,
         "max_drawdown": -27.2
@@ -806,23 +882,27 @@
         "display_name": "alpha101_005 (raw)",
         "base_name": "alpha101_005",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_005_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0096,
         "icir": 0.1191,
+        "ic_win_rate": 0.5545,
         "sharpe": 1.3722,
         "annual_return": 20.28,
         "max_drawdown": -30.57
       },
       {
         "name": "alpha101_006_neutralized",
-        "display_name": "alpha101_006 (neutralized)",
+        "display_name": "alpha101_006 (neu)",
         "base_name": "alpha101_006",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_006_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0139,
         "icir": 0.1754,
+        "ic_win_rate": 0.5836,
         "sharpe": 1.9071,
         "annual_return": 22.28,
         "max_drawdown": -21.16
@@ -832,23 +912,27 @@
         "display_name": "alpha101_006 (raw)",
         "base_name": "alpha101_006",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_006_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0159,
         "icir": 0.1981,
+        "ic_win_rate": 0.5923,
         "sharpe": 2.2931,
         "annual_return": 28.6,
         "max_drawdown": -21.14
       },
       {
         "name": "alpha101_009_neutralized",
-        "display_name": "alpha101_009 (neutralized)",
+        "display_name": "alpha101_009 (neu)",
         "base_name": "alpha101_009",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_009_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.014,
         "icir": 0.1279,
+        "ic_win_rate": 0.5617,
         "sharpe": -2.391,
         "annual_return": -29.01,
         "max_drawdown": -99.45
@@ -858,23 +942,27 @@
         "display_name": "alpha101_009 (raw)",
         "base_name": "alpha101_009",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_009_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.014,
         "icir": 0.1255,
+        "ic_win_rate": 0.5623,
         "sharpe": -2.3778,
         "annual_return": -29.04,
         "max_drawdown": -99.45
       },
       {
         "name": "alpha101_010_neutralized",
-        "display_name": "alpha101_010 (neutralized)",
+        "display_name": "alpha101_010 (neu)",
         "base_name": "alpha101_010",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_010_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.008,
         "icir": 0.078,
+        "ic_win_rate": 0.5374,
         "sharpe": -1.4465,
         "annual_return": -17.27,
         "max_drawdown": -94.67
@@ -884,23 +972,27 @@
         "display_name": "alpha101_010 (raw)",
         "base_name": "alpha101_010",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_010_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0076,
         "icir": 0.0741,
+        "ic_win_rate": 0.535,
         "sharpe": -1.6474,
         "annual_return": -19.4,
         "max_drawdown": -96.27
       },
       {
         "name": "alpha101_012_neutralized",
-        "display_name": "alpha101_012 (neutralized)",
+        "display_name": "alpha101_012 (neu)",
         "base_name": "alpha101_012",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_012_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0144,
         "icir": 0.2334,
+        "ic_win_rate": 0.6069,
         "sharpe": 0.1003,
         "annual_return": 0.5,
         "max_drawdown": -57.62
@@ -910,23 +1002,27 @@
         "display_name": "alpha101_012 (raw)",
         "base_name": "alpha101_012",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_012_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0186,
         "icir": 0.2752,
+        "ic_win_rate": 0.6376,
         "sharpe": 0.0849,
         "annual_return": 0.36,
         "max_drawdown": -67.69
       },
       {
         "name": "alpha101_013_neutralized",
-        "display_name": "alpha101_013 (neutralized)",
+        "display_name": "alpha101_013 (neu)",
         "base_name": "alpha101_013",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_013_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0403,
         "icir": 0.6009,
+        "ic_win_rate": 0.7414,
         "sharpe": 2.0579,
         "annual_return": 25.22,
         "max_drawdown": -32.75
@@ -936,23 +1032,27 @@
         "display_name": "alpha101_013 (raw)",
         "base_name": "alpha101_013",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_013_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0404,
         "icir": 0.585,
+        "ic_win_rate": 0.7369,
         "sharpe": 2.5279,
         "annual_return": 29.2,
         "max_drawdown": -26.84
       },
       {
         "name": "alpha101_015_neutralized",
-        "display_name": "alpha101_015 (neutralized)",
+        "display_name": "alpha101_015 (neu)",
         "base_name": "alpha101_015",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_015_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0302,
         "icir": 0.547,
+        "ic_win_rate": 0.7181,
         "sharpe": 2.5454,
         "annual_return": 25.48,
         "max_drawdown": -29.86
@@ -962,23 +1062,27 @@
         "display_name": "alpha101_015 (raw)",
         "base_name": "alpha101_015",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_015_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.031,
         "icir": 0.5566,
+        "ic_win_rate": 0.7152,
         "sharpe": 3.4978,
         "annual_return": 29.66,
         "max_drawdown": -15.88
       },
       {
         "name": "alpha101_016_neutralized",
-        "display_name": "alpha101_016 (neutralized)",
+        "display_name": "alpha101_016 (neu)",
         "base_name": "alpha101_016",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_016_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0406,
         "icir": 0.6282,
+        "ic_win_rate": 0.747,
         "sharpe": 3.0226,
         "annual_return": 38.09,
         "max_drawdown": -29.85
@@ -988,23 +1092,27 @@
         "display_name": "alpha101_016 (raw)",
         "base_name": "alpha101_016",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_016_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0406,
         "icir": 0.5846,
+        "ic_win_rate": 0.7321,
         "sharpe": 3.1342,
         "annual_return": 40.47,
         "max_drawdown": -42.21
       },
       {
         "name": "alpha101_018_neutralized",
-        "display_name": "alpha101_018 (neutralized)",
+        "display_name": "alpha101_018 (neu)",
         "base_name": "alpha101_018",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_018_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0349,
         "icir": 0.321,
+        "ic_win_rate": 0.645,
         "sharpe": -0.4788,
         "annual_return": -8.06,
         "max_drawdown": -80.44
@@ -1014,23 +1122,27 @@
         "display_name": "alpha101_018 (raw)",
         "base_name": "alpha101_018",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_018_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0345,
         "icir": 0.3152,
+        "ic_win_rate": 0.6487,
         "sharpe": -0.5535,
         "annual_return": -8.71,
         "max_drawdown": -86.66
       },
       {
         "name": "alpha101_019_neutralized",
-        "display_name": "alpha101_019 (neutralized)",
+        "display_name": "alpha101_019 (neu)",
         "base_name": "alpha101_019",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_019_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0351,
         "icir": 0.3127,
+        "ic_win_rate": 0.6233,
         "sharpe": 0.8933,
         "annual_return": 12.94,
         "max_drawdown": -30.54
@@ -1040,23 +1152,27 @@
         "display_name": "alpha101_019 (raw)",
         "base_name": "alpha101_019",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_019_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.035,
         "icir": 0.3109,
+        "ic_win_rate": 0.6224,
         "sharpe": 0.9294,
         "annual_return": 13.54,
         "max_drawdown": -30.91
       },
       {
         "name": "alpha101_020_neutralized",
-        "display_name": "alpha101_020 (neutralized)",
+        "display_name": "alpha101_020 (neu)",
         "base_name": "alpha101_020",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_020_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": -0.0012,
         "icir": -0.1064,
+        "ic_win_rate": NaN,
         "sharpe": 0.0,
         "annual_return": 0.0,
         "max_drawdown": 0.0
@@ -1066,36 +1182,42 @@
         "display_name": "alpha101_020 (raw)",
         "base_name": "alpha101_020",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_020_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0014,
         "icir": 0.1133,
+        "ic_win_rate": NaN,
         "sharpe": 0.0,
         "annual_return": 0.0,
         "max_drawdown": 0.0
       },
       {
         "name": "alpha101_021_neutralized",
-        "display_name": "alpha101_021 (neutralized)",
+        "display_name": "alpha101_021 (neu)",
         "base_name": "alpha101_021",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_021_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.039,
         "icir": 0.4239,
+        "ic_win_rate": 0.6847,
         "sharpe": 1.4965,
         "annual_return": 21.48,
         "max_drawdown": -27.85
       },
       {
         "name": "alpha101_022_neutralized",
-        "display_name": "alpha101_022 (neutralized)",
+        "display_name": "alpha101_022 (neu)",
         "base_name": "alpha101_022",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_022_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0055,
         "icir": 0.0878,
+        "ic_win_rate": 0.5404,
         "sharpe": 0.7362,
         "annual_return": 7.88,
         "max_drawdown": -38.31
@@ -1105,62 +1227,72 @@
         "display_name": "alpha101_022 (raw)",
         "base_name": "alpha101_022",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_022_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0069,
         "icir": 0.1197,
+        "ic_win_rate": 0.5661,
         "sharpe": 0.6942,
         "annual_return": 5.2,
         "max_drawdown": -35.43
       },
       {
         "name": "alpha101_023_neutralized",
-        "display_name": "alpha101_023 (neutralized)",
+        "display_name": "alpha101_023 (neu)",
         "base_name": "alpha101_023",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_023_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.024,
         "icir": 0.2903,
+        "ic_win_rate": 0.6173,
         "sharpe": 0.4067,
         "annual_return": 4.61,
         "max_drawdown": -61.54
       },
       {
         "name": "alpha101_024_neutralized",
-        "display_name": "alpha101_024 (neutralized)",
+        "display_name": "alpha101_024 (neu)",
         "base_name": "alpha101_024",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_024_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0131,
         "icir": 0.1758,
+        "ic_win_rate": 0.584,
         "sharpe": -0.1774,
         "annual_return": -2.88,
         "max_drawdown": -76.46
       },
       {
         "name": "alpha101_025_neutralized",
-        "display_name": "alpha101_025 (neutralized)",
+        "display_name": "alpha101_025 (neu)",
         "base_name": "alpha101_025",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_025_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0355,
         "icir": 0.3047,
+        "ic_win_rate": 0.6358,
         "sharpe": 1.6251,
         "annual_return": 26.04,
         "max_drawdown": -38.81
       },
       {
         "name": "alpha101_030_neutralized",
-        "display_name": "alpha101_030 (neutralized)",
+        "display_name": "alpha101_030 (neu)",
         "base_name": "alpha101_030",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_030_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0087,
         "icir": 0.0897,
+        "ic_win_rate": 0.5425,
         "sharpe": -1.3136,
         "annual_return": -16.83,
         "max_drawdown": -96.0
@@ -1170,36 +1302,42 @@
         "display_name": "alpha101_030 (raw)",
         "base_name": "alpha101_030",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_030_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0083,
         "icir": 0.0846,
+        "ic_win_rate": 0.5444,
         "sharpe": -1.4858,
         "annual_return": -18.76,
         "max_drawdown": -96.9
       },
       {
         "name": "alpha101_033_neutralized",
-        "display_name": "alpha101_033 (neutralized)",
+        "display_name": "alpha101_033 (neu)",
         "base_name": "alpha101_033",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_033_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0211,
         "icir": 0.142,
+        "ic_win_rate": 0.6012,
         "sharpe": -2.2878,
         "annual_return": -38.36,
         "max_drawdown": -99.94
       },
       {
         "name": "alpha101_034_neutralized",
-        "display_name": "alpha101_034 (neutralized)",
+        "display_name": "alpha101_034 (neu)",
         "base_name": "alpha101_034",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_034_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0159,
         "icir": 0.1411,
+        "ic_win_rate": 0.5822,
         "sharpe": -2.2306,
         "annual_return": -28.71,
         "max_drawdown": -99.44
@@ -1209,23 +1347,27 @@
         "display_name": "alpha101_034 (raw)",
         "base_name": "alpha101_034",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_034_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0156,
         "icir": 0.1376,
+        "ic_win_rate": 0.5843,
         "sharpe": -2.4458,
         "annual_return": -31.56,
         "max_drawdown": -99.7
       },
       {
         "name": "alpha101_037_neutralized",
-        "display_name": "alpha101_037 (neutralized)",
+        "display_name": "alpha101_037 (neu)",
         "base_name": "alpha101_037",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_037_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0236,
         "icir": 0.2362,
+        "ic_win_rate": 0.6367,
         "sharpe": 0.4321,
         "annual_return": 5.27,
         "max_drawdown": -60.74
@@ -1235,23 +1377,27 @@
         "display_name": "alpha101_037 (raw)",
         "base_name": "alpha101_037",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_037_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.023,
         "icir": 0.2268,
+        "ic_win_rate": 0.6303,
         "sharpe": 0.1758,
         "annual_return": 1.51,
         "max_drawdown": -70.17
       },
       {
         "name": "alpha101_040_neutralized",
-        "display_name": "alpha101_040 (neutralized)",
+        "display_name": "alpha101_040 (neu)",
         "base_name": "alpha101_040",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_040_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0368,
         "icir": 0.4316,
+        "ic_win_rate": 0.6952,
         "sharpe": 2.3581,
         "annual_return": 33.16,
         "max_drawdown": -25.51
@@ -1261,23 +1407,27 @@
         "display_name": "alpha101_040 (raw)",
         "base_name": "alpha101_040",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_040_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0377,
         "icir": 0.3972,
+        "ic_win_rate": 0.6765,
         "sharpe": 2.2007,
         "annual_return": 31.95,
         "max_drawdown": -18.9
       },
       {
         "name": "alpha101_041_neutralized",
-        "display_name": "alpha101_041 (neutralized)",
+        "display_name": "alpha101_041 (neu)",
         "base_name": "alpha101_041",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_041_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": -0.002,
         "icir": -0.0398,
+        "ic_win_rate": 0.4787,
         "sharpe": -1.0736,
         "annual_return": -10.57,
         "max_drawdown": -82.61
@@ -1287,23 +1437,27 @@
         "display_name": "alpha101_041 (raw)",
         "base_name": "alpha101_041",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_041_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": -0.0095,
         "icir": -0.1181,
+        "ic_win_rate": 0.4446,
         "sharpe": -2.8039,
         "annual_return": -33.83,
         "max_drawdown": -99.82
       },
       {
         "name": "alpha101_042_neutralized",
-        "display_name": "alpha101_042 (neutralized)",
+        "display_name": "alpha101_042 (neu)",
         "base_name": "alpha101_042",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_042_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0145,
         "icir": 0.186,
+        "ic_win_rate": 0.5904,
         "sharpe": 2.2835,
         "annual_return": 21.5,
         "max_drawdown": -29.57
@@ -1313,23 +1467,27 @@
         "display_name": "alpha101_042 (raw)",
         "base_name": "alpha101_042",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_042_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0147,
         "icir": 0.1621,
+        "ic_win_rate": 0.567,
         "sharpe": 1.4067,
         "annual_return": 17.3,
         "max_drawdown": -40.26
       },
       {
         "name": "alpha101_044_neutralized",
-        "display_name": "alpha101_044 (neutralized)",
+        "display_name": "alpha101_044 (neu)",
         "base_name": "alpha101_044",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_044_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.021,
         "icir": 0.2919,
+        "ic_win_rate": 0.6183,
         "sharpe": 1.1384,
         "annual_return": 13.66,
         "max_drawdown": -43.35
@@ -1339,23 +1497,27 @@
         "display_name": "alpha101_044 (raw)",
         "base_name": "alpha101_044",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_044_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0355,
         "icir": 0.4952,
+        "ic_win_rate": 0.7119,
         "sharpe": 3.3557,
         "annual_return": 40.36,
         "max_drawdown": -31.96
       },
       {
         "name": "alpha101_045_neutralized",
-        "display_name": "alpha101_045 (neutralized)",
+        "display_name": "alpha101_045 (neu)",
         "base_name": "alpha101_045",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_045_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0114,
         "icir": 0.2011,
+        "ic_win_rate": 0.596,
         "sharpe": 0.0287,
         "annual_return": -0.04,
         "max_drawdown": -51.19
@@ -1365,75 +1527,87 @@
         "display_name": "alpha101_045 (raw)",
         "base_name": "alpha101_045",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_045_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0113,
         "icir": 0.1974,
+        "ic_win_rate": 0.5968,
         "sharpe": 0.0272,
         "annual_return": -0.05,
         "max_drawdown": -51.82
       },
       {
         "name": "alpha101_046_neutralized",
-        "display_name": "alpha101_046 (neutralized)",
+        "display_name": "alpha101_046 (neu)",
         "base_name": "alpha101_046",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_046_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0146,
         "icir": 0.1554,
+        "ic_win_rate": 0.5735,
         "sharpe": -3.2325,
         "annual_return": -37.58,
         "max_drawdown": -99.93
       },
       {
         "name": "alpha101_049_neutralized",
-        "display_name": "alpha101_049 (neutralized)",
+        "display_name": "alpha101_049 (neu)",
         "base_name": "alpha101_049",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_049_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0069,
         "icir": 0.0659,
+        "ic_win_rate": 0.5409,
         "sharpe": -4.0626,
         "annual_return": -46.45,
         "max_drawdown": -99.99
       },
       {
         "name": "alpha101_050_neutralized",
-        "display_name": "alpha101_050 (neutralized)",
+        "display_name": "alpha101_050 (neu)",
         "base_name": "alpha101_050",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_050_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": -0.0033,
         "icir": -0.033,
+        "ic_win_rate": 0.489,
         "sharpe": -0.9686,
         "annual_return": -10.96,
         "max_drawdown": -85.75
       },
       {
         "name": "alpha101_051_neutralized",
-        "display_name": "alpha101_051 (neutralized)",
+        "display_name": "alpha101_051 (neu)",
         "base_name": "alpha101_051",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_051_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0079,
         "icir": 0.078,
+        "ic_win_rate": 0.5514,
         "sharpe": -3.8033,
         "annual_return": -44.64,
         "max_drawdown": -99.99
       },
       {
         "name": "alpha101_053_neutralized",
-        "display_name": "alpha101_053 (neutralized)",
+        "display_name": "alpha101_053 (neu)",
         "base_name": "alpha101_053",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_053_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0125,
         "icir": 0.1204,
+        "ic_win_rate": 0.5765,
         "sharpe": -1.1392,
         "annual_return": -14.12,
         "max_drawdown": -91.26
@@ -1443,36 +1617,42 @@
         "display_name": "alpha101_053 (raw)",
         "base_name": "alpha101_053",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_053_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0125,
         "icir": 0.1206,
+        "ic_win_rate": 0.576,
         "sharpe": -1.1404,
         "annual_return": -14.13,
         "max_drawdown": -91.29
       },
       {
         "name": "alpha101_054_neutralized",
-        "display_name": "alpha101_054 (neutralized)",
+        "display_name": "alpha101_054 (neu)",
         "base_name": "alpha101_054",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_054_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0101,
         "icir": 0.0879,
+        "ic_win_rate": 0.5602,
         "sharpe": -2.2791,
         "annual_return": -29.88,
         "max_drawdown": -99.55
       },
       {
         "name": "alpha101_055_neutralized",
-        "display_name": "alpha101_055 (neutralized)",
+        "display_name": "alpha101_055 (neu)",
         "base_name": "alpha101_055",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_055_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.028,
         "icir": 0.4807,
+        "ic_win_rate": 0.6999,
         "sharpe": 1.2581,
         "annual_return": 12.18,
         "max_drawdown": -30.2
@@ -1482,57 +1662,95 @@
         "display_name": "alpha101_055 (raw)",
         "base_name": "alpha101_055",
         "version_type": "raw",
+        "tag": "raw",
         "report_path": "alpha101/alpha101_055_raw_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0292,
         "icir": 0.5007,
+        "ic_win_rate": 0.7052,
         "sharpe": 1.628,
         "annual_return": 14.91,
         "max_drawdown": -27.83
       },
       {
         "name": "alpha101_061_neutralized",
-        "display_name": "alpha101_061 (neutralized)",
+        "display_name": "alpha101_061 (neu)",
         "base_name": "alpha101_061",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_061_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0145,
         "icir": 0.1926,
+        "ic_win_rate": 0.602,
         "sharpe": 0.2546,
         "annual_return": 2.5,
         "max_drawdown": -37.36
       },
       {
         "name": "alpha101_062_neutralized",
-        "display_name": "alpha101_062 (neutralized)",
+        "display_name": "alpha101_062 (neu)",
         "base_name": "alpha101_062",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_062_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0084,
         "icir": 0.0925,
+        "ic_win_rate": 0.5411,
         "sharpe": -0.0585,
         "annual_return": -1.97,
         "max_drawdown": -64.24
       },
       {
         "name": "alpha101_064_neutralized",
-        "display_name": "alpha101_064 (neutralized)",
+        "display_name": "alpha101_064 (neu)",
         "base_name": "alpha101_064",
         "version_type": "neutralized",
+        "tag": "neu",
         "report_path": "alpha101/alpha101_064_neutralized_20100101_20260206.html",
         "category": "technical",
         "ic_mean": 0.0128,
         "icir": 0.1484,
+        "ic_win_rate": 0.5759,
         "sharpe": -0.8962,
         "annual_return": -11.91,
         "max_drawdown": -87.77
+      },
+      {
+        "name": "alpha101_074_neutralized",
+        "display_name": "alpha101_074 (neu)",
+        "base_name": "alpha101_074",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha101/alpha101_074_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0107,
+        "icir": 0.1539,
+        "ic_win_rate": 0.5579,
+        "sharpe": 0.3325,
+        "annual_return": 3.62,
+        "max_drawdown": -35.63
+      },
+      {
+        "name": "alpha101_075_neutralized",
+        "display_name": "alpha101_075 (neu)",
+        "base_name": "alpha101_075",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha101/alpha101_075_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0066,
+        "icir": 0.1067,
+        "ic_win_rate": 0.5384,
+        "sharpe": 0.2715,
+        "annual_return": 2.54,
+        "max_drawdown": -45.99
       }
     ],
-    "factor_count": 61
+    "factor_count": 63
   },
-  "generated_at": "2026-02-09 07:39:34"
+  "generated_at": "2026-02-09 07:47:45"
 };
 
         // Navigation
@@ -1605,22 +1823,25 @@
         // Populate Factors Panel
         function populateFactorsPanel() {
             const { factors } = dashboardData;
+            const allFactors = factors.factors || [];
+            const searchInput = document.getElementById('factor-search');
+            const rawTagCheckbox = document.getElementById('factor-tag-raw');
+            const neuTagCheckbox = document.getElementById('factor-tag-neu');
 
-            document.getElementById('factor-count').textContent = formatNumber(factors.factor_count);
+            applyFactorFilters();
 
-            buildFactorReportMap();
-            renderFactors(factors.factors);
+            searchInput.addEventListener('input', (e) => {
+                currentFactorQuery = e.target.value.toLowerCase().trim();
+                applyFactorFilters();
+            });
 
-            // Search
-            document.getElementById('factor-search').addEventListener('input', (e) => {
-                const query = e.target.value.toLowerCase();
-                const filtered = factors.factors.filter(f =>
-                    f.display_name.toLowerCase().includes(query) ||
-                    f.base_name.toLowerCase().includes(query) ||
-                    f.category.toLowerCase().includes(query) ||
-                    f.version_type.toLowerCase().includes(query)
-                );
-                renderFactors(filtered);
+            [rawTagCheckbox, neuTagCheckbox].forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    selectedFactorTags = new Set();
+                    if (rawTagCheckbox.checked) selectedFactorTags.add('raw');
+                    if (neuTagCheckbox.checked) selectedFactorTags.add('neu');
+                    applyFactorFilters();
+                });
             });
 
             // Sort functionality
@@ -1642,27 +1863,53 @@
                     });
                     header.classList.add(currentSortDirection);
 
-                    // Sort and render
-                    const sorted = sortFactors(factors.factors, column, currentSortDirection);
-                    renderFactors(sorted);
+                    applyFactorFilters();
                 });
             });
-        }
 
-        // Factor report path mapping
-        const factorReports = {};
-
-        function buildFactorReportMap() {
-            // Build mapping from factor name to report path
-            const factors = dashboardData.factors.factors;
-            factors.forEach(f => {
-                // Use the report_path embedded in the factor data
-                factorReports[f.name] = f.report_path;
-            });
+            function applyFactorFilters() {
+                const filtered = filterFactors(allFactors);
+                const visible = currentSortColumn
+                    ? sortFactors(filtered, currentSortColumn, currentSortDirection)
+                    : filtered;
+                renderFactors(visible);
+                updateFactorCount(visible.length, allFactors.length);
+            }
         }
 
         let currentSortColumn = null;
         let currentSortDirection = 'desc';
+        let currentFactorQuery = '';
+        let selectedFactorTags = new Set(['raw', 'neu']);
+
+        function normalizeFactorTag(factor) {
+            const rawTag = (factor.tag || '').toString().toLowerCase();
+            if (rawTag === 'raw' || rawTag === 'neu') {
+                return rawTag;
+            }
+            const version = (factor.version_type || '').toString().toLowerCase();
+            return version === 'raw' ? 'raw' : 'neu';
+        }
+
+        function filterFactors(factors) {
+            return factors.filter(f => {
+                const tag = normalizeFactorTag(f);
+                const matchTag = selectedFactorTags.has(tag);
+                const matchQuery = !currentFactorQuery ||
+                    f.display_name.toLowerCase().includes(currentFactorQuery) ||
+                    f.base_name.toLowerCase().includes(currentFactorQuery) ||
+                    f.category.toLowerCase().includes(currentFactorQuery) ||
+                    (f.version_type || '').toLowerCase().includes(currentFactorQuery) ||
+                    tag.includes(currentFactorQuery);
+                return matchTag && matchQuery;
+            });
+        }
+
+        function updateFactorCount(visibleCount, totalCount) {
+            document.getElementById('factor-count').textContent = formatNumber(visibleCount);
+            document.getElementById('factor-count-subtitle').textContent =
+                `Visible / total: ${formatNumber(visibleCount)} / ${formatNumber(totalCount)}`;
+        }
 
         function sortFactors(factors, column, direction) {
             const sorted = [...factors].sort((a, b) => {
@@ -1689,33 +1936,35 @@
                 const className = num > 0 ? 'positive' : num < 0 ? 'negative' : '';
                 return `<span class="num ${className}">${formatted}</span>`;
             };
+            const formatPercent = (val, decimals = 2) => {
+                if (val === null || val === undefined) return '--';
+                const pct = val * 100;
+                const formatted = pct.toFixed(decimals);
+                const num = parseFloat(formatted);
+                const className = num > 0 ? 'positive' : num < 0 ? 'negative' : '';
+                return `<span class="num ${className}">${formatted}%</span>`;
+            };
 
             const html = factors.length > 0
                 ? factors.map(f => `
                     <tr>
-                        <td><strong>${f.display_name}</strong></td>
+                        <td><a class="factor-link" href="${f.report_path}"><strong>${f.display_name}</strong></a></td>
+                        <td>
+                            <span class="badge ${normalizeFactorTag(f) === 'raw' ? 'badge-info' : 'badge-neutral'}">
+                                ${normalizeFactorTag(f)}
+                            </span>
+                        </td>
                         <td><span class="badge badge-primary">${f.category}</span></td>
                         <td>${formatMetric(f.ic_mean)}</td>
                         <td>${formatMetric(f.icir)}</td>
+                        <td>${formatPercent(f.ic_win_rate, 2)}</td>
                         <td>${formatMetric(f.sharpe)}</td>
                         <td>${formatMetric(f.annual_return, 2)}%</td>
-                        <td>
-                            <button class="view-report-btn" onclick="viewReport('${f.name}')">
-                                View Report
-                            </button>
-                        </td>
                     </tr>
                 `).join('')
-                : '<tr><td colspan="7" style="text-align: center; color: #999; padding: 40px;">No factors found</td></tr>';
+                : '<tr><td colspan="8" style="text-align: center; color: #999; padding: 40px;">No factors found</td></tr>';
 
             document.getElementById('factor-list').innerHTML = html;
-        }
-
-        function viewReport(factorName) {
-            const reportPath = factorReports[factorName];
-            if (reportPath) {
-                window.location.href = reportPath;
-            }
         }
 
         // Initialize
