@@ -649,7 +649,7 @@
     </div>
 
     <div class="footer">
-        Generated at 2026-02-09 07:47:45 |
+        Generated at 2026-02-09 07:56:06 |
         Data from datahub/metadata.db
     </div>
 
@@ -1746,11 +1746,86 @@
         "sharpe": 0.2715,
         "annual_return": 2.54,
         "max_drawdown": -45.99
+      },
+      {
+        "name": "alpha101_099_neutralized",
+        "display_name": "alpha101_099 (neu)",
+        "base_name": "alpha101_099",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha101/alpha101_099_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0043,
+        "icir": 0.0629,
+        "ic_win_rate": 0.526,
+        "sharpe": -0.0791,
+        "annual_return": -1.85,
+        "max_drawdown": -40.96
+      },
+      {
+        "name": "alpha101_101_neutralized",
+        "display_name": "alpha101_101 (neu)",
+        "base_name": "alpha101_101",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha101/alpha101_101_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0141,
+        "icir": -0.1014,
+        "ic_win_rate": 0.4235,
+        "sharpe": 3.3958,
+        "annual_return": 83.24,
+        "max_drawdown": -23.32
+      },
+      {
+        "name": "alpha191_014_neutralized",
+        "display_name": "alpha191_014 (neu)",
+        "base_name": "alpha191_014",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha191/alpha191_014_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0435,
+        "icir": -0.3224,
+        "ic_win_rate": 0.3523,
+        "sharpe": -0.1659,
+        "annual_return": -4.43,
+        "max_drawdown": -78.69
+      },
+      {
+        "name": "alpha191_014_raw",
+        "display_name": "alpha191_014 (raw)",
+        "base_name": "alpha191_014",
+        "version_type": "raw",
+        "tag": "raw",
+        "report_path": "alpha191/alpha191_014_raw_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0439,
+        "icir": -0.3216,
+        "ic_win_rate": 0.3539,
+        "sharpe": -0.1757,
+        "annual_return": -4.65,
+        "max_drawdown": -79.84
+      },
+      {
+        "name": "alpha191_015_neutralized",
+        "display_name": "alpha191_015 (neu)",
+        "base_name": "alpha191_015",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha191/alpha191_015_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0263,
+        "icir": 0.3422,
+        "ic_win_rate": 0.6604,
+        "sharpe": 8.3594,
+        "annual_return": 234.45,
+        "max_drawdown": -9.34
       }
     ],
-    "factor_count": 63
+    "factor_count": 68
   },
-  "generated_at": "2026-02-09 07:47:45"
+  "generated_at": "2026-02-09 07:56:06"
 };
 
         // Navigation
@@ -1912,12 +1987,18 @@
         }
 
         function sortFactors(factors, column, direction) {
+            const absSortColumns = new Set(['ic_mean', 'icir']);
             const sorted = [...factors].sort((a, b) => {
                 let aVal = a[column];
                 let bVal = b[column];
 
                 if (aVal === null || aVal === undefined) return 1;
                 if (bVal === null || bVal === undefined) return -1;
+
+                if (absSortColumns.has(column)) {
+                    aVal = Math.abs(aVal);
+                    bVal = Math.abs(bVal);
+                }
 
                 if (direction === 'asc') {
                     return aVal - bVal;
