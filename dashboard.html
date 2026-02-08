@@ -255,6 +255,65 @@
         .negative {
             color: #dc3545;
         }
+
+        /* Sortable table */
+        .sortable {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .sortable:hover {
+            background: #e9ecef;
+        }
+
+        .sort-icon {
+            font-size: 12px;
+            color: #ccc;
+            margin-left: 4px;
+        }
+
+        .sortable.asc .sort-icon {
+            color: #2E86AB;
+        }
+
+        .sortable.desc .sort-icon {
+            color: #2E86AB;
+        }
+
+        .sortable.asc .sort-icon::after {
+            content: ' ▲';
+        }
+
+        .sortable.desc .sort-icon::after {
+            content: ' ▼';
+        }
+
+        /* Factor link */
+        .factor-link {
+            color: #2E86AB;
+            text-decoration: none;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .factor-link:hover {
+            text-decoration: underline;
+        }
+
+        .view-report-btn {
+            background: #2E86AB;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+
+        .view-report-btn:hover {
+            background: #1a5a7a;
+        }
     </style>
 </head>
 <body>
@@ -345,11 +404,11 @@
                         <tr>
                             <th>Factor Name</th>
                             <th>Category</th>
-                            <th>IC Mean</th>
-                            <th>IC IR</th>
-                            <th>Sharpe</th>
-                            <th>Annual Return</th>
-                            <th>Version</th>
+                            <th class="sortable" data-sort="ic_mean">IC Mean <span class="sort-icon">↕</span></th>
+                            <th class="sortable" data-sort="icir">IC IR <span class="sort-icon">↕</span></th>
+                            <th class="sortable" data-sort="sharpe">Sharpe <span class="sort-icon">↕</span></th>
+                            <th class="sortable" data-sort="annual_return">Annual Return <span class="sort-icon">↕</span></th>
+                            <th>Report</th>
                         </tr>
                     </thead>
                     <tbody id="factor-list">
@@ -361,7 +420,7 @@
     </div>
 
     <div class="footer">
-        Generated at 2026-02-08 14:00:00 |
+        Generated at 2026-02-08 14:27:03 |
         Data from datahub/metadata.db
     </div>
 
@@ -501,365 +560,517 @@
         "file_count": 254,
         "updated_at": "2026-02-07 08:15:45.122167",
         "status": "active"
-      },
-      {
-        "name": "large_order_turnover_20d",
-        "description": "",
-        "row_count": 12500399,
-        "size_mb": 96.68,
-        "date_start": "20100115",
-        "date_end": "20260206",
-        "file_count": 188,
-        "updated_at": "2026-02-08 10:54:25.389792",
-        "status": "active"
-      },
-      {
-        "name": "momentum_20d",
-        "description": "",
-        "row_count": 14101453,
-        "size_mb": 99.99,
-        "date_start": "20051128",
-        "date_end": "20260206",
-        "file_count": 239,
-        "updated_at": "2026-02-08 10:41:27.549894",
-        "status": "active"
       }
     ],
-    "total_rows": 98382238,
-    "total_size_mb": 3272.43,
-    "table_count": 14,
+    "total_rows": 71780386,
+    "total_size_mb": 3075.76,
+    "table_count": 12,
     "date_range": {
       "start": "20000101",
       "end": "20260207"
     },
-    "last_updated": "2026-02-08 10:54:25.389792"
+    "last_updated": "2026-02-07 19:10:02.875238"
   },
   "factors": {
     "factors": [
       {
-        "name": "large_order_turnover_20d",
-        "description": "20日大单换手率（大单+特大单成交额 / 日成交额）",
-        "category": "money_flow",
-        "ic_mean": null,
-        "icir": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null,
-        "row_count": 12612368,
-        "date_start": "20100104",
-        "date_end": "20260206",
-        "updated_at": "2026-02-08 10:54:25.466546",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": -1,
-        "tags": "[\"moneyflow\", \"large_order\", \"turnover\"]"
-      },
-      {
-        "name": "momentum_20d",
-        "description": "20日价格动量因子",
-        "category": "momentum",
-        "ic_mean": null,
-        "icir": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null,
-        "row_count": 14101453,
-        "date_start": "20050104",
-        "date_end": "20260206",
-        "updated_at": "2026-02-08 10:41:27.576175",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": -1,
-        "tags": "[\"classic\", \"price\"]"
-      },
-      {
-        "name": "flib_bias_20d",
-        "description": "From factor_lib.BIAS: -(close - MA20)/MA20",
+        "name": "f2s_ar_26d_neutralized",
+        "display_name": "f2s_ar_26d (neutralized)",
+        "base_name": "f2s_ar_26d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/f2s_ar_26d_mktcap_neutralized_20100104_20260206.html",
         "category": "technical",
-        "ic_mean": -0.1479,
-        "icir": -0.4605,
-        "sharpe": -5.0776,
-        "annual_return": -69.39,
-        "max_drawdown": -13.36,
-        "row_count": 0,
-        "date_start": null,
-        "date_end": null,
-        "updated_at": "2026-02-08 07:30:36.834364",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": 1,
-        "tags": "[\"factor_lib\", \"stock_adapted\", \"bias\"]"
+        "ic_mean": 0.0309,
+        "icir": 0.2522,
+        "sharpe": 1.1258,
+        "annual_return": 18.71,
+        "max_drawdown": -29.94
       },
       {
-        "name": "flib_illiq_20d",
-        "description": "From factor_lib.ILLIQ family: rolling mean(|ret|/amount), window=20",
+        "name": "f2s_ar_26d_raw",
+        "display_name": "f2s_ar_26d (raw)",
+        "base_name": "f2s_ar_26d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/f2s_ar_26d_raw_20100104_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0337,
+        "icir": 0.2754,
+        "sharpe": 1.0014,
+        "annual_return": 17.2,
+        "max_drawdown": -34.99
+      },
+      {
+        "name": "f2s_atr_20d_neutralized",
+        "display_name": "f2s_atr_20d (neutralized)",
+        "base_name": "f2s_atr_20d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/f2s_atr_20d_mktcap_neutralized_20100104_20260206.html",
+        "category": "volatility",
+        "ic_mean": 0.0028,
+        "icir": 0.0222,
+        "sharpe": 0.0472,
+        "annual_return": -0.47,
+        "max_drawdown": -51.45
+      },
+      {
+        "name": "f2s_atr_20d_raw",
+        "display_name": "f2s_atr_20d (raw)",
+        "base_name": "f2s_atr_20d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/f2s_atr_20d_raw_20100104_20260206.html",
+        "category": "volatility",
+        "ic_mean": 0.0256,
+        "icir": 0.215,
+        "sharpe": 1.0453,
+        "annual_return": 15.33,
+        "max_drawdown": -34.39
+      },
+      {
+        "name": "f2s_atrc_20d_neutralized",
+        "display_name": "f2s_atrc_20d (neutralized)",
+        "base_name": "f2s_atrc_20d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/f2s_atrc_20d_mktcap_neutralized_20100104_20260206.html",
+        "category": "volatility",
+        "ic_mean": 0.0399,
+        "icir": 0.2349,
+        "sharpe": 1.0728,
+        "annual_return": 23.71,
+        "max_drawdown": -35.75
+      },
+      {
+        "name": "f2s_atrc_20d_raw",
+        "display_name": "f2s_atrc_20d (raw)",
+        "base_name": "f2s_atrc_20d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/f2s_atrc_20d_raw_20100104_20260206.html",
+        "category": "volatility",
+        "ic_mean": 0.037,
+        "icir": 0.2004,
+        "sharpe": 0.7427,
+        "annual_return": 16.52,
+        "max_drawdown": -51.4
+      },
+      {
+        "name": "f2s_bias_20d_neutralized",
+        "display_name": "f2s_bias_20d (neutralized)",
+        "base_name": "f2s_bias_20d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/f2s_bias_20d_mktcap_neutralized_20100104_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0492,
+        "icir": 0.3205,
+        "sharpe": 0.599,
+        "annual_return": 10.87,
+        "max_drawdown": -40.22
+      },
+      {
+        "name": "f2s_bias_20d_raw",
+        "display_name": "f2s_bias_20d (raw)",
+        "base_name": "f2s_bias_20d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/f2s_bias_20d_raw_20100104_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0472,
+        "icir": 0.2852,
+        "sharpe": 0.2805,
+        "annual_return": 3.89,
+        "max_drawdown": -55.58
+      },
+      {
+        "name": "f2s_br_26d_neutralized",
+        "display_name": "f2s_br_26d (neutralized)",
+        "base_name": "f2s_br_26d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/f2s_br_26d_mktcap_neutralized_20100104_20260206.html",
+        "category": "volatility",
+        "ic_mean": -0.0289,
+        "icir": -0.2425,
+        "sharpe": -0.2835,
+        "annual_return": -5.83,
+        "max_drawdown": -66.65
+      },
+      {
+        "name": "f2s_br_26d_raw",
+        "display_name": "f2s_br_26d (raw)",
+        "base_name": "f2s_br_26d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/f2s_br_26d_raw_20100104_20260206.html",
+        "category": "volatility",
+        "ic_mean": -0.0303,
+        "icir": -0.2412,
+        "sharpe": -0.2706,
+        "annual_return": -6.13,
+        "max_drawdown": -67.3
+      },
+      {
+        "name": "f2s_cmo_20d_neutralized",
+        "display_name": "f2s_cmo_20d (neutralized)",
+        "base_name": "f2s_cmo_20d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/f2s_cmo_20d_mktcap_neutralized_20100104_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0335,
+        "icir": -0.251,
+        "sharpe": 0.2541,
+        "annual_return": 2.98,
+        "max_drawdown": -58.93
+      },
+      {
+        "name": "f2s_cmo_20d_raw",
+        "display_name": "f2s_cmo_20d (raw)",
+        "base_name": "f2s_cmo_20d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/f2s_cmo_20d_raw_20100104_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0319,
+        "icir": -0.2235,
+        "sharpe": 0.4183,
+        "annual_return": 6.49,
+        "max_drawdown": -54.88
+      },
+      {
+        "name": "f2s_cvi_20d_neutralized",
+        "display_name": "f2s_cvi_20d (neutralized)",
+        "base_name": "f2s_cvi_20d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/f2s_cvi_20d_mktcap_neutralized_20100104_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0373,
+        "icir": 0.3338,
+        "sharpe": 2.4712,
+        "annual_return": 44.94,
+        "max_drawdown": -18.94
+      },
+      {
+        "name": "f2s_cvi_20d_raw",
+        "display_name": "f2s_cvi_20d (raw)",
+        "base_name": "f2s_cvi_20d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/f2s_cvi_20d_raw_20100104_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0365,
+        "icir": 0.3117,
+        "sharpe": 2.0062,
+        "annual_return": 38.57,
+        "max_drawdown": -24.04
+      },
+      {
+        "name": "f2s_emv_14d_neutralized",
+        "display_name": "f2s_emv_14d (neutralized)",
+        "base_name": "f2s_emv_14d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/f2s_emv_14d_mktcap_neutralized_20100104_20260206.html",
         "category": "liquidity",
-        "ic_mean": 0.0242,
-        "icir": 0.1865,
-        "sharpe": 2.4443,
-        "annual_return": 84.37,
-        "max_drawdown": -97.81,
-        "row_count": 0,
-        "date_start": null,
-        "date_end": null,
-        "updated_at": "2026-02-08 07:24:00.648077",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": 1,
-        "tags": "[\"factor_lib\", \"stock_adapted\", \"illiq\"]"
+        "ic_mean": -0.002,
+        "icir": -0.0144,
+        "sharpe": 0.0742,
+        "annual_return": -0.28,
+        "max_drawdown": -72.87
       },
       {
-        "name": "flib_cmo_14d",
-        "description": "From factor_lib.CMO family: Chande Momentum Oscillator(14)",
+        "name": "f2s_emv_14d_raw",
+        "display_name": "f2s_emv_14d (raw)",
+        "base_name": "f2s_emv_14d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/f2s_emv_14d_raw_20100104_20260206.html",
+        "category": "liquidity",
+        "ic_mean": -0.0298,
+        "icir": -0.2423,
+        "sharpe": -1.3694,
+        "annual_return": -20.13,
+        "max_drawdown": -97.01
+      },
+      {
+        "name": "f2s_highlow_mean_20d_neutralized",
+        "display_name": "f2s_highlow_mean_20d (neutralized)",
+        "base_name": "f2s_highlow_mean_20d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/f2s_highlow_mean_20d_mktcap_neutralized_20100104_20260206.html",
         "category": "technical",
-        "ic_mean": -0.0359,
-        "icir": -0.2555,
-        "sharpe": -0.4178,
-        "annual_return": -3.33,
-        "max_drawdown": -36.65,
-        "row_count": 0,
-        "date_start": null,
-        "date_end": null,
-        "updated_at": "2026-02-08 07:23:56.627995",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": -1,
-        "tags": "[\"factor_lib\", \"stock_adapted\", \"cmo\"]"
+        "ic_mean": 0.0475,
+        "icir": 0.284,
+        "sharpe": 1.5327,
+        "annual_return": 37.26,
+        "max_drawdown": -29.16
       },
       {
-        "name": "flib_vr_26d",
-        "description": "From factor_lib.VR family: volume ratio over 26 days",
-        "category": "price_volume",
-        "ic_mean": -0.0271,
-        "icir": -0.2466,
-        "sharpe": -1.6078,
-        "annual_return": -12.88,
-        "max_drawdown": -76.12,
-        "row_count": 0,
-        "date_start": null,
-        "date_end": null,
-        "updated_at": "2026-02-08 07:23:50.898416",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": -1,
-        "tags": "[\"factor_lib\", \"stock_adapted\", \"vr\"]"
-      },
-      {
-        "name": "flib_cv_20d",
-        "description": "From factor_lib.CV family: rolling std/mean of close, window=20",
-        "category": "risk",
-        "ic_mean": -0.0318,
-        "icir": -0.1836,
-        "sharpe": -0.8387,
-        "annual_return": -8.11,
-        "max_drawdown": -62.23,
-        "row_count": 0,
-        "date_start": null,
-        "date_end": null,
-        "updated_at": "2026-02-08 07:23:41.823562",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": -1,
-        "tags": "[\"factor_lib\", \"stock_adapted\", \"cv\"]"
-      },
-      {
-        "name": "flib_atrc_14d",
-        "description": "From factor_lib.ATRC family: ATR(14)/close",
-        "category": "risk",
-        "ic_mean": -0.0495,
-        "icir": -0.2552,
-        "sharpe": -1.3426,
-        "annual_return": -13.43,
-        "max_drawdown": -78.31,
-        "row_count": 0,
-        "date_start": null,
-        "date_end": null,
-        "updated_at": "2026-02-08 07:23:30.873135",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": -1,
-        "tags": "[\"factor_lib\", \"stock_adapted\", \"atrc\"]"
-      },
-      {
-        "name": "flib_psy_12d",
-        "description": "From factor_lib.PSY family: ratio of up days in past 12 days",
+        "name": "f2s_highlow_mean_20d_raw",
+        "display_name": "f2s_highlow_mean_20d (raw)",
+        "base_name": "f2s_highlow_mean_20d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/f2s_highlow_mean_20d_raw_20100104_20260206.html",
         "category": "technical",
-        "ic_mean": -0.018,
-        "icir": -0.1718,
-        "sharpe": 0.4578,
-        "annual_return": 2.37,
-        "max_drawdown": -15.38,
-        "row_count": 0,
-        "date_start": null,
-        "date_end": null,
-        "updated_at": "2026-02-08 07:08:52.153279",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": -1,
-        "tags": "[\"factor_lib\", \"stock_adapted\", \"psy\"]"
+        "ic_mean": 0.0443,
+        "icir": 0.2475,
+        "sharpe": 1.1812,
+        "annual_return": 29.41,
+        "max_drawdown": -31.16
       },
       {
-        "name": "flib_rsi_14d",
-        "description": "From factor_lib.RSI family: RSI(14)",
+        "name": "f2s_highlow_std_20d_neutralized",
+        "display_name": "f2s_highlow_std_20d (neutralized)",
+        "base_name": "f2s_highlow_std_20d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/f2s_highlow_std_20d_mktcap_neutralized_20100104_20260206.html",
         "category": "technical",
-        "ic_mean": -0.0362,
-        "icir": -0.2582,
-        "sharpe": -0.6008,
-        "annual_return": -4.63,
-        "max_drawdown": -42.32,
-        "row_count": 0,
-        "date_start": null,
-        "date_end": null,
-        "updated_at": "2026-02-08 07:06:26.532110",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": -1,
-        "tags": "[\"factor_lib\", \"stock_adapted\", \"rsi\"]"
+        "ic_mean": 0.05,
+        "icir": 0.4048,
+        "sharpe": 2.2488,
+        "annual_return": 44.45,
+        "max_drawdown": -29.76
       },
       {
-        "name": "flib_ma_gap_20d",
-        "description": "From factor_lib.MA family: close/MA20 - 1",
+        "name": "f2s_highlow_std_20d_raw",
+        "display_name": "f2s_highlow_std_20d (raw)",
+        "base_name": "f2s_highlow_std_20d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/f2s_highlow_std_20d_raw_20100104_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0462,
+        "icir": 0.3297,
+        "sharpe": 1.4899,
+        "annual_return": 32.38,
+        "max_drawdown": -34.52
+      },
+      {
+        "name": "f2s_tema_20d_neutralized",
+        "display_name": "f2s_tema_20d (neutralized)",
+        "base_name": "f2s_tema_20d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/f2s_tema_20d_mktcap_neutralized_20100104_20260206.html",
         "category": "momentum",
-        "ic_mean": -0.0475,
-        "icir": -0.2852,
-        "sharpe": -0.3955,
-        "annual_return": -4.46,
-        "max_drawdown": -47.84,
-        "row_count": 0,
-        "date_start": null,
-        "date_end": null,
-        "updated_at": "2026-02-08 07:06:16.926224",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": -1,
-        "tags": "[\"factor_lib\", \"stock_adapted\", \"ma\"]"
+        "ic_mean": 0.01,
+        "icir": 0.0968,
+        "sharpe": 0.5424,
+        "annual_return": 6.04,
+        "max_drawdown": -30.64
       },
       {
-        "name": "flib_volatility_20d",
-        "description": "From factor_lib volatility family: 20-day std of daily returns",
-        "category": "risk",
-        "ic_mean": -0.047,
-        "icir": -0.2547,
-        "sharpe": -1.3701,
-        "annual_return": -13.11,
-        "max_drawdown": -78.88,
-        "row_count": 0,
-        "date_start": null,
-        "date_end": null,
-        "updated_at": "2026-02-08 07:06:05.493732",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": -1,
-        "tags": "[\"factor_lib\", \"stock_adapted\", \"volatility\"]"
-      },
-      {
-        "name": "flib_rocma_20d",
-        "description": "From factor_lib.ROCMA family: pct_change(MA20, 5)",
+        "name": "f2s_tema_20d_raw",
+        "display_name": "f2s_tema_20d (raw)",
+        "base_name": "f2s_tema_20d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/f2s_tema_20d_raw_20100104_20260206.html",
         "category": "momentum",
-        "ic_mean": -0.037,
-        "icir": -0.2332,
-        "sharpe": -1.9725,
-        "annual_return": -17.31,
-        "max_drawdown": -86.02,
-        "row_count": 0,
-        "date_start": null,
-        "date_end": null,
-        "updated_at": "2026-02-08 07:05:57.242495",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": -1,
-        "tags": "[\"factor_lib\", \"stock_adapted\", \"rocma\"]"
+        "ic_mean": -0.0134,
+        "icir": -0.1329,
+        "sharpe": -0.9883,
+        "annual_return": -12.44,
+        "max_drawdown": -87.76
       },
       {
-        "name": "flib_ar_26d",
-        "description": "From factor_lib.AR: rolling sum(high-open) / sum(open-low), window=26",
+        "name": "f2s_vmacd_12_26_9_neutralized",
+        "display_name": "f2s_vmacd_12_26_9 (neutralized)",
+        "base_name": "f2s_vmacd_12_26_9",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/f2s_vmacd_12_26_9_mktcap_neutralized_20100104_20260206.html",
         "category": "technical",
-        "ic_mean": -0.0387,
-        "icir": -0.321,
-        "sharpe": -1.414,
-        "annual_return": -9.5,
-        "max_drawdown": -65.67,
-        "row_count": 0,
-        "date_start": null,
-        "date_end": null,
-        "updated_at": "2026-02-08 07:02:14.284214",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": -1,
-        "tags": "[\"factor_lib\", \"stock_adapted\", \"ar\"]"
+        "ic_mean": -0.019,
+        "icir": -0.2416,
+        "sharpe": -1.6122,
+        "annual_return": -15.13,
+        "max_drawdown": -92.06
       },
       {
-        "name": "flib_wqalpha006_10d",
-        "description": "From factor_lib.WQAlpha006: -corr(open, volume, 10)",
-        "category": "price_volume",
-        "ic_mean": 0.0195,
-        "icir": 0.2284,
-        "sharpe": 2.354,
-        "annual_return": 11.0,
-        "max_drawdown": -8.49,
-        "row_count": 0,
-        "date_start": null,
-        "date_end": null,
-        "updated_at": "2026-02-08 07:02:09.900934",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": 1,
-        "tags": "[\"factor_lib\", \"stock_adapted\", \"wqalpha\"]"
+        "name": "f2s_vmacd_12_26_9_raw",
+        "display_name": "f2s_vmacd_12_26_9 (raw)",
+        "base_name": "f2s_vmacd_12_26_9",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/f2s_vmacd_12_26_9_raw_20100104_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0213,
+        "icir": -0.2665,
+        "sharpe": -1.6721,
+        "annual_return": -17.17,
+        "max_drawdown": -94.43
       },
       {
-        "name": "flib_atr_14d",
-        "description": "From factor_lib.ATR: 14-day average true range",
-        "category": "risk",
-        "ic_mean": -0.0325,
-        "icir": -0.2522,
-        "sharpe": -0.9227,
-        "annual_return": -8.37,
-        "max_drawdown": -63.47,
-        "row_count": 0,
-        "date_start": null,
-        "date_end": null,
-        "updated_at": "2026-02-08 07:02:09.242139",
-        "version": "1.0.0",
-        "author": "system",
-        "universe": "cn_stock",
-        "freq": "daily",
-        "direction": -1,
-        "tags": "[\"factor_lib\", \"stock_adapted\", \"atr\"]"
+        "name": "f2s_vol_std_20d_neutralized",
+        "display_name": "f2s_vol_std_20d (neutralized)",
+        "base_name": "f2s_vol_std_20d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/f2s_vol_std_20d_mktcap_neutralized_20100104_20260206.html",
+        "category": "volatility",
+        "ic_mean": 0.0417,
+        "icir": 0.2599,
+        "sharpe": 1.146,
+        "annual_return": 24.76,
+        "max_drawdown": -30.84
+      },
+      {
+        "name": "f2s_vol_std_20d_raw",
+        "display_name": "f2s_vol_std_20d (raw)",
+        "base_name": "f2s_vol_std_20d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/f2s_vol_std_20d_raw_20100104_20260206.html",
+        "category": "volatility",
+        "ic_mean": 0.0388,
+        "icir": 0.2227,
+        "sharpe": 0.8333,
+        "annual_return": 18.41,
+        "max_drawdown": -38.73
+      },
+      {
+        "name": "f2s_vr_26d_neutralized",
+        "display_name": "f2s_vr_26d (neutralized)",
+        "base_name": "f2s_vr_26d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/f2s_vr_26d_mktcap_neutralized_20100104_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.029,
+        "icir": 0.2855,
+        "sharpe": 1.3271,
+        "annual_return": 19.19,
+        "max_drawdown": -23.0
+      },
+      {
+        "name": "f2s_vr_26d_raw",
+        "display_name": "f2s_vr_26d (raw)",
+        "base_name": "f2s_vr_26d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/f2s_vr_26d_raw_20100104_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0272,
+        "icir": 0.2478,
+        "sharpe": 0.8523,
+        "annual_return": 12.93,
+        "max_drawdown": -32.67
+      },
+      {
+        "name": "f2s_wqa006_20d_neutralized",
+        "display_name": "f2s_wqa006_20d (neutralized)",
+        "base_name": "f2s_wqa006_20d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/f2s_wqa006_20d_mktcap_neutralized_20100104_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.02,
+        "icir": 0.2632,
+        "sharpe": 2.9388,
+        "annual_return": 35.06,
+        "max_drawdown": -17.05
+      },
+      {
+        "name": "f2s_wqa006_20d_raw",
+        "display_name": "f2s_wqa006_20d (raw)",
+        "base_name": "f2s_wqa006_20d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/f2s_wqa006_20d_raw_20100104_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0184,
+        "icir": 0.2189,
+        "sharpe": 2.3791,
+        "annual_return": 31.44,
+        "max_drawdown": -17.5
+      },
+      {
+        "name": "large_order_turnover_20d_neutralized",
+        "display_name": "large_order_turnover_20d (neutralized)",
+        "base_name": "large_order_turnover_20d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/large_order_turnover_20d_mktcap_neutralized_20100104_20260206.html",
+        "category": "liquidity",
+        "ic_mean": 0.0107,
+        "icir": 0.1241,
+        "sharpe": 0.36,
+        "annual_return": 3.75,
+        "max_drawdown": -53.76
+      },
+      {
+        "name": "large_order_turnover_20d_raw",
+        "display_name": "large_order_turnover_20d (raw)",
+        "base_name": "large_order_turnover_20d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/large_order_turnover_20d_raw_20100104_20260206.html",
+        "category": "liquidity",
+        "ic_mean": 0.0202,
+        "icir": 0.1854,
+        "sharpe": 1.5559,
+        "annual_return": 23.72,
+        "max_drawdown": -37.77
+      },
+      {
+        "name": "momentum_10d_neutralized",
+        "display_name": "momentum_10d (neutralized)",
+        "base_name": "momentum_10d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/momentum_10d_mktcap_neutralized_20050104_20260206.html",
+        "category": "momentum",
+        "ic_mean": 0.0474,
+        "icir": 0.3286,
+        "sharpe": 0.9184,
+        "annual_return": 17.69,
+        "max_drawdown": -33.77
+      },
+      {
+        "name": "momentum_10d_raw",
+        "display_name": "momentum_10d (raw)",
+        "base_name": "momentum_10d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/momentum_10d_raw_20050104_20260206.html",
+        "category": "momentum",
+        "ic_mean": 0.0452,
+        "icir": 0.2896,
+        "sharpe": 0.5767,
+        "annual_return": 10.84,
+        "max_drawdown": -51.07
+      },
+      {
+        "name": "momentum_20d_neutralized",
+        "display_name": "momentum_20d (neutralized)",
+        "base_name": "momentum_20d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/momentum_20d_mktcap_neutralized_20050104_20260206.html",
+        "category": "momentum",
+        "ic_mean": 0.0438,
+        "icir": 0.3016,
+        "sharpe": 1.3562,
+        "annual_return": 28.83,
+        "max_drawdown": -34.49
+      },
+      {
+        "name": "momentum_20d_raw",
+        "display_name": "momentum_20d (raw)",
+        "base_name": "momentum_20d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/momentum_20d_raw_20050104_20260206.html",
+        "category": "momentum",
+        "ic_mean": 0.0416,
+        "icir": 0.2627,
+        "sharpe": 0.9429,
+        "annual_return": 20.51,
+        "max_drawdown": -43.39
+      },
+      {
+        "name": "momentum_5d_neutralized",
+        "display_name": "momentum_5d (neutralized)",
+        "base_name": "momentum_5d",
+        "version_type": "neutralized",
+        "report_path": "f2s_raw_vs_neutralized/momentum_5d_mktcap_neutralized_20050104_20260206.html",
+        "category": "momentum",
+        "ic_mean": 0.0557,
+        "icir": 0.3903,
+        "sharpe": 0.5336,
+        "annual_return": 8.98,
+        "max_drawdown": -89.37
+      },
+      {
+        "name": "momentum_5d_raw",
+        "display_name": "momentum_5d (raw)",
+        "base_name": "momentum_5d",
+        "version_type": "raw",
+        "report_path": "f2s_raw_vs_neutralized/momentum_5d_raw_20050104_20260206.html",
+        "category": "momentum",
+        "ic_mean": 0.0532,
+        "icir": 0.3466,
+        "sharpe": 0.1745,
+        "annual_return": 1.42,
+        "max_drawdown": -93.87
       }
     ],
-    "factor_count": 16
+    "factor_count": 38
   },
-  "generated_at": "2026-02-08 14:00:00"
+  "generated_at": "2026-02-08 14:27:03"
 };
 
         // Navigation
@@ -935,18 +1146,77 @@
 
             document.getElementById('factor-count').textContent = formatNumber(factors.factor_count);
 
+            buildFactorReportMap();
             renderFactors(factors.factors);
 
             // Search
             document.getElementById('factor-search').addEventListener('input', (e) => {
                 const query = e.target.value.toLowerCase();
                 const filtered = factors.factors.filter(f =>
-                    f.name.toLowerCase().includes(query) ||
+                    f.display_name.toLowerCase().includes(query) ||
+                    f.base_name.toLowerCase().includes(query) ||
                     f.category.toLowerCase().includes(query) ||
-                    (f.description && f.description.toLowerCase().includes(query))
+                    f.version_type.toLowerCase().includes(query)
                 );
                 renderFactors(filtered);
             });
+
+            // Sort functionality
+            document.querySelectorAll('.sortable').forEach(header => {
+                header.addEventListener('click', () => {
+                    const column = header.dataset.sort;
+
+                    // Toggle direction if same column, else default to desc
+                    if (currentSortColumn === column) {
+                        currentSortDirection = currentSortDirection === 'desc' ? 'asc' : 'desc';
+                    } else {
+                        currentSortColumn = column;
+                        currentSortDirection = 'desc';
+                    }
+
+                    // Update sort icons
+                    document.querySelectorAll('.sortable').forEach(h => {
+                        h.classList.remove('asc', 'desc');
+                    });
+                    header.classList.add(currentSortDirection);
+
+                    // Sort and render
+                    const sorted = sortFactors(factors.factors, column, currentSortDirection);
+                    renderFactors(sorted);
+                });
+            });
+        }
+
+        // Factor report path mapping
+        const factorReports = {};
+
+        function buildFactorReportMap() {
+            // Build mapping from factor name to report path
+            const factors = dashboardData.factors.factors;
+            factors.forEach(f => {
+                // Use the report_path embedded in the factor data
+                factorReports[f.name] = f.report_path;
+            });
+        }
+
+        let currentSortColumn = null;
+        let currentSortDirection = 'desc';
+
+        function sortFactors(factors, column, direction) {
+            const sorted = [...factors].sort((a, b) => {
+                let aVal = a[column];
+                let bVal = b[column];
+
+                if (aVal === null || aVal === undefined) return 1;
+                if (bVal === null || bVal === undefined) return -1;
+
+                if (direction === 'asc') {
+                    return aVal - bVal;
+                } else {
+                    return bVal - aVal;
+                }
+            });
+            return sorted;
         }
 
         function renderFactors(factors) {
@@ -961,18 +1231,29 @@
             const html = factors.length > 0
                 ? factors.map(f => `
                     <tr>
-                        <td><strong>${f.name}</strong></td>
+                        <td><strong>${f.display_name}</strong></td>
                         <td><span class="badge badge-primary">${f.category}</span></td>
                         <td>${formatMetric(f.ic_mean)}</td>
                         <td>${formatMetric(f.icir)}</td>
                         <td>${formatMetric(f.sharpe)}</td>
                         <td>${formatMetric(f.annual_return, 2)}%</td>
-                        <td class="num">${f.version}</td>
+                        <td>
+                            <button class="view-report-btn" onclick="viewReport('${f.name}')">
+                                View Report
+                            </button>
+                        </td>
                     </tr>
                 `).join('')
                 : '<tr><td colspan="7" style="text-align: center; color: #999; padding: 40px;">No factors found</td></tr>';
 
             document.getElementById('factor-list').innerHTML = html;
+        }
+
+        function viewReport(factorName) {
+            const reportPath = factorReports[factorName];
+            if (reportPath) {
+                window.location.href = reportPath;
+            }
         }
 
         // Initialize
