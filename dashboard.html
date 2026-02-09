@@ -264,17 +264,19 @@
             padding: 8px 10px;
         }
 
-        .tag-filter-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+        .tag-filter-label {
             font-size: 13px;
             color: #495057;
-            user-select: none;
-            cursor: pointer;
+            font-weight: 600;
         }
 
-        .tag-filter-item input {
+        .tag-select {
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            background: white;
+            padding: 6px 8px;
+            font-size: 13px;
+            color: #212529;
             cursor: pointer;
         }
 
@@ -626,14 +628,12 @@
                     </div>
                     <div class="factor-controls">
                         <div class="tag-filters">
-                            <label class="tag-filter-item">
-                                <input type="checkbox" id="factor-tag-raw" checked>
-                                <span>raw</span>
-                            </label>
-                            <label class="tag-filter-item">
-                                <input type="checkbox" id="factor-tag-neu" checked>
-                                <span>neu</span>
-                            </label>
+                            <span class="tag-filter-label">Tag</span>
+                            <select id="factor-tag-mode" class="tag-select">
+                                <option value="all" selected>all</option>
+                                <option value="raw">raw</option>
+                                <option value="neu">neu</option>
+                            </select>
                         </div>
                         <div class="search-box">
                             <span class="search-icon">🔍</span>
@@ -663,7 +663,7 @@
     </div>
 
     <div class="footer">
-        Generated at 2026-02-09 08:13:49 |
+        Generated at 2026-02-09 08:19:29 |
         Data from datahub/metadata.db
     </div>
 
@@ -2120,11 +2120,71 @@
         "sharpe": 0.9491,
         "annual_return": 16.49,
         "max_drawdown": -63.38
+      },
+      {
+        "name": "alpha191_038_neutralized",
+        "display_name": "alpha191_038 (neu)",
+        "base_name": "alpha191_038",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha191/alpha191_038_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0244,
+        "icir": 0.2569,
+        "ic_win_rate": 0.6111,
+        "sharpe": 0.0739,
+        "annual_return": -0.12,
+        "max_drawdown": -78.81
+      },
+      {
+        "name": "alpha191_040_neutralized",
+        "display_name": "alpha191_040 (neu)",
+        "base_name": "alpha191_040",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha191/alpha191_040_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.027,
+        "icir": -0.238,
+        "ic_win_rate": 0.389,
+        "sharpe": -0.3942,
+        "annual_return": -8.3,
+        "max_drawdown": -82.91
+      },
+      {
+        "name": "alpha191_040_raw",
+        "display_name": "alpha191_040 (raw)",
+        "base_name": "alpha191_040",
+        "version_type": "raw",
+        "tag": "raw",
+        "report_path": "alpha191/alpha191_040_raw_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0263,
+        "icir": -0.2419,
+        "ic_win_rate": 0.3896,
+        "sharpe": -0.604,
+        "annual_return": -10.1,
+        "max_drawdown": -82.87
+      },
+      {
+        "name": "alpha191_041_neutralized",
+        "display_name": "alpha191_041 (neu)",
+        "base_name": "alpha191_041",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha191/alpha191_041_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0003,
+        "icir": -0.0026,
+        "ic_win_rate": 0.4855,
+        "sharpe": -1.0739,
+        "annual_return": -20.6,
+        "max_drawdown": -97.66
       }
     ],
-    "factor_count": 87
+    "factor_count": 91
   },
-  "generated_at": "2026-02-09 08:13:49"
+  "generated_at": "2026-02-09 08:19:29"
 };
 
         // Navigation
@@ -2199,8 +2259,7 @@
             const { factors } = dashboardData;
             const allFactors = factors.factors || [];
             const searchInput = document.getElementById('factor-search');
-            const rawTagCheckbox = document.getElementById('factor-tag-raw');
-            const neuTagCheckbox = document.getElementById('factor-tag-neu');
+            const tagModeSelect = document.getElementById('factor-tag-mode');
 
             applyFactorFilters();
 
@@ -2209,13 +2268,9 @@
                 applyFactorFilters();
             });
 
-            [rawTagCheckbox, neuTagCheckbox].forEach(checkbox => {
-                checkbox.addEventListener('change', () => {
-                    selectedFactorTags = new Set();
-                    if (rawTagCheckbox.checked) selectedFactorTags.add('raw');
-                    if (neuTagCheckbox.checked) selectedFactorTags.add('neu');
-                    applyFactorFilters();
-                });
+            tagModeSelect.addEventListener('change', (e) => {
+                currentTagMode = (e.target.value || 'all').toLowerCase();
+                applyFactorFilters();
             });
 
             // Sort functionality
@@ -2254,7 +2309,7 @@
         let currentSortColumn = null;
         let currentSortDirection = 'desc';
         let currentFactorQuery = '';
-        let selectedFactorTags = new Set(['raw', 'neu']);
+        let currentTagMode = 'all';
 
         function normalizeFactorTag(factor) {
             const rawTag = (factor.tag || '').toString().toLowerCase();
@@ -2268,7 +2323,7 @@
         function filterFactors(factors) {
             return factors.filter(f => {
                 const tag = normalizeFactorTag(f);
-                const matchTag = selectedFactorTags.has(tag);
+                const matchTag = currentTagMode === 'all' ? true : tag === currentTagMode;
                 const matchQuery = !currentFactorQuery ||
                     f.display_name.toLowerCase().includes(currentFactorQuery) ||
                     f.base_name.toLowerCase().includes(currentFactorQuery) ||
