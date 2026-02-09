@@ -154,6 +154,12 @@
             color: #333;
         }
 
+        .table-note {
+            margin-top: 6px;
+            font-size: 12px;
+            color: #6c757d;
+        }
+
         .search-box {
             position: relative;
         }
@@ -434,6 +440,11 @@
                 font-size: 18px;
             }
 
+            .table-note {
+                margin-top: 4px;
+                font-size: 11px;
+            }
+
             .search-box input {
                 width: 100%;
                 font-size: 14px;
@@ -609,7 +620,10 @@
 
             <div class="table-container">
                 <div class="table-header">
-                    <div class="table-title">Factor Library</div>
+                    <div>
+                        <div class="table-title">Factor Library</div>
+                        <div class="table-note">IC metrics use Spearman rank correlation (Rank IC / Rank ICIR)</div>
+                    </div>
                     <div class="factor-controls">
                         <div class="tag-filters">
                             <label class="tag-filter-item">
@@ -633,8 +647,8 @@
                             <th>Factor Name</th>
                             <th>Tag</th>
                             <th>Category</th>
-                            <th class="sortable" data-sort="ic_mean">IC Mean <span class="sort-icon">↕</span></th>
-                            <th class="sortable" data-sort="icir">IC IR <span class="sort-icon">↕</span></th>
+                            <th class="sortable" data-sort="ic_mean">Rank IC <span class="sort-icon">↕</span></th>
+                            <th class="sortable" data-sort="icir">Rank ICIR <span class="sort-icon">↕</span></th>
                             <th class="sortable" data-sort="ic_win_rate">IC Win Rate <span class="sort-icon">↕</span></th>
                             <th class="sortable" data-sort="sharpe">Sharpe <span class="sort-icon">↕</span></th>
                             <th class="sortable" data-sort="annual_return">Annual Return <span class="sort-icon">↕</span></th>
@@ -649,7 +663,7 @@
     </div>
 
     <div class="footer">
-        Generated at 2026-02-09 07:56:06 |
+        Generated at 2026-02-09 08:13:49 |
         Data from datahub/metadata.db
     </div>
 
@@ -1821,11 +1835,296 @@
         "sharpe": 8.3594,
         "annual_return": 234.45,
         "max_drawdown": -9.34
+      },
+      {
+        "name": "alpha191_018_neutralized",
+        "display_name": "alpha191_018 (neu)",
+        "base_name": "alpha191_018",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha191/alpha191_018_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.04,
+        "icir": -0.2731,
+        "ic_win_rate": 0.3631,
+        "sharpe": 1.001,
+        "annual_return": 19.47,
+        "max_drawdown": -67.03
+      },
+      {
+        "name": "alpha191_018_raw",
+        "display_name": "alpha191_018 (raw)",
+        "base_name": "alpha191_018",
+        "version_type": "raw",
+        "tag": "raw",
+        "report_path": "alpha191/alpha191_018_raw_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0463,
+        "icir": -0.2912,
+        "ic_win_rate": 0.357,
+        "sharpe": 0.5056,
+        "annual_return": 9.21,
+        "max_drawdown": -79.07
+      },
+      {
+        "name": "alpha191_019_neutralized",
+        "display_name": "alpha191_019 (neu)",
+        "base_name": "alpha191_019",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha191/alpha191_019_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0471,
+        "icir": -0.2833,
+        "ic_win_rate": 0.361,
+        "sharpe": 0.2869,
+        "annual_return": 4.05,
+        "max_drawdown": -83.47
+      },
+      {
+        "name": "alpha191_020_neutralized",
+        "display_name": "alpha191_020 (neu)",
+        "base_name": "alpha191_020",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha191/alpha191_020_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0461,
+        "icir": -0.2888,
+        "ic_win_rate": 0.3624,
+        "sharpe": 0.1705,
+        "annual_return": 1.33,
+        "max_drawdown": -85.03
+      },
+      {
+        "name": "alpha191_020_raw",
+        "display_name": "alpha191_020 (raw)",
+        "base_name": "alpha191_020",
+        "version_type": "raw",
+        "tag": "raw",
+        "report_path": "alpha191/alpha191_020_raw_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0461,
+        "icir": -0.2893,
+        "ic_win_rate": 0.3618,
+        "sharpe": 0.1668,
+        "annual_return": 1.25,
+        "max_drawdown": -85.34
+      },
+      {
+        "name": "alpha191_022_neutralized",
+        "display_name": "alpha191_022 (neu)",
+        "base_name": "alpha191_022",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha191/alpha191_022_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0281,
+        "icir": -0.207,
+        "ic_win_rate": 0.391,
+        "sharpe": 1.087,
+        "annual_return": 20.91,
+        "max_drawdown": -71.29
+      },
+      {
+        "name": "alpha191_022_raw",
+        "display_name": "alpha191_022 (raw)",
+        "base_name": "alpha191_022",
+        "version_type": "raw",
+        "tag": "raw",
+        "report_path": "alpha191/alpha191_022_raw_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0281,
+        "icir": -0.207,
+        "ic_win_rate": 0.3904,
+        "sharpe": 1.0887,
+        "annual_return": 20.94,
+        "max_drawdown": -71.31
+      },
+      {
+        "name": "alpha191_024_neutralized",
+        "display_name": "alpha191_024 (neu)",
+        "base_name": "alpha191_024",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha191/alpha191_024_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0417,
+        "icir": -0.3093,
+        "ic_win_rate": 0.3741,
+        "sharpe": -0.8687,
+        "annual_return": -15.39,
+        "max_drawdown": -92.08
+      },
+      {
+        "name": "alpha191_024_raw",
+        "display_name": "alpha191_024 (raw)",
+        "base_name": "alpha191_024",
+        "version_type": "raw",
+        "tag": "raw",
+        "report_path": "alpha191/alpha191_024_raw_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.042,
+        "icir": -0.3067,
+        "ic_win_rate": 0.3741,
+        "sharpe": -0.8767,
+        "annual_return": -15.65,
+        "max_drawdown": -92.43
+      },
+      {
+        "name": "alpha191_028_neutralized",
+        "display_name": "alpha191_028 (neu)",
+        "base_name": "alpha191_028",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha191/alpha191_028_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.006,
+        "icir": 0.0684,
+        "ic_win_rate": 0.5352,
+        "sharpe": -0.8213,
+        "annual_return": -10.91,
+        "max_drawdown": -83.86
+      },
+      {
+        "name": "alpha191_028_raw",
+        "display_name": "alpha191_028 (raw)",
+        "base_name": "alpha191_028",
+        "version_type": "raw",
+        "tag": "raw",
+        "report_path": "alpha191/alpha191_028_raw_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0058,
+        "icir": 0.0665,
+        "ic_win_rate": 0.5375,
+        "sharpe": -0.9169,
+        "annual_return": -12.13,
+        "max_drawdown": -86.89
+      },
+      {
+        "name": "alpha191_029_neutralized",
+        "display_name": "alpha191_029 (neu)",
+        "base_name": "alpha191_029",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha191/alpha191_029_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.039,
+        "icir": -0.3204,
+        "ic_win_rate": 0.3545,
+        "sharpe": -1.0265,
+        "annual_return": -18.0,
+        "max_drawdown": -96.06
+      },
+      {
+        "name": "alpha191_029_raw",
+        "display_name": "alpha191_029 (raw)",
+        "base_name": "alpha191_029",
+        "version_type": "raw",
+        "tag": "raw",
+        "report_path": "alpha191/alpha191_029_raw_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0435,
+        "icir": -0.3214,
+        "ic_win_rate": 0.3621,
+        "sharpe": -0.9661,
+        "annual_return": -17.61,
+        "max_drawdown": -96.26
+      },
+      {
+        "name": "alpha191_031_neutralized",
+        "display_name": "alpha191_031 (neu)",
+        "base_name": "alpha191_031",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha191/alpha191_031_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0448,
+        "icir": -0.266,
+        "ic_win_rate": 0.3712,
+        "sharpe": 0.8773,
+        "annual_return": 19.71,
+        "max_drawdown": -61.15
+      },
+      {
+        "name": "alpha191_031_raw",
+        "display_name": "alpha191_031 (raw)",
+        "base_name": "alpha191_031",
+        "version_type": "raw",
+        "tag": "raw",
+        "report_path": "alpha191/alpha191_031_raw_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0447,
+        "icir": -0.266,
+        "ic_win_rate": 0.3715,
+        "sharpe": 0.8802,
+        "annual_return": 19.8,
+        "max_drawdown": -61.45
+      },
+      {
+        "name": "alpha191_034_neutralized",
+        "display_name": "alpha191_034 (neu)",
+        "base_name": "alpha191_034",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha191/alpha191_034_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.042,
+        "icir": -0.2779,
+        "ic_win_rate": 0.3649,
+        "sharpe": 0.7891,
+        "annual_return": 13.92,
+        "max_drawdown": -54.35
+      },
+      {
+        "name": "alpha191_034_raw",
+        "display_name": "alpha191_034 (raw)",
+        "base_name": "alpha191_034",
+        "version_type": "raw",
+        "tag": "raw",
+        "report_path": "alpha191/alpha191_034_raw_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": -0.0447,
+        "icir": -0.266,
+        "ic_win_rate": 0.3715,
+        "sharpe": 0.8802,
+        "annual_return": 19.8,
+        "max_drawdown": -61.44
+      },
+      {
+        "name": "alpha191_037_neutralized",
+        "display_name": "alpha191_037 (neu)",
+        "base_name": "alpha191_037",
+        "version_type": "neutralized",
+        "tag": "neu",
+        "report_path": "alpha191/alpha191_037_neutralized_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0462,
+        "icir": 0.3387,
+        "ic_win_rate": 0.6546,
+        "sharpe": 0.8434,
+        "annual_return": 14.62,
+        "max_drawdown": -66.87
+      },
+      {
+        "name": "alpha191_037_raw",
+        "display_name": "alpha191_037 (raw)",
+        "base_name": "alpha191_037",
+        "version_type": "raw",
+        "tag": "raw",
+        "report_path": "alpha191/alpha191_037_raw_20100101_20260206.html",
+        "category": "technical",
+        "ic_mean": 0.0469,
+        "icir": 0.3441,
+        "ic_win_rate": 0.6567,
+        "sharpe": 0.9491,
+        "annual_return": 16.49,
+        "max_drawdown": -63.38
       }
     ],
-    "factor_count": 68
+    "factor_count": 87
   },
-  "generated_at": "2026-02-09 07:56:06"
+  "generated_at": "2026-02-09 08:13:49"
 };
 
         // Navigation
