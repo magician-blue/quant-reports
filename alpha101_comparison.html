@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Alpha101 Ground Truth Comparison</title>
+<style>
+body { font-family: -apple-system, sans-serif; margin: 20px; background: #f5f5f5; }
+.container { max-width: 1400px; margin: 0 auto; }
+h1 { color: #2c3e50; }
+.summary { display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
+.summary-card { background: white; border-radius: 8px; padding: 15px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); text-align: center; min-width: 100px; }
+.summary-card .num { font-size: 28px; font-weight: bold; }
+.summary-card .label { font-size: 12px; color: #666; margin-top: 4px; }
+table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+th { background: #2c3e50; color: white; padding: 10px 12px; text-align: left; font-size: 13px; }
+td { padding: 8px 12px; border-bottom: 1px solid #eee; font-size: 13px; }
+tr:hover { background: #f8f9fa; }
+.note { background: white; border-radius: 8px; padding: 15px; margin: 20px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 13px; color: #555; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Alpha101 Comparison: Our Implementation vs Ground Truth</h1>
+<p style="color:#666;">Comparison period: 202401, 202402, 202403, 202404, 202405, 202406 | Total factors compared: 101</p>
+
+<div class="summary">
+    <div class="summary-card"><div class="num" style="color:#2ecc71">11</div><div class="label">Excellent (>0.95)</div></div>
+    <div class="summary-card"><div class="num" style="color:#27ae60">20</div><div class="label">Good (0.8-0.95)</div></div>
+    <div class="summary-card"><div class="num" style="color:#f39c12">36</div><div class="label">Moderate (0.5-0.8)</div></div>
+    <div class="summary-card"><div class="num" style="color:#e67e22">13</div><div class="label">Weak (0.2-0.5)</div></div>
+    <div class="summary-card"><div class="num" style="color:#e74c3c">20</div><div class="label">Poor (<0.2)</div></div>
+    <div class="summary-card"><div class="num" style="color:#999">1</div><div class="label">N/A</div></div>
+</div>
+
+<div class="note">
+<strong>Metrics:</strong>
+<ul>
+<li><b>Pearson</b>: Linear correlation of raw values (pooled across all dates/instruments)</li>
+<li><b>Spearman</b>: Rank correlation of raw values (pooled)</li>
+<li><b>CS Rank Corr</b>: Mean daily cross-sectional rank correlation (most meaningful - measures if relative stock ranking matches each day)</li>
+</ul>
+<strong>Possible sources of difference:</strong>
+ADV definition (AMOUNT vs VOLUME), RETURNS formula (pct vs log), VWAP definition,
+ts_rank/cs_rank implementation details, data source differences (adjusted vs unadjusted prices),
+expr_codegen formula optimizations (e.g., ts_delay → ts_delta simplification).
+</div>
+
+<table>
+<thead>
+<tr>
+    <th>Factor</th>
+    <th>Quality</th>
+    <th>Pearson</th>
+    <th>Spearman</th>
+    <th>CS Rank Corr</th>
+    <th>Valid Rows</th>
+    <th>Formula</th>
+    <th>Diff Reason</th>
+</tr>
+</thead>
+<tbody>
+
+        <tr>
+            <td>alpha_041</td>
+            <td style="color: #2ecc71; font-weight: bold;">Excellent</td>
+            <td>1.0000</td>
+            <td>1.0000</td>
+            <td>1.0000</td>
+            <td>625,317</td>
+            <td style="font-size: 11px; color: #666;" title="Pow(HIGH * LOW, 0.5) - VWAP">Pow(HIGH * LOW, 0.5) - VWAP</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_101</td>
+            <td style="color: #2ecc71; font-weight: bold;">Excellent</td>
+            <td>1.0000</td>
+            <td>1.0000</td>
+            <td>1.0000</td>
+            <td>625,317</td>
+            <td style="font-size: 11px; color: #666;" title="(CLOSE - OPEN) / (HIGH - LOW + 0.001)">(CLOSE - OPEN) / (HIGH - LOW + 0.001)</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_054</td>
+            <td style="color: #2ecc71; font-weight: bold;">Excellent</td>
+            <td>1.0000</td>
+            <td>1.0000</td>
+            <td>1.0000</td>
+            <td>623,051</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * ((LOW - CLOSE) * Pow(OPEN, 5)) / ((LOW - HIGH) * Pow(CLOSE, 5))">-1 * ((LOW - CLOSE) * Pow(OPEN, 5)) / ((LOW - HIGH) * Pow(CLOSE, 5))</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_042</td>
+            <td style="color: #2ecc71; font-weight: bold;">Excellent</td>
+            <td>0.9724</td>
+            <td>1.0000</td>
+            <td>1.0000</td>
+            <td>625,200</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(VWAP - CLOSE) / cs_rank(VWAP + CLOSE)">cs_rank(VWAP - CLOSE) / cs_rank(VWAP + CLOSE)</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_005</td>
+            <td style="color: #2ecc71; font-weight: bold;">Excellent</td>
+            <td>1.0000</td>
+            <td>0.9998</td>
+            <td>0.9998</td>
+            <td>623,310</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(OPEN - ts_sum(VWAP, 10) / 10) * (-1 * abs_(cs_rank(CLOSE - VWAP)))">cs_rank(OPEN - ts_sum(VWAP, 10) / 10) * (-1 * abs_(cs_rank(CLOSE - VWAP)))</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_033</td>
+            <td style="color: #2ecc71; font-weight: bold;">Excellent</td>
+            <td>0.9994</td>
+            <td>0.9995</td>
+            <td>1.0000</td>
+            <td>625,317</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(-1 * Pow(1 - OPEN / CLOSE, 1))">cs_rank(-1 * Pow(1 - OPEN / CLOSE, 1))</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_083</td>
+            <td style="color: #2ecc71; font-weight: bold;">Excellent</td>
+            <td>0.9510</td>
+            <td>0.9837</td>
+            <td>0.9832</td>
+            <td>622,105</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(ts_delay((HIGH - LOW) / (ts_sum(CLOSE, 5) / 5), 2)) * cs_rank(cs_rank(VO...">cs_rank(ts_delay((HIGH - LOW) / (ts_sum(CLOSE, 5) / 5), 2)) * cs_rank(cs_rank(VO...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_018</td>
+            <td style="color: #2ecc71; font-weight: bold;">Excellent</td>
+            <td>0.9730</td>
+            <td>0.9730</td>
+            <td>0.9730</td>
+            <td>623,310</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * cs_rank(ts_std_dev(abs_(CLOSE - OPEN), 5) + (CLOSE - OPEN) + ts_corr(CLOSE,...">-1 * cs_rank(ts_std_dev(abs_(CLOSE - OPEN), 5) + (CLOSE - OPEN) + ts_corr(CLOSE,...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_004</td>
+            <td style="color: #2ecc71; font-weight: bold;">Excellent</td>
+            <td>0.9710</td>
+            <td>0.9710</td>
+            <td>0.9700</td>
+            <td>623,538</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * ts_rank(cs_rank(LOW), 9)">-1 * ts_rank(cs_rank(LOW), 9)</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_035</td>
+            <td style="color: #2ecc71; font-weight: bold;">Excellent</td>
+            <td>0.9410</td>
+            <td>0.9593</td>
+            <td>0.9469</td>
+            <td>620,947</td>
+            <td style="font-size: 11px; color: #666;" title="ts_rank(VOLUME, 32) * (1 - ts_rank(CLOSE + HIGH - LOW, 16)) * (1 - ts_rank(RETUR...">ts_rank(VOLUME, 32) * (1 - ts_rank(CLOSE + HIGH - LOW, 16)) * (1 - ts_rank(RETUR...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_011</td>
+            <td style="color: #2ecc71; font-weight: bold;">Excellent</td>
+            <td>0.9491</td>
+            <td>0.9513</td>
+            <td>0.9502</td>
+            <td>624,830</td>
+            <td style="font-size: 11px; color: #666;" title="(cs_rank(ts_max(VWAP - CLOSE, 3)) + cs_rank(ts_min(VWAP - CLOSE, 3))) * cs_rank(...">(cs_rank(ts_max(VWAP - CLOSE, 3)) + cs_rank(ts_min(VWAP - CLOSE, 3))) * cs_rank(...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_012</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.8981</td>
+            <td>0.9454</td>
+            <td>0.9289</td>
+            <td>625,068</td>
+            <td style="font-size: 11px; color: #666;" title="sign(ts_delta(VOLUME, 1)) * (-1 * ts_delta(CLOSE, 1))">sign(ts_delta(VOLUME, 1)) * (-1 * ts_delta(CLOSE, 1))</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_045</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.8797</td>
+            <td>0.9419</td>
+            <td>0.9173</td>
+            <td>546,223</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * (cs_rank(ts_sum(ts_delay(CLOSE, 5), 20) / 20) * ts_corr(CLOSE, VOLUME, 2) *...">-1 * (cs_rank(ts_sum(ts_delay(CLOSE, 5), 20) / 20) * ts_corr(CLOSE, VOLUME, 2) *...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_040</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.9362</td>
+            <td>0.9344</td>
+            <td>0.9321</td>
+            <td>623,309</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * cs_rank(ts_std_dev(HIGH, 10)) * ts_corr(HIGH, VOLUME, 10)">-1 * cs_rank(ts_std_dev(HIGH, 10)) * ts_corr(HIGH, VOLUME, 10)</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_052</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.8611</td>
+            <td>0.9225</td>
+            <td>0.8954</td>
+            <td>592,987</td>
+            <td style="font-size: 11px; color: #666;" title="(-1 * ts_min(LOW, 5) + ts_delay(ts_min(LOW, 5), 5)) * cs_rank((ts_sum(RETURNS, 2...">(-1 * ts_min(LOW, 5) + ts_delay(ts_min(LOW, 5), 5)) * cs_rank((ts_sum(RETURNS, 2...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_037</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.9265</td>
+            <td>0.9219</td>
+            <td>0.9216</td>
+            <td>581,862</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(ts_corr(ts_delay(OPEN - CLOSE, 1), CLOSE, 200)) + cs_rank(OPEN - CLOSE)">cs_rank(ts_corr(ts_delay(OPEN - CLOSE, 1), CLOSE, 200)) + cs_rank(OPEN - CLOSE)</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_013</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.9166</td>
+            <td>0.9166</td>
+            <td>0.9165</td>
+            <td>624,438</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * cs_rank(ts_covariance(cs_rank(CLOSE), cs_rank(VOLUME), 5))">-1 * cs_rank(ts_covariance(cs_rank(CLOSE), cs_rank(VOLUME), 5))</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_006</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.9102</td>
+            <td>0.9121</td>
+            <td>0.9172</td>
+            <td>623,310</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * ts_corr(OPEN, VOLUME, 10)">-1 * ts_corr(OPEN, VOLUME, 10)</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_003</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.8937</td>
+            <td>0.8980</td>
+            <td>0.9079</td>
+            <td>623,184</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * ts_corr(cs_rank(OPEN), cs_rank(VOLUME), 10)">-1 * ts_corr(cs_rank(OPEN), cs_rank(VOLUME), 10)</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_050</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.8895</td>
+            <td>0.8899</td>
+            <td>0.8883</td>
+            <td>623,409</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * ts_max(cs_rank(ts_corr(cs_rank(VOLUME), cs_rank(VWAP), 5)), 5)">-1 * ts_max(cs_rank(ts_corr(cs_rank(VOLUME), cs_rank(VWAP), 5)), 5)</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_049</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.7898</td>
+            <td>0.8603</td>
+            <td>0.8372</td>
+            <td>625,142</td>
+            <td style="font-size: 11px; color: #666;" title="if_else((ts_delay(CLOSE, 20) - ts_delay(CLOSE, 10)) / 10 - (ts_delay(CLOSE, 10) ...">if_else((ts_delay(CLOSE, 20) - ts_delay(CLOSE, 10)) / 10 - (ts_delay(CLOSE, 10) ...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_043</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.8532</td>
+            <td>0.8553</td>
+            <td>0.8507</td>
+            <td>620,708</td>
+            <td style="font-size: 11px; color: #666;" title="ts_rank(VOLUME / ADV20, 20) * ts_rank(-1 * ts_delta(CLOSE, 7), 8)">ts_rank(VOLUME / ADV20, 20) * ts_rank(-1 * ts_delta(CLOSE, 7), 8)</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_034</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.8516</td>
+            <td>0.8517</td>
+            <td>0.8520</td>
+            <td>624,911</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(1 - cs_rank(ts_std_dev(RETURNS, 2) / ts_std_dev(RETURNS, 5)) + (1 - cs_r...">cs_rank(1 - cs_rank(ts_std_dev(RETURNS, 2) / ts_std_dev(RETURNS, 5)) + (1 - cs_r...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_051</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.7897</td>
+            <td>0.8505</td>
+            <td>0.8269</td>
+            <td>625,146</td>
+            <td style="font-size: 11px; color: #666;" title="if_else((ts_delay(CLOSE, 20) - ts_delay(CLOSE, 10)) / 10 - (ts_delay(CLOSE, 10) ...">if_else((ts_delay(CLOSE, 20) - ts_delay(CLOSE, 10)) / 10 - (ts_delay(CLOSE, 10) ...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_002</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.8176</td>
+            <td>0.8299</td>
+            <td>0.8641</td>
+            <td>624,121</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * ts_corr(cs_rank(ts_delta(log(VOLUME), 2)), cs_rank((CLOSE - OPEN) / OPEN), ...">-1 * ts_corr(cs_rank(ts_delta(log(VOLUME), 2)), cs_rank((CLOSE - OPEN) / OPEN), ...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_014</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.7706</td>
+            <td>0.8252</td>
+            <td>0.7950</td>
+            <td>623,310</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * cs_rank(ts_delta(RETURNS, 3)) * ts_corr(OPEN, VOLUME, 10)">-1 * cs_rank(ts_delta(RETURNS, 3)) * ts_corr(OPEN, VOLUME, 10)</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_039</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.8367</td>
+            <td>0.8246</td>
+            <td>0.8211</td>
+            <td>592,458</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * cs_rank(ts_delta(CLOSE, 7) * (1 - cs_rank(ts_decay_linear(VOLUME / ADV20, 9...">-1 * cs_rank(ts_delta(CLOSE, 7) * (1 - cs_rank(ts_decay_linear(VOLUME / ADV20, 9...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_047</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.7303</td>
+            <td>0.8088</td>
+            <td>0.8132</td>
+            <td>623,480</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(1 / CLOSE) * VOLUME / ADV20 * (HIGH * cs_rank(HIGH - CLOSE) / (ts_sum(HI...">cs_rank(1 / CLOSE) * VOLUME / ADV20 * (HIGH * cs_rank(HIGH - CLOSE) / (ts_sum(HI...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_046</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.4710</td>
+            <td>0.8048</td>
+            <td>0.7769</td>
+            <td>625,203</td>
+            <td style="font-size: 11px; color: #666;" title="if_else(0.25 &lt; (ts_delay(CLOSE, 20) - ts_delay(CLOSE, 10)) / 10 - (ts_delay(CLOS...">if_else(0.25 &lt; (ts_delay(CLOSE, 20) - ts_delay(CLOSE, 10)) / 10 - (ts_delay(CLOS...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_038</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.8576</td>
+            <td>0.8021</td>
+            <td>0.9184</td>
+            <td>623,310</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * cs_rank(ts_rank(CLOSE, 10)) * cs_rank(CLOSE / OPEN)">-1 * cs_rank(ts_rank(CLOSE, 10)) * cs_rank(CLOSE / OPEN)</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_094</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.7693</td>
+            <td>0.7893</td>
+            <td>0.8745</td>
+            <td>504,812</td>
+            <td style="font-size: 11px; color: #666;" title="Pow(cs_rank(VWAP - ts_min(VWAP, 12)), ts_rank(ts_corr(ts_rank(VWAP, 20), ts_rank...">Pow(cs_rank(VWAP - ts_min(VWAP, 12)), ts_rank(ts_corr(ts_rank(VWAP, 20), ts_rank...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_084</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>nan</td>
+            <td>0.7873</td>
+            <td>0.7394</td>
+            <td>617,779</td>
+            <td style="font-size: 11px; color: #666;" title="signed_power(ts_rank(VWAP - ts_max(VWAP, 15), 21), ts_delta(CLOSE, 5))">signed_power(ts_rank(VWAP - ts_max(VWAP, 15), 21), ts_delta(CLOSE, 5))</td>
+            <td style="font-size: 11px; color: #e74c3c;">signed_power指数=ts_delta(CLOSE,5), 后复权价格导致指数极大, GT和我们都溢出到10^300</td>
+        </tr>
+        <tr>
+            <td>alpha_016</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.7770</td>
+            <td>0.7770</td>
+            <td>0.7770</td>
+            <td>624,310</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * cs_rank(ts_covariance(cs_rank(HIGH), cs_rank(VOLUME), 5))">-1 * cs_rank(ts_covariance(cs_rank(HIGH), cs_rank(VOLUME), 5))</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_057</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.0975</td>
+            <td>0.7662</td>
+            <td>0.7756</td>
+            <td>604,559</td>
+            <td style="font-size: 11px; color: #666;" title="0 - 1 * ((CLOSE - VWAP) / ts_decay_linear(cs_rank(ts_arg_max(CLOSE, 30)), 2))">0 - 1 * ((CLOSE - VWAP) / ts_decay_linear(cs_rank(ts_arg_max(CLOSE, 30)), 2))</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_085</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.7547</td>
+            <td>0.7623</td>
+            <td>0.7527</td>
+            <td>615,403</td>
+            <td style="font-size: 11px; color: #666;" title="Pow(cs_rank(ts_corr(HIGH * 0.876703 + CLOSE * (1 - 0.876703), ADV30, 10)), cs_ra...">Pow(cs_rank(ts_corr(HIGH * 0.876703 + CLOSE * (1 - 0.876703), ADV30, 10)), cs_ra...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_030</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.7720</td>
+            <td>0.7607</td>
+            <td>0.8973</td>
+            <td>623,826</td>
+            <td style="font-size: 11px; color: #666;" title="(1.0 - cs_rank(sign(CLOSE - ts_delay(CLOSE, 1)) + sign(ts_delay(CLOSE, 1) - ts_d...">(1.0 - cs_rank(sign(CLOSE - ts_delay(CLOSE, 1)) + sign(ts_delay(CLOSE, 1) - ts_d...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_026</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.7145</td>
+            <td>0.7527</td>
+            <td>0.7509</td>
+            <td>508,009</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * ts_max(ts_corr(ts_rank(VOLUME, 5), ts_rank(HIGH, 5), 5), 3)">-1 * ts_max(ts_corr(ts_rank(VOLUME, 5), ts_rank(HIGH, 5), 5), 3)</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_090</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.7749</td>
+            <td>0.7512</td>
+            <td>0.8212</td>
+            <td>737,977</td>
+            <td style="font-size: 11px; color: #666;" title="Pow(cs_rank(CLOSE - ts_max(CLOSE, 5)), ts_rank(ts_corr(gp_demean(SUBINDUSTRY, AD...">Pow(cs_rank(CLOSE - ts_max(CLOSE, 5)), ts_rank(ts_corr(gp_demean(SUBINDUSTRY, AD...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_036</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.7497</td>
+            <td>0.7510</td>
+            <td>0.7573</td>
+            <td>582,175</td>
+            <td style="font-size: 11px; color: #666;" title="2.21 * cs_rank(ts_corr(CLOSE - OPEN, ts_delay(VOLUME, 1), 15)) + 0.7 * cs_rank(O...">2.21 * cs_rank(ts_corr(CLOSE - OPEN, ts_delay(VOLUME, 1), 15)) + 0.7 * cs_rank(O...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_078</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.7307</td>
+            <td>0.7388</td>
+            <td>0.7362</td>
+            <td>617,352</td>
+            <td style="font-size: 11px; color: #666;" title="Pow(cs_rank(ts_corr(ts_sum(LOW * 0.352233 + VWAP * (1 - 0.352233), 20), ts_sum(A...">Pow(cs_rank(ts_corr(ts_sum(LOW * 0.352233 + VWAP * (1 - 0.352233), 20), ts_sum(A...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_100</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.5343</td>
+            <td>0.7343</td>
+            <td>0.7464</td>
+            <td>737,479</td>
+            <td style="font-size: 11px; color: #666;" title="0 - 1 * ((1.5 * cs_scale(gp_demean(SUBINDUSTRY, gp_demean(SUBINDUSTRY, cs_rank((...">0 - 1 * ((1.5 * cs_scale(gp_demean(SUBINDUSTRY, gp_demean(SUBINDUSTRY, cs_rank((...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_074</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.7296</td>
+            <td>0.7296</td>
+            <td>0.7291</td>
+            <td>621,157</td>
+            <td style="font-size: 11px; color: #666;" title="int_(cs_rank(ts_corr(CLOSE, ts_sum(ADV30, 37), 15)) &lt; cs_rank(ts_corr(cs_rank(HI...">int_(cs_rank(ts_corr(CLOSE, ts_sum(ADV30, 37), 15)) &lt; cs_rank(ts_corr(cs_rank(HI...</td>
+            <td style="font-size: 11px; color: #e74c3c;">bool比较结果(int_), ts_rank归一化差异</td>
+        </tr>
+        <tr>
+            <td>alpha_086</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.7194</td>
+            <td>0.7194</td>
+            <td>0.7157</td>
+            <td>623,662</td>
+            <td style="font-size: 11px; color: #666;" title="int_(ts_rank(ts_corr(CLOSE, ts_sum(ADV20, 15), 6), 20) &lt; cs_rank(OPEN + CLOSE - ...">int_(ts_rank(ts_corr(CLOSE, ts_sum(ADV20, 15), 6), 20) &lt; cs_rank(OPEN + CLOSE - ...</td>
+            <td style="font-size: 11px; color: #e74c3c;">bool比较结果(int_), ts_rank归一化差异 + ADV20定义</td>
+        </tr>
+        <tr>
+            <td>alpha_028</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.7715</td>
+            <td>0.7151</td>
+            <td>nan</td>
+            <td>623,172</td>
+            <td style="font-size: 11px; color: #666;" title="cs_scale(ts_corr(ADV20, LOW, 5) + (HIGH + LOW) / 2 - CLOSE)">cs_scale(ts_corr(ADV20, LOW, 5) + (HIGH + LOW) / 2 - CLOSE)</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_027</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.7067</td>
+            <td>0.7067</td>
+            <td>0.7153</td>
+            <td>626,637</td>
+            <td style="font-size: 11px; color: #666;" title="if_else(0.5 &lt; cs_rank(ts_sum(ts_corr(cs_rank(VOLUME), cs_rank(VWAP), 6), 2) / 2....">if_else(0.5 &lt; cs_rank(ts_sum(ts_corr(cs_rank(VOLUME), cs_rank(VWAP), 6), 2) / 2....</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_017</td>
+            <td style="color: #27ae60; font-weight: bold;">Good</td>
+            <td>0.8320</td>
+            <td>0.6725</td>
+            <td>0.7227</td>
+            <td>622,535</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * cs_rank(ts_rank(CLOSE, 10)) * cs_rank(ts_delta(ts_delta(CLOSE, 1), 1)) * cs...">-1 * cs_rank(ts_rank(CLOSE, 10)) * cs_rank(ts_delta(ts_delta(CLOSE, 1), 1)) * cs...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_081</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.6631</td>
+            <td>0.6631</td>
+            <td>0.6628</td>
+            <td>621,154</td>
+            <td style="font-size: 11px; color: #666;" title="int_(cs_rank(log(ts_product(cs_rank(Pow(cs_rank(ts_corr(VWAP, ts_sum(ADV10, 50),...">int_(cs_rank(log(ts_product(cs_rank(Pow(cs_rank(ts_corr(VWAP, ts_sum(ADV10, 50),...</td>
+            <td style="font-size: 11px; color: #e74c3c;">bool比较结果(int_), 公式复杂(嵌套log+ts_product+Pow+ts_corr), 累积误差</td>
+        </tr>
+        <tr>
+            <td>alpha_075</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.6501</td>
+            <td>0.6501</td>
+            <td>0.6497</td>
+            <td>622,397</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(ts_corr(VWAP, VOLUME, 4)) &lt; cs_rank(ts_corr(cs_rank(LOW), cs_rank(ADV50)...">cs_rank(ts_corr(VWAP, VOLUME, 4)) &lt; cs_rank(ts_corr(cs_rank(LOW), cs_rank(ADV50)...</td>
+            <td style="font-size: 11px; color: #e74c3c;">bool比较结果(cs_rank&lt;cs_rank), ADV50定义不同</td>
+        </tr>
+        <tr>
+            <td>alpha_053</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.6734</td>
+            <td>0.6386</td>
+            <td>0.5894</td>
+            <td>556,304</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * ts_delta((CLOSE - LOW - (HIGH - CLOSE)) / (CLOSE - LOW), 9)">-1 * ts_delta((CLOSE - LOW - (HIGH - CLOSE)) / (CLOSE - LOW), 9)</td>
+            <td style="font-size: 11px; color: #e74c3c;">GT含inf值, (CLOSE-LOW-(HIGH-CLOSE))/(CLOSE-LOW)在CLOSE=LOW时除零</td>
+        </tr>
+        <tr>
+            <td>alpha_060</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.5628</td>
+            <td>0.6374</td>
+            <td>0.6849</td>
+            <td>622,629</td>
+            <td style="font-size: 11px; color: #666;" title="0 - 1 * (2 * cs_scale(cs_rank((CLOSE - LOW - (HIGH - CLOSE)) / (HIGH - LOW) * VO...">0 - 1 * (2 * cs_scale(cs_rank((CLOSE - LOW - (HIGH - CLOSE)) / (HIGH - LOW) * VO...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_099</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.6355</td>
+            <td>0.6355</td>
+            <td>0.6352</td>
+            <td>620,655</td>
+            <td style="font-size: 11px; color: #666;" title="int_(cs_rank(ts_corr(ts_sum((HIGH + LOW) / 2, 20), ts_sum(ADV60, 20), 9)) &lt; cs_r...">int_(cs_rank(ts_corr(ts_sum((HIGH + LOW) / 2, 20), ts_sum(ADV60, 20), 9)) &lt; cs_r...</td>
+            <td style="font-size: 11px; color: #e74c3c;">bool比较结果(int_), ts_rank归一化差异 + ADV60定义</td>
+        </tr>
+        <tr>
+            <td>alpha_069</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.5815</td>
+            <td>0.6229</td>
+            <td>0.6386</td>
+            <td>738,346</td>
+            <td style="font-size: 11px; color: #666;" title="Pow(cs_rank(ts_max(ts_delta(gp_demean(INDUSTRY, VWAP), 3), 5)), ts_rank(ts_corr(...">Pow(cs_rank(ts_max(ts_delta(gp_demean(INDUSTRY, VWAP), 3), 5)), ts_rank(ts_corr(...</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + Pow幂运算放大gp_demean差异</td>
+        </tr>
+        <tr>
+            <td>alpha_023</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.7071</td>
+            <td>0.6120</td>
+            <td>0.5498</td>
+            <td>626,416</td>
+            <td style="font-size: 11px; color: #666;" title="if_else(ts_sum(HIGH, 20) / 20 &lt; HIGH, -1 * ts_delta(HIGH, 2), 0)">if_else(ts_sum(HIGH, 20) / 20 &lt; HIGH, -1 * ts_delta(HIGH, 2), 0)</td>
+            <td style="font-size: 11px; color: #e74c3c;">后复权价格导致if_else条件(ts_sum(HIGH,20)/20&lt;HIGH)几乎恒为true</td>
+        </tr>
+        <tr>
+            <td>alpha_068</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.6072</td>
+            <td>0.6072</td>
+            <td>0.6088</td>
+            <td>624,196</td>
+            <td style="font-size: 11px; color: #666;" title="int_(ts_rank(ts_corr(cs_rank(HIGH), cs_rank(ADV15), 9), 14) &lt; cs_rank(ts_delta(C...">int_(ts_rank(ts_corr(cs_rank(HIGH), cs_rank(ADV15), 9), 14) &lt; cs_rank(ts_delta(C...</td>
+            <td style="font-size: 11px; color: #e74c3c;">bool比较结果(int_), ts_rank归一化差异 + ADV15定义</td>
+        </tr>
+        <tr>
+            <td>alpha_032</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.2718</td>
+            <td>0.5953</td>
+            <td>0.8371</td>
+            <td>570,843</td>
+            <td style="font-size: 11px; color: #666;" title="cs_scale(ts_sum(CLOSE, 7) / 7 - CLOSE) + 20 * cs_scale(ts_corr(VWAP, ts_delay(CL...">cs_scale(ts_sum(CLOSE, 7) / 7 - CLOSE) + 20 * cs_scale(ts_corr(VWAP, ts_delay(CL...</td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+        <tr>
+            <td>alpha_029</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.5714</td>
+            <td>0.5795</td>
+            <td>0.5154</td>
+            <td>624,791</td>
+            <td style="font-size: 11px; color: #666;" title="min_(ts_product(cs_rank(cs_rank(cs_scale(log(ts_sum(ts_min(cs_rank(cs_rank(-1 * ...">min_(ts_product(cs_rank(cs_rank(cs_scale(log(ts_sum(ts_min(cs_rank(cs_rank(-1 * ...</td>
+            <td style="font-size: 11px; color: #e74c3c;">公式复杂(嵌套cs_rank+cs_scale+log+ts_sum+ts_min), 多算子累积误差</td>
+        </tr>
+        <tr>
+            <td>alpha_056</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.5716</td>
+            <td>0.5772</td>
+            <td>0.5827</td>
+            <td>596,205</td>
+            <td style="font-size: 11px; color: #666;" title="0 - 1 * (cs_rank(ts_sum(RETURNS, 10) / ts_sum(ts_sum(RETURNS, 2), 3)) * cs_rank(...">0 - 1 * (cs_rank(ts_sum(RETURNS, 10) / ts_sum(ts_sum(RETURNS, 2), 3)) * cs_rank(...</td>
+            <td style="font-size: 11px; color: #e74c3c;">cs_rank(ts_sum(RETURNS,10)/ts_sum(ts_sum(RETURNS,2),3)) * cs_rank(CAP*RETURNS), CAP定义可能不同</td>
+        </tr>
+        <tr>
+            <td>alpha_065</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.5767</td>
+            <td>0.5767</td>
+            <td>0.5924</td>
+            <td>621,627</td>
+            <td style="font-size: 11px; color: #666;" title="int_(cs_rank(ts_corr(OPEN * 0.00817205 + VWAP * (1 - 0.00817205), ts_sum(ADV60, ...">int_(cs_rank(ts_corr(OPEN * 0.00817205 + VWAP * (1 - 0.00817205), ts_sum(ADV60, ...</td>
+            <td style="font-size: 11px; color: #e74c3c;">bool比较结果(int_), ts_rank归一化差异 + ADV60定义</td>
+        </tr>
+        <tr>
+            <td>alpha_072</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.0879</td>
+            <td>0.5743</td>
+            <td>0.5669</td>
+            <td>579,382</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(ts_decay_linear(ts_corr((HIGH + LOW) / 2, ADV40, 9), 10)) / cs_rank(ts_d...">cs_rank(ts_decay_linear(ts_corr((HIGH + LOW) / 2, ADV40, 9), 10)) / cs_rank(ts_d...</td>
+            <td style="font-size: 11px; color: #e74c3c;">ts_decay_linear归一化差异, cs_rank/cs_rank除法放大差异</td>
+        </tr>
+        <tr>
+            <td>alpha_073</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.5663</td>
+            <td>0.5666</td>
+            <td>0.4936</td>
+            <td>624,435</td>
+            <td style="font-size: 11px; color: #666;" title="max_(cs_rank(ts_decay_linear(ts_delta(VWAP, 5), 3)), ts_rank(ts_decay_linear(ts_...">max_(cs_rank(ts_decay_linear(ts_delta(VWAP, 5), 3)), ts_rank(ts_decay_linear(ts_...</td>
+            <td style="font-size: 11px; color: #e74c3c;">ts_decay_linear归一化差异 + max_(cs_rank, ts_rank)归一化不一致</td>
+        </tr>
+        <tr>
+            <td>alpha_025</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.5522</td>
+            <td>0.5524</td>
+            <td>0.5965</td>
+            <td>624,352</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(-1 * RETURNS * ADV20 * VWAP * (HIGH - CLOSE))">cs_rank(-1 * RETURNS * ADV20 * VWAP * (HIGH - CLOSE))</td>
+            <td style="font-size: 11px; color: #e74c3c;">cs_rank(-RETURNS*ADV20*VWAP*(HIGH-CLOSE)), ADV20定义不同(AMOUNT vs VOLUME*price)</td>
+        </tr>
+        <tr>
+            <td>alpha_088</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.5404</td>
+            <td>0.5494</td>
+            <td>0.5510</td>
+            <td>623,766</td>
+            <td style="font-size: 11px; color: #666;" title="min_(cs_rank(ts_decay_linear(cs_rank(OPEN) + cs_rank(LOW) - (cs_rank(HIGH) + cs_...">min_(cs_rank(ts_decay_linear(cs_rank(OPEN) + cs_rank(LOW) - (cs_rank(HIGH) + cs_...</td>
+            <td style="font-size: 11px; color: #e74c3c;">ts_decay_linear归一化差异, min_()取两个不同归一化结果的最小值</td>
+        </tr>
+        <tr>
+            <td>alpha_067</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.5297</td>
+            <td>0.5390</td>
+            <td>0.6350</td>
+            <td>740,019</td>
+            <td style="font-size: 11px; color: #666;" title="Pow(cs_rank(HIGH - ts_min(HIGH, 2)), cs_rank(ts_corr(gp_demean(SECTOR, VWAP), gp...">Pow(cs_rank(HIGH - ts_min(HIGH, 2)), cs_rank(ts_corr(gp_demean(SECTOR, VWAP), gp...</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + Pow(cs_rank, cs_rank)幂运算放大微小差异</td>
+        </tr>
+        <tr>
+            <td>alpha_064</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.5201</td>
+            <td>0.5201</td>
+            <td>0.5200</td>
+            <td>614,361</td>
+            <td style="font-size: 11px; color: #666;" title="int_(cs_rank(ts_corr(ts_sum(OPEN * 0.178404 + LOW * (1 - 0.178404), 13), ts_sum(...">int_(cs_rank(ts_corr(ts_sum(OPEN * 0.178404 + LOW * (1 - 0.178404), 13), ts_sum(...</td>
+            <td style="font-size: 11px; color: #e74c3c;">bool比较结果(int_), ts_rank归一化差异 + ADV定义不同</td>
+        </tr>
+        <tr>
+            <td>alpha_070</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.5060</td>
+            <td>0.5130</td>
+            <td>0.5571</td>
+            <td>733,386</td>
+            <td style="font-size: 11px; color: #666;" title="Pow(cs_rank(ts_delta(VWAP, 1)), ts_rank(ts_corr(gp_demean(INDUSTRY, CLOSE), ADV5...">Pow(cs_rank(ts_delta(VWAP, 1)), ts_rank(ts_corr(gp_demean(INDUSTRY, CLOSE), ADV5...</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + Pow(cs_rank, ts_rank)放大差异</td>
+        </tr>
+        <tr>
+            <td>alpha_077</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.4855</td>
+            <td>0.5079</td>
+            <td>0.5079</td>
+            <td>622,414</td>
+            <td style="font-size: 11px; color: #666;" title="min_(cs_rank(ts_decay_linear((HIGH + LOW) / 2 + HIGH - (VWAP + HIGH), 20)), cs_r...">min_(cs_rank(ts_decay_linear((HIGH + LOW) / 2 + HIGH - (VWAP + HIGH), 20)), cs_r...</td>
+            <td style="font-size: 11px; color: #e74c3c;">ts_decay_linear归一化差异, min_()取两个不同归一化结果的最小值</td>
+        </tr>
+        <tr>
+            <td>alpha_082</td>
+            <td style="color: #e67e22; font-weight: bold;">Weak</td>
+            <td>0.4711</td>
+            <td>0.4822</td>
+            <td>0.4984</td>
+            <td>738,999</td>
+            <td style="font-size: 11px; color: #666;" title="min_(cs_rank(ts_decay_linear(ts_delta(OPEN, 1), 15)), ts_rank(ts_decay_linear(ts...">min_(cs_rank(ts_decay_linear(ts_delta(OPEN, 1), 15)), ts_rank(ts_decay_linear(ts...</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + ts_decay_linear归一化差异 + min_()放大</td>
+        </tr>
+        <tr>
+            <td>alpha_031</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>0.5600</td>
+            <td>0.4149</td>
+            <td>0.3624</td>
+            <td>621,752</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(cs_rank(cs_rank(ts_decay_linear(-1 * cs_rank(cs_rank(ts_delta(CLOSE, 10)...">cs_rank(cs_rank(cs_rank(ts_decay_linear(-1 * cs_rank(cs_rank(ts_delta(CLOSE, 10)...</td>
+            <td style="font-size: 11px; color: #e74c3c;">ts_decay_linear归一化差异 + 嵌套cs_rank(3层)放大差异</td>
+        </tr>
+        <tr>
+            <td>alpha_048</td>
+            <td style="color: #e67e22; font-weight: bold;">Weak</td>
+            <td>0.3677</td>
+            <td>0.4000</td>
+            <td>0.4176</td>
+            <td>670,813</td>
+            <td style="font-size: 11px; color: #666;" title="gp_demean(SUBINDUSTRY, ts_corr(ts_delta(CLOSE, 1), ts_delta(ts_delay(CLOSE, 1), ...">gp_demean(SUBINDUSTRY, ts_corr(ts_delta(CLOSE, 1), ts_delta(ts_delay(CLOSE, 1), ...</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + gp_demean后ts_corr累积差异</td>
+        </tr>
+        <tr>
+            <td>alpha_015</td>
+            <td style="color: #e67e22; font-weight: bold;">Weak</td>
+            <td>0.3862</td>
+            <td>0.3789</td>
+            <td>0.3799</td>
+            <td>620,101</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * ts_sum(cs_rank(ts_corr(cs_rank(HIGH), cs_rank(VOLUME), 3)), 3)">-1 * ts_sum(cs_rank(ts_corr(cs_rank(HIGH), cs_rank(VOLUME), 3)), 3)</td>
+            <td style="font-size: 11px; color: #e74c3c;">ts_corr(cs_rank(HIGH), cs_rank(VOLUME), 3)后ts_sum累积, cs_rank归一化差异被放大</td>
+        </tr>
+        <tr>
+            <td>alpha_059</td>
+            <td style="color: #e67e22; font-weight: bold;">Weak</td>
+            <td>0.3573</td>
+            <td>0.3682</td>
+            <td>0.3447</td>
+            <td>739,806</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * ts_rank(ts_decay_linear(ts_corr(gp_demean(INDUSTRY, VWAP * 0.728317 + VWAP ...">-1 * ts_rank(ts_decay_linear(ts_corr(gp_demean(INDUSTRY, VWAP * 0.728317 + VWAP ...</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + ts_rank+ts_decay_linear归一化差异</td>
+        </tr>
+        <tr>
+            <td>alpha_024</td>
+            <td style="color: #e67e22; font-weight: bold;">Weak</td>
+            <td>0.2931</td>
+            <td>0.3646</td>
+            <td>0.3384</td>
+            <td>624,931</td>
+            <td style="font-size: 11px; color: #666;" title="if_else((ts_delta(ts_sum(CLOSE, 100) / 100, 100) / ts_delay(CLOSE, 100) &lt; 0.05) ...">if_else((ts_delta(ts_sum(CLOSE, 100) / 100, 100) / ts_delay(CLOSE, 100) &lt; 0.05) ...</td>
+            <td style="font-size: 11px; color: #e74c3c;">后复权价格导致if_else条件中ts_delta(ts_sum(CLOSE,100)/100,100)/ts_delay(CLOSE,100)极大, 分支选择不同</td>
+        </tr>
+        <tr>
+            <td>alpha_063</td>
+            <td style="color: #e67e22; font-weight: bold;">Weak</td>
+            <td>0.3431</td>
+            <td>0.3327</td>
+            <td>0.3513</td>
+            <td>701,088</td>
+            <td style="font-size: 11px; color: #666;" title="(cs_rank(ts_decay_linear(ts_delta(gp_demean(INDUSTRY, CLOSE), 2), 8)) - cs_rank(...">(cs_rank(ts_decay_linear(ts_delta(gp_demean(INDUSTRY, CLOSE), 2), 8)) - cs_rank(...</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + ts_decay_linear归一化差异</td>
+        </tr>
+        <tr>
+            <td>alpha_022</td>
+            <td style="color: #e67e22; font-weight: bold;">Weak</td>
+            <td>0.3347</td>
+            <td>0.2768</td>
+            <td>0.2669</td>
+            <td>620,865</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * (ts_delta(ts_corr(HIGH, VOLUME, 5), 5) * cs_rank(ts_std_dev(CLOSE, 20)))">-1 * (ts_delta(ts_corr(HIGH, VOLUME, 5), 5) * cs_rank(ts_std_dev(CLOSE, 20)))</td>
+            <td style="font-size: 11px; color: #e74c3c;">ts_delta(ts_corr(HIGH,VOLUME,5),5)对ts_corr实现细节敏感, 累积差异</td>
+        </tr>
+        <tr>
+            <td>alpha_095</td>
+            <td style="color: #e67e22; font-weight: bold;">Weak</td>
+            <td>0.2573</td>
+            <td>0.2573</td>
+            <td>0.2645</td>
+            <td>621,088</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(OPEN - ts_min(OPEN, 12)) &lt; ts_rank(Pow(cs_rank(ts_corr(ts_sum((HIGH + LO...">cs_rank(OPEN - ts_min(OPEN, 12)) &lt; ts_rank(Pow(cs_rank(ts_corr(ts_sum((HIGH + LO...</td>
+            <td style="font-size: 11px; color: #e74c3c;">bool比较结果(int_), ts_rank+Pow归一化差异</td>
+        </tr>
+        <tr>
+            <td>alpha_089</td>
+            <td style="color: #e67e22; font-weight: bold;">Weak</td>
+            <td>0.2517</td>
+            <td>0.2512</td>
+            <td>0.3042</td>
+            <td>735,827</td>
+            <td style="font-size: 11px; color: #666;" title="ts_rank(ts_decay_linear(ts_corr(LOW * 0.967285 + LOW * (1 - 0.967285), ADV10, 7)...">ts_rank(ts_decay_linear(ts_corr(LOW * 0.967285 + LOW * (1 - 0.967285), ADV10, 7)...</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + ts_rank+ts_decay_linear归一化差异</td>
+        </tr>
+        <tr>
+            <td>alpha_080</td>
+            <td style="color: #e67e22; font-weight: bold;">Weak</td>
+            <td>0.2633</td>
+            <td>0.2508</td>
+            <td>0.2688</td>
+            <td>737,534</td>
+            <td style="font-size: 11px; color: #666;" title="Pow(cs_rank(sign(ts_delta(gp_demean(INDUSTRY, OPEN * 0.868128 + HIGH * (1 - 0.86...">Pow(cs_rank(sign(ts_delta(gp_demean(INDUSTRY, OPEN * 0.868128 + HIGH * (1 - 0.86...</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + Pow(cs_rank, ts_rank)放大gp_demean差异</td>
+        </tr>
+        <tr>
+            <td>alpha_071</td>
+            <td style="color: #e67e22; font-weight: bold;">Weak</td>
+            <td>0.2020</td>
+            <td>0.2147</td>
+            <td>0.2115</td>
+            <td>618,761</td>
+            <td style="font-size: 11px; color: #666;" title="max_(ts_rank(ts_decay_linear(ts_corr(ts_rank(CLOSE, 3), ts_rank(ADV180, 12), 18)...">max_(ts_rank(ts_decay_linear(ts_corr(ts_rank(CLOSE, 3), ts_rank(ADV180, 12), 18)...</td>
+            <td style="font-size: 11px; color: #e74c3c;">ts_rank+ts_decay_linear归一化差异, max_()取两个不同归一化结果的最大值</td>
+        </tr>
+        <tr>
+            <td>alpha_058</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>0.1782</td>
+            <td>0.1808</td>
+            <td>0.2283</td>
+            <td>739,556</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * ts_rank(ts_decay_linear(ts_corr(gp_demean(SECTOR, VWAP), VOLUME, 4), 8), 6)">-1 * ts_rank(ts_decay_linear(ts_corr(gp_demean(SECTOR, VWAP), VOLUME, 4), 8), 6)</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + ts_rank+ts_decay_linear归一化差异</td>
+        </tr>
+        <tr>
+            <td>alpha_079</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>0.1607</td>
+            <td>0.1607</td>
+            <td>0.1896</td>
+            <td>724,064</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(ts_delta(gp_demean(SECTOR, CLOSE * 0.60733 + OPEN * (1 - 0.60733)), 1)) ...">cs_rank(ts_delta(gp_demean(SECTOR, CLOSE * 0.60733 + OPEN * (1 - 0.60733)), 1)) ...</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + gp_demean后ts_delta+ts_corr累积差异</td>
+        </tr>
+        <tr>
+            <td>alpha_055</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>0.0312</td>
+            <td>0.0231</td>
+            <td>0.0165</td>
+            <td>621,108</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * ts_corr(cs_rank((CLOSE - ts_min(LOW, 12)) / (ts_max(HIGH, 12) - ts_min(LOW,...">-1 * ts_corr(cs_rank((CLOSE - ts_min(LOW, 12)) / (ts_max(HIGH, 12) - ts_min(LOW,...</td>
+            <td style="font-size: 11px; color: #e74c3c;">ts_corr中嵌套cs_rank归一化差异 + ts_max/ts_min在12日窗口累积</td>
+        </tr>
+        <tr>
+            <td>alpha_061</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>nan</td>
+            <td>nan</td>
+            <td>nan</td>
+            <td>606,726</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(VWAP - ts_min(VWAP, 16)) &lt; cs_rank(ts_corr(VWAP, ADV180, 18))">cs_rank(VWAP - ts_min(VWAP, 16)) &lt; cs_rank(ts_corr(VWAP, ADV180, 18))</td>
+            <td style="font-size: 11px; color: #e74c3c;">bool比较结果(cs_rank&lt;cs_rank)为常量, ADV180窗口差异</td>
+        </tr>
+        <tr>
+            <td>alpha_091</td>
+            <td style="color: #e67e22; font-weight: bold;">Weak</td>
+            <td>0.2471</td>
+            <td>0.2275</td>
+            <td>0.2632</td>
+            <td>735,005</td>
+            <td style="font-size: 11px; color: #666;" title="(ts_rank(ts_decay_linear(ts_decay_linear(ts_corr(gp_demean(INDUSTRY, CLOSE), VOL...">(ts_rank(ts_decay_linear(ts_decay_linear(ts_corr(gp_demean(INDUSTRY, CLOSE), VOL...</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + 嵌套ts_decay_linear(2层)归一化差异累积</td>
+        </tr>
+        <tr>
+            <td>alpha_087</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>0.1387</td>
+            <td>0.1856</td>
+            <td>0.1969</td>
+            <td>742,137</td>
+            <td style="font-size: 11px; color: #666;" title="max_(cs_rank(ts_decay_linear(ts_delta(CLOSE * 0.369701 + VWAP * (1 - 0.369701), ...">max_(cs_rank(ts_decay_linear(ts_delta(CLOSE * 0.369701 + VWAP * (1 - 0.369701), ...</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + ts_decay_linear归一化差异 + max_()放大</td>
+        </tr>
+        <tr>
+            <td>alpha_096</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>0.1809</td>
+            <td>0.1769</td>
+            <td>0.1712</td>
+            <td>624,214</td>
+            <td style="font-size: 11px; color: #666;" title="max_(ts_rank(ts_decay_linear(ts_corr(cs_rank(VWAP), cs_rank(VOLUME), 4), 4), 8),...">max_(ts_rank(ts_decay_linear(ts_corr(cs_rank(VWAP), cs_rank(VOLUME), 4), 4), 8),...</td>
+            <td style="font-size: 11px; color: #e74c3c;">ts_rank+ts_decay_linear归一化差异, max_()取两个不同归一化结果放大</td>
+        </tr>
+        <tr>
+            <td>alpha_097</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>0.1154</td>
+            <td>0.1060</td>
+            <td>0.1138</td>
+            <td>731,702</td>
+            <td style="font-size: 11px; color: #666;" title="(cs_rank(ts_decay_linear(ts_delta(gp_demean(INDUSTRY, LOW * 0.721001 + VWAP * (1...">(cs_rank(ts_decay_linear(ts_delta(gp_demean(INDUSTRY, LOW * 0.721001 + VWAP * (1...</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + ts_decay_linear归一化差异</td>
+        </tr>
+        <tr>
+            <td>alpha_076</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>0.0816</td>
+            <td>0.0722</td>
+            <td>0.0881</td>
+            <td>741,958</td>
+            <td style="font-size: 11px; color: #666;" title="max_(cs_rank(ts_decay_linear(ts_delta(VWAP, 1), 12)), ts_rank(ts_decay_linear(ts...">max_(cs_rank(ts_decay_linear(ts_delta(VWAP, 1), 12)), ts_rank(ts_decay_linear(ts...</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + ts_decay_linear归一化差异 + max_()放大</td>
+        </tr>
+        <tr>
+            <td>alpha_007</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>0.0864</td>
+            <td>0.0719</td>
+            <td>0.0745</td>
+            <td>622,576</td>
+            <td style="font-size: 11px; color: #666;" title="if_else(ADV20 &lt; VOLUME, -1 * ts_rank(abs_(ts_delta(CLOSE, 7)), 60) * sign(ts_del...">if_else(ADV20 &lt; VOLUME, -1 * ts_rank(abs_(ts_delta(CLOSE, 7)), 60) * sign(ts_del...</td>
+            <td style="font-size: 11px; color: #e74c3c;">if_else分支内ts_rank归一化差异 + 后复权价格导致ts_delta(CLOSE,7)极大</td>
+        </tr>
+        <tr>
+            <td>alpha_093</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>0.0005</td>
+            <td>0.0645</td>
+            <td>0.0686</td>
+            <td>719,831</td>
+            <td style="font-size: 11px; color: #666;" title="ts_rank(ts_decay_linear(ts_corr(gp_demean(INDUSTRY, VWAP), ADV81, 17), 20), 8) /...">ts_rank(ts_decay_linear(ts_corr(gp_demean(INDUSTRY, VWAP), ADV81, 17), 20), 8) /...</td>
+            <td style="font-size: 11px; color: #e74c3c;">行业分类不同(中信vs申万) + ts_rank+ts_decay_linear归一化差异 + ADV81窗口</td>
+        </tr>
+        <tr>
+            <td>alpha_021</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>0.0246</td>
+            <td>0.0246</td>
+            <td>0.0249</td>
+            <td>626,637</td>
+            <td style="font-size: 11px; color: #666;" title="if_else(ts_sum(CLOSE, 8) / 8 + ts_std_dev(CLOSE, 8) &lt; ts_sum(CLOSE, 2) / 2, -1 *...">if_else(ts_sum(CLOSE, 8) / 8 + ts_std_dev(CLOSE, 8) &lt; ts_sum(CLOSE, 2) / 2, -1 *...</td>
+            <td style="font-size: 11px; color: #e74c3c;">后复权价格导致ts_std_dev(CLOSE,8)极大, if_else条件几乎恒为true, bool比较结果为常量</td>
+        </tr>
+        <tr>
+            <td>alpha_019</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>0.0046</td>
+            <td>0.0224</td>
+            <td>0.0227</td>
+            <td>566,371</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * sign(CLOSE - ts_delay(CLOSE, 7) + ts_delta(CLOSE, 7)) * (1 + cs_rank(1 + ts...">-1 * sign(CLOSE - ts_delay(CLOSE, 7) + ts_delta(CLOSE, 7)) * (1 + cs_rank(1 + ts...</td>
+            <td style="font-size: 11px; color: #e74c3c;">expr_codegen优化CLOSE-ts_delay(CLOSE,7)+ts_delta(CLOSE,7)→2*ts_delta(CLOSE,7), GT公式解读不同</td>
+        </tr>
+        <tr>
+            <td>alpha_098</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>0.0263</td>
+            <td>0.0202</td>
+            <td>0.0213</td>
+            <td>621,250</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(ts_decay_linear(ts_corr(VWAP, ts_sum(ADV5, 26), 5), 7)) - cs_rank(ts_dec...">cs_rank(ts_decay_linear(ts_corr(VWAP, ts_sum(ADV5, 26), 5), 7)) - cs_rank(ts_dec...</td>
+            <td style="font-size: 11px; color: #e74c3c;">ts_decay_linear归一化差异, cs_rank差-cs_rank差放大微小差异</td>
+        </tr>
+        <tr>
+            <td>alpha_092</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>-0.0353</td>
+            <td>-0.0476</td>
+            <td>0.0002</td>
+            <td>620,572</td>
+            <td style="font-size: 11px; color: #666;" title="min_(ts_rank(ts_decay_linear((HIGH + LOW) / 2 + CLOSE &lt; LOW + OPEN, 15), 19), ts...">min_(ts_rank(ts_decay_linear((HIGH + LOW) / 2 + CLOSE &lt; LOW + OPEN, 15), 19), ts...</td>
+            <td style="font-size: 11px; color: #e74c3c;">bool比较结果((H+L)/2+C&lt;L+O为常量false), ts_decay_linear输入为常量</td>
+        </tr>
+        <tr>
+            <td>alpha_010</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>-0.0510</td>
+            <td>-0.0535</td>
+            <td>-0.0497</td>
+            <td>624,393</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(if_else(0 &lt; ts_min(ts_delta(CLOSE, 1), 4), ts_delta(CLOSE, 1), if_else(t...">cs_rank(if_else(0 &lt; ts_min(ts_delta(CLOSE, 1), 4), ts_delta(CLOSE, 1), if_else(t...</td>
+            <td style="font-size: 11px; color: #e74c3c;">同alpha_009, 外层cs_rank放大了内部if_else条件差异</td>
+        </tr>
+        <tr>
+            <td>alpha_009</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>-0.1362</td>
+            <td>-0.0735</td>
+            <td>-0.0816</td>
+            <td>624,393</td>
+            <td style="font-size: 11px; color: #666;" title="if_else(0 &lt; ts_min(ts_delta(CLOSE, 1), 5), ts_delta(CLOSE, 1), if_else(ts_max(ts...">if_else(0 &lt; ts_min(ts_delta(CLOSE, 1), 5), ts_delta(CLOSE, 1), if_else(ts_max(ts...</td>
+            <td style="font-size: 11px; color: #e74c3c;">GT公式解读不同: if_else条件中ts_min/ts_max窗口不同(GT用5/5, 论文用5/5但实现有歧义)</td>
+        </tr>
+        <tr>
+            <td>alpha_066</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>-0.1026</td>
+            <td>-0.1018</td>
+            <td>-0.1040</td>
+            <td>518,280</td>
+            <td style="font-size: 11px; color: #666;" title="(cs_rank(ts_decay_linear(ts_delta(VWAP, 4), 7)) + ts_rank(ts_decay_linear((LOW *...">(cs_rank(ts_decay_linear(ts_delta(VWAP, 4), 7)) + ts_rank(ts_decay_linear((LOW *...</td>
+            <td style="font-size: 11px; color: #e74c3c;">ts_decay_linear归一化差异 + ts_rank归一化差异, 两者相加放大差异</td>
+        </tr>
+        <tr>
+            <td>alpha_044</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>-0.0896</td>
+            <td>-0.1136</td>
+            <td>-0.0669</td>
+            <td>623,199</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * ts_corr(HIGH, cs_rank(VOLUME), 5)">-1 * ts_corr(HIGH, cs_rank(VOLUME), 5)</td>
+            <td style="font-size: 11px; color: #e74c3c;">ts_corr(HIGH, cs_rank(VOLUME), 5), GT的cs_rank非百分位归一化导致corr输入分布不同</td>
+        </tr>
+        <tr>
+            <td>alpha_020</td>
+            <td style="color: #e74c3c; font-weight: bold;">Poor</td>
+            <td>-0.0281</td>
+            <td>-0.1604</td>
+            <td>-0.1603</td>
+            <td>625,098</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * cs_rank(OPEN - ts_delay(HIGH, 1)) * cs_rank(OPEN - ts_delay(CLOSE, 1)) * cs...">-1 * cs_rank(OPEN - ts_delay(HIGH, 1)) * cs_rank(OPEN - ts_delay(CLOSE, 1)) * cs...</td>
+            <td style="font-size: 11px; color: #e74c3c;">GT的cs_rank非百分位归一化[0,1], GT值域[-21424,0] vs 我们[-1,0]</td>
+        </tr>
+        <tr>
+            <td>alpha_008</td>
+            <td style="color: #e67e22; font-weight: bold;">Weak</td>
+            <td>-0.4612</td>
+            <td>-0.4612</td>
+            <td>-0.4611</td>
+            <td>622,829</td>
+            <td style="font-size: 11px; color: #666;" title="-1 * cs_rank(ts_sum(OPEN, 5) * ts_sum(RETURNS, 5) - ts_delay(ts_sum(OPEN, 5) * t...">-1 * cs_rank(ts_sum(OPEN, 5) * ts_sum(RETURNS, 5) - ts_delay(ts_sum(OPEN, 5) * t...</td>
+            <td style="font-size: 11px; color: #e74c3c;">expr_codegen公式优化(ts_delay→ts_delta), GT公式解读不同(ts_sum*ts_sum vs ts_delta)</td>
+        </tr>
+        <tr>
+            <td>alpha_001</td>
+            <td style="color: #f39c12; font-weight: bold;">Moderate</td>
+            <td>-0.7051</td>
+            <td>-0.7046</td>
+            <td>-0.8270</td>
+            <td>624,398</td>
+            <td style="font-size: 11px; color: #666;" title="cs_rank(ts_arg_max(signed_power(if_else(RETURNS &lt; 0, ts_std_dev(RETURNS, 20), CL...">cs_rank(ts_arg_max(signed_power(if_else(RETURNS &lt; 0, ts_std_dev(RETURNS, 20), CL...</td>
+            <td style="font-size: 11px; color: #e74c3c;">ts_arg_max实现不同 + signed_power指数=后复权delta导致溢出</td>
+        </tr>
+        <tr>
+            <td>alpha_062</td>
+            <td style="color: #999; font-weight: bold;">N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>0</td>
+            <td style="font-size: 11px; color: #666;" title=""></td>
+            <td style="font-size: 11px; color: #e74c3c;"></td>
+        </tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
