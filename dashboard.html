@@ -248,6 +248,43 @@
             color: #495057;
         }
 
+        .filter-btn {
+            padding: 6px 16px;
+            border: 1px solid #dee2e6;
+            border-radius: 20px;
+            background: white;
+            font-size: 13px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: #2E86AB;
+            color: #2E86AB;
+        }
+
+        .filter-btn.active {
+            background: #2E86AB;
+            border-color: #2E86AB;
+            color: white;
+        }
+
+        .type-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .type-badge.raw_data { background: #e3f2fd; color: #1565c0; }
+        .type-badge.factor { background: #f3e5f5; color: #7b1fa2; }
+        .type-badge.derived { background: #e8f5e9; color: #2e7d32; }
+        .type-badge.other { background: #fff3e0; color: #e65100; }
+
         .factor-controls {
             display: flex;
             align-items: center;
@@ -586,7 +623,16 @@
 
             <div class="table-container">
                 <div class="table-header">
-                    <div class="table-title">Data Tables</div>
+                    <div>
+                        <div class="table-title">Data Tables</div>
+                        <div style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
+                            <button class="filter-btn active" data-type="all" onclick="filterDataType('all')">All</button>
+                            <button class="filter-btn" data-type="raw_data" onclick="filterDataType('raw_data')">Raw Data</button>
+                            <button class="filter-btn" data-type="factor" onclick="filterDataType('factor')">Factors</button>
+                            <button class="filter-btn" data-type="derived" onclick="filterDataType('derived')">Derived</button>
+                            <button class="filter-btn" data-type="other" onclick="filterDataType('other')">Other</button>
+                        </div>
+                    </div>
                     <div class="search-box">
                         <span class="search-icon">🔍</span>
                         <input type="text" id="data-search" placeholder="Search tables...">
@@ -596,6 +642,7 @@
                     <thead>
                         <tr>
                             <th>Table Name</th>
+                            <th>Type</th>
                             <th>Description</th>
                             <th>Rows</th>
                             <th>Size (MB)</th>
@@ -663,7 +710,7 @@
     </div>
 
     <div class="footer">
-        Generated at 2026-02-13 13:20:17 |
+        Generated at 2026-02-13 14:00:40 |
         Data from metadata.db
     </div>
 
@@ -681,7 +728,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 12:52:20.950567",
-        "status": "active"
+        "status": "active",
+        "data_type": "other"
       },
       {
         "name": "alpha101_batch",
@@ -692,18 +740,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:10:32.738835",
-        "status": "active"
-      },
-      {
-        "name": "alpha101_code1_batch",
-        "description": "",
-        "row_count": 13453007,
-        "size_mb": 4982.81,
-        "date_start": "20100104",
-        "date_end": "20260206",
-        "file_count": 189,
-        "updated_at": "2026-02-10 19:21:20.773308",
-        "status": "active"
+        "status": "active",
+        "data_type": "derived"
       },
       {
         "name": "alpha101_wide",
@@ -714,7 +752,8 @@
         "date_end": "20260206",
         "file_count": 240,
         "updated_at": "2026-02-13 12:47:46.284889",
-        "status": "active"
+        "status": "active",
+        "data_type": "derived"
       },
       {
         "name": "alpha191_batch",
@@ -725,7 +764,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:22:59.123107",
-        "status": "active"
+        "status": "active",
+        "data_type": "derived"
       },
       {
         "name": "alpha191_wide",
@@ -736,7 +776,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 13:10:32.441890",
-        "status": "active"
+        "status": "active",
+        "data_type": "derived"
       },
       {
         "name": "backtest_base",
@@ -747,7 +788,8 @@
         "date_end": "20260206",
         "file_count": 240,
         "updated_at": "2026-02-13 12:43:13.262943",
-        "status": "active"
+        "status": "active",
+        "data_type": "raw_data"
       },
       {
         "name": "cn_citic_industry_member",
@@ -758,7 +800,8 @@
         "date_end": "20260208",
         "file_count": 1,
         "updated_at": "2026-02-08 14:37:22.321289",
-        "status": "active"
+        "status": "active",
+        "data_type": "raw_data"
       },
       {
         "name": "cn_cpi_monthly",
@@ -769,7 +812,8 @@
         "date_end": "20251201",
         "file_count": 312,
         "updated_at": "2026-02-07 08:07:06.627294",
-        "status": "active"
+        "status": "active",
+        "data_type": "raw_data"
       },
       {
         "name": "cn_future_bar1d",
@@ -780,7 +824,8 @@
         "date_end": "20260206",
         "file_count": 254,
         "updated_at": "2026-02-07 08:07:07.242769",
-        "status": "active"
+        "status": "active",
+        "data_type": "raw_data"
       },
       {
         "name": "cn_money_supply_monthly",
@@ -791,7 +836,8 @@
         "date_end": "20260201",
         "file_count": 314,
         "updated_at": "2026-02-08 14:38:50.405742",
-        "status": "active"
+        "status": "active",
+        "data_type": "raw_data"
       },
       {
         "name": "cn_option_bar1d",
@@ -802,7 +848,8 @@
         "date_end": "20260206",
         "file_count": 95,
         "updated_at": "2026-02-07 08:07:07.737138",
-        "status": "active"
+        "status": "active",
+        "data_type": "raw_data"
       },
       {
         "name": "cn_power_generation_monthly",
@@ -813,7 +860,8 @@
         "date_end": "20251201",
         "file_count": 286,
         "updated_at": "2026-02-07 08:07:08.048159",
-        "status": "active"
+        "status": "active",
+        "data_type": "raw_data"
       },
       {
         "name": "cn_ppi_monthly",
@@ -824,7 +872,8 @@
         "date_end": "20251201",
         "file_count": 312,
         "updated_at": "2026-02-07 08:07:08.484837",
-        "status": "active"
+        "status": "active",
+        "data_type": "raw_data"
       },
       {
         "name": "cn_stock_bar1d",
@@ -835,7 +884,8 @@
         "date_end": "20260206",
         "file_count": 243,
         "updated_at": "2026-02-07 19:10:02.167455",
-        "status": "active"
+        "status": "active",
+        "data_type": "raw_data"
       },
       {
         "name": "cn_stock_daily_basic",
@@ -846,7 +896,8 @@
         "date_end": "20260206",
         "file_count": 253,
         "updated_at": "2026-02-07 19:10:02.875238",
-        "status": "active"
+        "status": "active",
+        "data_type": "raw_data"
       },
       {
         "name": "cn_stock_factors_alpha_101",
@@ -857,7 +908,8 @@
         "date_end": null,
         "file_count": 209,
         "updated_at": "2026-02-10 04:43:16.317716",
-        "status": "active"
+        "status": "active",
+        "data_type": "raw_data"
       },
       {
         "name": "cn_stock_index_bar1d",
@@ -868,7 +920,8 @@
         "date_end": "20260206",
         "file_count": 254,
         "updated_at": "2026-02-07 08:07:09.567604",
-        "status": "active"
+        "status": "active",
+        "data_type": "raw_data"
       },
       {
         "name": "cn_stock_moneyflow",
@@ -879,7 +932,8 @@
         "date_end": "20260206",
         "file_count": 193,
         "updated_at": "2026-02-07 08:07:10.079828",
-        "status": "active"
+        "status": "active",
+        "data_type": "raw_data"
       },
       {
         "name": "cn_stock_status",
@@ -890,7 +944,8 @@
         "date_end": "20260206",
         "file_count": 254,
         "updated_at": "2026-02-07 08:15:45.122167",
-        "status": "active"
+        "status": "active",
+        "data_type": "raw_data"
       },
       {
         "name": "gtja191_001",
@@ -901,7 +956,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:40.632093",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_002",
@@ -912,7 +968,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:41.627047",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_003",
@@ -923,7 +980,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:42.596889",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_004",
@@ -934,7 +992,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:43.497834",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_005",
@@ -945,7 +1004,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:44.443052",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_006",
@@ -956,7 +1016,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:45.365029",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_007",
@@ -967,7 +1028,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:46.304807",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_008",
@@ -978,7 +1040,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:47.230267",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_009",
@@ -989,7 +1052,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:48.128501",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_010",
@@ -1000,7 +1064,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:49.057658",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_011",
@@ -1011,7 +1076,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:49.991358",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_012",
@@ -1022,7 +1088,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:50.950244",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_013",
@@ -1033,7 +1100,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:51.901329",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_014",
@@ -1044,7 +1112,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:52.881189",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_015",
@@ -1055,7 +1124,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:53.817690",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_016",
@@ -1066,7 +1136,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:54.713060",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_017",
@@ -1077,7 +1148,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:55.616889",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_018",
@@ -1088,7 +1160,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:56.604428",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_019",
@@ -1099,7 +1172,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:57.613387",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_020",
@@ -1110,7 +1184,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:58.584721",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_021",
@@ -1121,7 +1196,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:37:59.500021",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_022",
@@ -1132,7 +1208,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:00.395304",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_023",
@@ -1143,7 +1220,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:01.287572",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_024",
@@ -1154,7 +1232,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:02.201376",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_025",
@@ -1165,7 +1244,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:03.082765",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_026",
@@ -1176,7 +1256,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:04.006022",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_027",
@@ -1187,7 +1268,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:04.898117",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_028",
@@ -1198,7 +1280,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:05.819423",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_029",
@@ -1209,7 +1292,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:06.726935",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_031",
@@ -1220,7 +1304,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:07.632027",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_032",
@@ -1231,7 +1316,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:08.573310",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_033",
@@ -1242,7 +1328,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:09.469891",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_034",
@@ -1253,7 +1340,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:10.417073",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_035",
@@ -1264,7 +1352,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:11.331625",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_036",
@@ -1275,7 +1364,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:12.232358",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_037",
@@ -1286,7 +1376,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:13.131185",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_038",
@@ -1297,7 +1388,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:14.034564",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_039",
@@ -1308,7 +1400,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:14.984496",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_040",
@@ -1319,7 +1412,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:15.862379",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_041",
@@ -1330,7 +1424,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:16.732633",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_042",
@@ -1341,7 +1436,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:17.625663",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_043",
@@ -1352,7 +1448,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:18.565177",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_044",
@@ -1363,7 +1460,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:19.438732",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_045",
@@ -1374,7 +1472,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:20.329757",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_046",
@@ -1385,7 +1484,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:21.214940",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_047",
@@ -1396,7 +1496,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:22.079677",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_048",
@@ -1407,7 +1508,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:22.967773",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_049",
@@ -1418,7 +1520,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:23.943096",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_050",
@@ -1429,7 +1532,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:24.898559",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_051",
@@ -1440,7 +1544,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:25.842932",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_052",
@@ -1451,7 +1556,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:26.747438",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_053",
@@ -1462,7 +1568,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:27.601876",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_054",
@@ -1473,7 +1580,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:28.504148",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_055",
@@ -1484,7 +1592,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:29.382026",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_056",
@@ -1495,7 +1604,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:30.260735",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_057",
@@ -1506,7 +1616,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:31.124614",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_058",
@@ -1517,7 +1628,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:31.974674",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_059",
@@ -1528,7 +1640,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:32.884953",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_060",
@@ -1539,7 +1652,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:33.783696",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_061",
@@ -1550,7 +1664,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:34.675429",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_062",
@@ -1561,7 +1676,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:35.534679",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_063",
@@ -1572,7 +1688,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:36.381974",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_064",
@@ -1583,7 +1700,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:37.256543",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_065",
@@ -1594,7 +1712,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:38.179814",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_066",
@@ -1605,7 +1724,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:39.108525",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_067",
@@ -1616,7 +1736,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:39.957273",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_068",
@@ -1627,7 +1748,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:40.804345",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_069",
@@ -1638,7 +1760,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:41.732810",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_070",
@@ -1649,7 +1772,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:42.602389",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_071",
@@ -1660,7 +1784,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:43.475765",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_072",
@@ -1671,7 +1796,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:44.350455",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_073",
@@ -1682,7 +1808,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:45.281675",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_074",
@@ -1693,7 +1820,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:46.188948",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_075",
@@ -1704,7 +1832,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:47.034175",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_076",
@@ -1715,7 +1844,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:47.906903",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_077",
@@ -1726,7 +1856,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:48.800837",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_078",
@@ -1737,7 +1868,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:49.672114",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_079",
@@ -1748,7 +1880,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:50.541537",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_080",
@@ -1759,7 +1892,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:51.413727",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_081",
@@ -1770,7 +1904,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:52.289760",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_082",
@@ -1781,7 +1916,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:53.168370",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_083",
@@ -1792,7 +1928,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:54.058320",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_084",
@@ -1803,7 +1940,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:54.998170",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_085",
@@ -1814,7 +1952,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:55.863463",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_086",
@@ -1825,7 +1964,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:56.729203",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_087",
@@ -1836,7 +1976,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:57.635938",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_088",
@@ -1847,7 +1988,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:58.614830",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_089",
@@ -1858,7 +2000,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:38:59.485834",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_090",
@@ -1869,7 +2012,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:00.375470",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_091",
@@ -1880,7 +2024,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:01.318280",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_092",
@@ -1891,7 +2036,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:02.179241",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_093",
@@ -1902,7 +2048,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:03.096370",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_094",
@@ -1913,7 +2060,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:04.025764",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_095",
@@ -1924,7 +2072,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:04.899092",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_096",
@@ -1935,7 +2084,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:05.778996",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_097",
@@ -1946,7 +2096,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:06.654421",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_098",
@@ -1957,7 +2108,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:07.587935",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_099",
@@ -1968,7 +2120,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:08.483849",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_100",
@@ -1979,7 +2132,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:09.353020",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_101",
@@ -1990,7 +2144,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:10.233776",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_102",
@@ -2001,7 +2156,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:11.096076",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_103",
@@ -2012,7 +2168,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:11.970443",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_104",
@@ -2023,7 +2180,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:12.846924",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_105",
@@ -2034,7 +2192,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:13.724902",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_106",
@@ -2045,7 +2204,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:14.675277",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_107",
@@ -2056,7 +2216,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:15.543615",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_108",
@@ -2067,7 +2228,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:16.414453",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_109",
@@ -2078,7 +2240,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:17.293145",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_110",
@@ -2089,7 +2252,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:18.230501",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_111",
@@ -2100,7 +2264,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:19.186307",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_112",
@@ -2111,7 +2276,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:20.143265",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_113",
@@ -2122,7 +2288,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:21.065478",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_114",
@@ -2133,7 +2300,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:21.968279",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_115",
@@ -2144,7 +2312,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:22.874139",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_116",
@@ -2155,7 +2324,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:23.760173",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_117",
@@ -2166,7 +2336,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:24.642782",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_118",
@@ -2177,7 +2348,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:25.612881",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_119",
@@ -2188,7 +2360,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:26.532629",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_120",
@@ -2199,7 +2372,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:27.446940",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_121",
@@ -2210,7 +2384,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:28.337852",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_122",
@@ -2221,7 +2396,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:29.201321",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_123",
@@ -2232,7 +2408,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:30.063313",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_124",
@@ -2243,7 +2420,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:30.929017",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_125",
@@ -2254,7 +2432,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:31.870677",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_126",
@@ -2265,7 +2444,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:32.799234",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_127",
@@ -2276,7 +2456,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:33.677090",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_128",
@@ -2287,7 +2468,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:34.547268",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_129",
@@ -2298,7 +2480,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:35.449296",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_130",
@@ -2309,7 +2492,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:36.382319",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_131",
@@ -2320,7 +2504,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:37.307096",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_132",
@@ -2331,7 +2516,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:38.257102",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_133",
@@ -2342,7 +2528,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:39.122697",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_134",
@@ -2353,7 +2540,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:40.007908",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_135",
@@ -2364,7 +2552,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:40.898281",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_136",
@@ -2375,7 +2564,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:41.780742",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_137",
@@ -2386,7 +2576,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:42.639987",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_138",
@@ -2397,7 +2588,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:43.571946",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_139",
@@ -2408,7 +2600,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:44.459478",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_140",
@@ -2419,7 +2612,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:45.350066",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_141",
@@ -2430,7 +2624,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:46.247181",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_142",
@@ -2441,7 +2636,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:47.121385",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_143",
@@ -2452,7 +2648,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:47.994048",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_144",
@@ -2463,7 +2660,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:48.906053",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_145",
@@ -2474,7 +2672,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:49.799863",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_146",
@@ -2485,7 +2684,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:50.661752",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_147",
@@ -2496,7 +2696,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:51.554226",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_148",
@@ -2507,7 +2708,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:52.408119",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_149",
@@ -2518,7 +2720,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:53.279251",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_150",
@@ -2529,7 +2732,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:54.151664",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_151",
@@ -2540,7 +2744,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:55.017135",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_152",
@@ -2551,7 +2756,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:55.864447",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_153",
@@ -2562,7 +2768,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:56.747362",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_154",
@@ -2573,7 +2780,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:57.621228",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_155",
@@ -2584,7 +2792,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:58.491549",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_156",
@@ -2595,7 +2804,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:39:59.382847",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_157",
@@ -2606,7 +2816,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:00.322284",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_158",
@@ -2617,7 +2828,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:01.261906",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_159",
@@ -2628,7 +2840,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:02.153079",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_160",
@@ -2639,7 +2852,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:03.008593",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_161",
@@ -2650,7 +2864,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:03.926740",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_162",
@@ -2661,7 +2876,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:04.792784",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_163",
@@ -2672,7 +2888,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:05.708056",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_164",
@@ -2683,7 +2900,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:06.644983",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_165",
@@ -2694,7 +2912,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:07.531764",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_166",
@@ -2705,7 +2924,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:08.413110",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_167",
@@ -2716,7 +2936,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:09.341078",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_168",
@@ -2727,7 +2948,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:10.229500",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_169",
@@ -2738,7 +2960,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:11.084543",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_170",
@@ -2749,7 +2972,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:11.953934",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_171",
@@ -2760,7 +2984,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:12.894327",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_172",
@@ -2771,7 +2996,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:13.790724",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_173",
@@ -2782,7 +3008,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:14.687419",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_174",
@@ -2793,7 +3020,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:15.576663",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_175",
@@ -2804,7 +3032,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:16.535408",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_176",
@@ -2815,7 +3044,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:17.414077",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_177",
@@ -2826,7 +3056,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:18.277319",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_178",
@@ -2837,7 +3068,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:19.175088",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_179",
@@ -2848,7 +3080,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:20.059710",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_180",
@@ -2859,7 +3092,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:20.979369",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_181",
@@ -2870,7 +3104,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:21.876829",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_182",
@@ -2881,7 +3116,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:22.769152",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_183",
@@ -2892,7 +3128,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:23.643623",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_184",
@@ -2903,7 +3140,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:24.540240",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_185",
@@ -2914,7 +3152,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:25.434449",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_186",
@@ -2925,7 +3164,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:26.312359",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_187",
@@ -2936,7 +3176,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:27.230552",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_188",
@@ -2947,7 +3188,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:28.101881",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_189",
@@ -2958,7 +3200,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:28.993197",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_190",
@@ -2969,7 +3212,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:29.869553",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "gtja191_191",
@@ -2980,7 +3224,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:40:30.762011",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_001",
@@ -2991,7 +3236,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:18:52.154831",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_002",
@@ -3002,7 +3248,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:18:53.123477",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_003",
@@ -3013,7 +3260,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:18:54.028237",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_004",
@@ -3024,7 +3272,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:18:54.939694",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_005",
@@ -3035,7 +3284,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:18:55.914787",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_006",
@@ -3046,7 +3296,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:18:56.833471",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_007",
@@ -3057,7 +3308,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:18:57.815742",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_008",
@@ -3068,7 +3320,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:18:58.781854",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_009",
@@ -3079,7 +3332,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:18:59.805484",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_010",
@@ -3090,7 +3344,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:00.792838",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_011",
@@ -3101,7 +3356,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:01.716310",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_012",
@@ -3112,7 +3368,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:02.696389",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_013",
@@ -3123,7 +3380,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:03.671462",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_014",
@@ -3134,7 +3392,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:04.546496",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_015",
@@ -3145,7 +3404,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:05.502975",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_016",
@@ -3156,7 +3416,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:06.424308",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_017",
@@ -3167,7 +3428,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:07.365779",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_018",
@@ -3178,7 +3440,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:08.291237",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_019",
@@ -3189,7 +3452,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:09.189758",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_020",
@@ -3200,7 +3464,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:10.117948",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_021",
@@ -3211,7 +3476,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:10.995441",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_022",
@@ -3222,7 +3488,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:11.900527",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_023",
@@ -3233,7 +3500,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:12.806993",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_024",
@@ -3244,7 +3512,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:13.750486",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_025",
@@ -3255,7 +3524,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:14.663493",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_026",
@@ -3266,7 +3536,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:15.572683",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_027",
@@ -3277,7 +3548,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:16.489778",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_028",
@@ -3288,7 +3560,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:17.367412",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_029",
@@ -3299,7 +3572,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:18.255659",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_030",
@@ -3310,7 +3584,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:19.135255",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_031",
@@ -3321,7 +3596,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:20.003229",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_032",
@@ -3332,7 +3608,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:20.876598",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_033",
@@ -3343,7 +3620,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:21.798724",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_034",
@@ -3354,7 +3632,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:22.722552",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_035",
@@ -3365,7 +3644,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:23.602431",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_036",
@@ -3376,7 +3656,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:24.547966",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_037",
@@ -3387,7 +3668,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:25.448298",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_038",
@@ -3398,7 +3680,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:26.408351",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_039",
@@ -3409,7 +3692,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:27.272491",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_040",
@@ -3420,7 +3704,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:28.158686",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_041",
@@ -3431,7 +3716,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:29.074332",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_042",
@@ -3442,7 +3728,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:30.044506",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_043",
@@ -3453,7 +3740,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:30.922332",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_044",
@@ -3464,7 +3752,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:31.809312",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_045",
@@ -3475,7 +3764,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:32.718941",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_046",
@@ -3486,7 +3776,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:33.603581",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_047",
@@ -3497,7 +3788,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:34.494692",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_048",
@@ -3508,7 +3800,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:35.383020",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_049",
@@ -3519,7 +3812,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:36.297548",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_050",
@@ -3530,7 +3824,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:37.203846",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_051",
@@ -3541,7 +3836,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:38.129100",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_052",
@@ -3552,7 +3848,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:39.019083",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_053",
@@ -3563,7 +3860,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:39.984319",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_054",
@@ -3574,7 +3872,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:40.912116",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_055",
@@ -3585,7 +3884,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:41.791705",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_056",
@@ -3596,7 +3896,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:42.686673",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_057",
@@ -3607,7 +3908,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:43.583628",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_058",
@@ -3618,7 +3920,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:44.456132",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_059",
@@ -3629,7 +3932,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:45.312157",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_060",
@@ -3640,7 +3944,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:46.188272",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_061",
@@ -3651,7 +3956,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:47.064453",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_062",
@@ -3662,7 +3968,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:47.937329",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_063",
@@ -3673,7 +3980,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:48.885972",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_064",
@@ -3684,7 +3992,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:49.751126",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_065",
@@ -3695,7 +4004,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:50.618140",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_066",
@@ -3706,7 +4016,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:51.530597",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_067",
@@ -3717,7 +4028,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:52.392219",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_068",
@@ -3728,7 +4040,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:53.245450",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_069",
@@ -3739,7 +4052,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:54.177781",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_070",
@@ -3750,7 +4064,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:55.132432",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_071",
@@ -3761,7 +4076,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:56.013527",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_072",
@@ -3772,7 +4088,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:56.952308",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_073",
@@ -3783,7 +4100,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:57.816112",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_074",
@@ -3794,7 +4112,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:58.675116",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_075",
@@ -3805,7 +4124,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:19:59.530205",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_076",
@@ -3816,7 +4136,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:00.396958",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_077",
@@ -3827,7 +4148,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:01.276933",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_078",
@@ -3838,7 +4160,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:02.161270",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_079",
@@ -3849,7 +4172,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:03.018262",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_080",
@@ -3860,7 +4184,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:03.926604",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_081",
@@ -3871,7 +4196,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:04.799416",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_082",
@@ -3882,7 +4208,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:05.709680",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_083",
@@ -3893,7 +4220,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:06.595204",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_084",
@@ -3904,7 +4232,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:07.517350",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_085",
@@ -3915,7 +4244,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:08.405589",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_086",
@@ -3926,7 +4256,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:09.268878",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_087",
@@ -3937,7 +4268,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:10.131246",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_088",
@@ -3948,7 +4280,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:11.042173",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_089",
@@ -3959,7 +4292,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:11.922106",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_090",
@@ -3970,7 +4304,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:12.868770",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_091",
@@ -3981,7 +4316,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:13.795184",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_092",
@@ -3992,7 +4328,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:14.666763",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_093",
@@ -4003,7 +4340,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:15.603286",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_094",
@@ -4014,7 +4352,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:16.526971",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_095",
@@ -4025,7 +4364,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:17.399181",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_096",
@@ -4036,7 +4376,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:18.262022",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_097",
@@ -4047,7 +4388,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:19.176617",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_098",
@@ -4058,7 +4400,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:20.096446",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_099",
@@ -4069,7 +4412,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:20.958866",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_100",
@@ -4080,7 +4424,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:21.851522",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101_101",
@@ -4091,7 +4436,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-13 08:20:22.781364",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_001",
@@ -4102,7 +4448,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:14:09.170181",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_002",
@@ -4113,7 +4460,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:14:15.083022",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_003",
@@ -4124,7 +4472,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:14:20.386270",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_004",
@@ -4135,7 +4484,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:14:25.534517",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_005",
@@ -4146,7 +4496,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:14:30.763421",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_006",
@@ -4157,7 +4508,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:14:36.101358",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_007",
@@ -4168,7 +4520,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:14:41.221140",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_008",
@@ -4179,7 +4532,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:14:46.609967",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_009",
@@ -4190,7 +4544,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:14:52.290407",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_010",
@@ -4201,7 +4556,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:14:57.812935",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_011",
@@ -4212,7 +4568,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:15:02.908460",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_012",
@@ -4223,7 +4580,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:15:08.490804",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_013",
@@ -4234,7 +4592,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:15:13.866332",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_014",
@@ -4245,7 +4604,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:15:19.096412",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_015",
@@ -4256,7 +4616,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:15:24.535502",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_016",
@@ -4267,7 +4628,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:15:29.838325",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_017",
@@ -4278,7 +4640,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:15:35.016361",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_018",
@@ -4289,7 +4652,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:15:40.272238",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_019",
@@ -4300,7 +4664,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:15:45.582294",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_020",
@@ -4311,7 +4676,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:15:50.545506",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_021",
@@ -4322,7 +4688,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:15:55.440514",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_022",
@@ -4333,7 +4700,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:16:00.467731",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_023",
@@ -4344,7 +4712,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:16:05.573726",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_024",
@@ -4355,7 +4724,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:16:11.119386",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_025",
@@ -4366,7 +4736,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:16:16.555163",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_026",
@@ -4377,7 +4748,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:16:21.821999",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_027",
@@ -4388,7 +4760,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:16:26.808006",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_028",
@@ -4399,7 +4772,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:16:31.735690",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_029",
@@ -4410,7 +4784,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:16:37.131482",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_030",
@@ -4421,7 +4796,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:16:42.163807",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_031",
@@ -4432,7 +4808,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:16:47.069069",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_032",
@@ -4443,7 +4820,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:16:52.047070",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_033",
@@ -4454,7 +4832,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:16:57.509047",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_034",
@@ -4465,7 +4844,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:17:02.920821",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_035",
@@ -4476,7 +4856,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:17:08.124775",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_036",
@@ -4487,7 +4868,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:17:13.199914",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_037",
@@ -4498,7 +4880,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:17:18.073627",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_038",
@@ -4509,7 +4892,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:17:23.092785",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_039",
@@ -4520,7 +4904,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:17:28.045119",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_040",
@@ -4531,7 +4916,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:17:33.005605",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_041",
@@ -4542,7 +4928,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:17:37.963484",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_042",
@@ -4553,7 +4940,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:17:43.799927",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_043",
@@ -4564,7 +4952,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:17:48.736231",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_044",
@@ -4575,7 +4964,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:17:53.736239",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_045",
@@ -4586,7 +4976,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:17:58.876950",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_046",
@@ -4597,7 +4988,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:18:03.910709",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_047",
@@ -4608,7 +5000,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:18:08.943047",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_049",
@@ -4619,7 +5012,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:18:14.141851",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_050",
@@ -4630,7 +5024,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:18:19.195635",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_051",
@@ -4641,7 +5036,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:18:24.382913",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_052",
@@ -4652,7 +5048,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:18:29.462328",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_053",
@@ -4663,7 +5060,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:18:35.058045",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_054",
@@ -4674,7 +5072,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:18:40.338760",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_055",
@@ -4685,7 +5084,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:18:45.386302",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_057",
@@ -4696,7 +5096,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:18:50.275521",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_060",
@@ -4707,7 +5108,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:18:55.250835",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_061",
@@ -4718,7 +5120,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:19:00.084214",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_062",
@@ -4729,7 +5132,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:19:04.969049",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_064",
@@ -4740,7 +5144,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:19:10.041399",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_065",
@@ -4751,7 +5156,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:19:14.842262",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_066",
@@ -4762,7 +5168,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:19:20.141431",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_068",
@@ -4773,7 +5180,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:19:24.902210",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_071",
@@ -4784,7 +5192,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:19:29.860946",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_072",
@@ -4795,7 +5204,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:19:35.147114",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_073",
@@ -4806,7 +5216,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:19:40.052683",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_074",
@@ -4817,7 +5228,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:19:44.762233",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_075",
@@ -4828,7 +5240,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:19:49.612139",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_077",
@@ -4839,7 +5252,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:19:54.876076",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_078",
@@ -4850,7 +5264,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:19:59.916475",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_081",
@@ -4861,7 +5276,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:20:04.768683",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_083",
@@ -4872,7 +5288,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:20:09.806523",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_084",
@@ -4883,7 +5300,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:20:15.047300",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_085",
@@ -4894,7 +5312,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:20:20.011042",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_086",
@@ -4905,7 +5324,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:20:24.922960",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_088",
@@ -4916,7 +5336,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:20:30.338730",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_092",
@@ -4927,7 +5348,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:20:35.303217",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_094",
@@ -4938,7 +5360,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:20:40.491931",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_095",
@@ -4949,7 +5372,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:20:45.490910",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_096",
@@ -4960,7 +5384,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:20:50.572894",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_098",
@@ -4971,7 +5396,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:20:55.998477",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_099",
@@ -4982,7 +5408,8 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:21:00.907802",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       },
       {
         "name": "wq101c1_101",
@@ -4993,12 +5420,13 @@
         "date_end": "20260206",
         "file_count": 189,
         "updated_at": "2026-02-10 19:21:06.305972",
-        "status": "active"
+        "status": "active",
+        "data_type": "factor"
       }
     ],
-    "total_rows": 5177761783,
-    "total_size_mb": 74212.78,
-    "table_count": 393,
+    "total_rows": 5164308776,
+    "total_size_mb": 69229.97,
+    "table_count": 392,
     "date_range": {
       "start": "20000101",
       "end": "20260208"
@@ -5008,51 +5436,6 @@
   "factors": {
     "factors": [
       {
-        "name": "alpha101_batch",
-        "display_name": "alpha101_batch (raw)",
-        "base_name": "alpha101_batch",
-        "version_type": "raw",
-        "tag": "raw",
-        "report_path": "",
-        "category": "alpha101",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
-      },
-      {
-        "name": "alpha101_code1_batch",
-        "display_name": "alpha101_code1_batch (raw)",
-        "base_name": "alpha101_code1_batch",
-        "version_type": "raw",
-        "tag": "raw",
-        "report_path": "",
-        "category": "alpha101",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
-      },
-      {
-        "name": "alpha191_batch",
-        "display_name": "alpha191_batch (raw)",
-        "base_name": "alpha191_batch",
-        "version_type": "raw",
-        "tag": "raw",
-        "report_path": "",
-        "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
-      },
-      {
         "name": "gtja191_001",
         "display_name": "gtja191_001 (raw)",
         "base_name": "gtja191_001",
@@ -5060,12 +5443,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_001_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.0123,
+        "icir": 0.2021,
+        "ic_win_rate": 0.5931,
+        "sharpe": 2.7716,
+        "annual_return": 26.55,
+        "max_drawdown": -14.16
       },
       {
         "name": "gtja191_002",
@@ -5075,12 +5458,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_002_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.0192,
+        "icir": -0.1861,
+        "ic_win_rate": 0.435,
+        "sharpe": -3.4735,
+        "annual_return": -42.28,
+        "max_drawdown": -99.98
       },
       {
         "name": "gtja191_003",
@@ -5120,12 +5503,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_005_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.0116,
+        "icir": 0.1919,
+        "ic_win_rate": 0.5724,
+        "sharpe": 2.3781,
+        "annual_return": 24.58,
+        "max_drawdown": -18.35
       },
       {
         "name": "gtja191_006",
@@ -5195,9 +5578,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_010_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0123,
-        "icir": -0.1478,
-        "ic_win_rate": 0.4261,
+        "ic_mean": -0.0139,
+        "icir": -0.156,
+        "ic_win_rate": 0.4251,
         "sharpe": -1.8579,
         "annual_return": -23.6,
         "max_drawdown": -98.42
@@ -5210,12 +5593,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_011_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.0118,
+        "icir": -0.1745,
+        "ic_win_rate": 0.4199,
+        "sharpe": -2.4079,
+        "annual_return": -29.86,
+        "max_drawdown": -99.55
       },
       {
         "name": "gtja191_012",
@@ -5285,9 +5668,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_016_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0125,
-        "icir": -0.1122,
-        "ic_win_rate": 0.5556,
+        "ic_mean": 0.0038,
+        "icir": 0.0553,
+        "ic_win_rate": 0.5338,
         "sharpe": 0.2435,
         "annual_return": 2.09,
         "max_drawdown": -82.4
@@ -5420,9 +5803,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_025_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0207,
-        "icir": 0.1736,
-        "ic_win_rate": 0.5556,
+        "ic_mean": 0.0037,
+        "icir": 0.0321,
+        "ic_win_rate": 0.5126,
         "sharpe": -0.0507,
         "annual_return": -2.33,
         "max_drawdown": -68.87
@@ -5435,9 +5818,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_026_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0008,
-        "icir": -0.0297,
-        "ic_win_rate": 0.5,
+        "ic_mean": -0.0015,
+        "icir": -0.0507,
+        "ic_win_rate": 0.4929,
         "sharpe": -1.5799,
         "annual_return": -26.84,
         "max_drawdown": -96.68
@@ -5465,12 +5848,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_028_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.1739,
+        "icir": 1.2548,
+        "ic_win_rate": 1.0,
+        "sharpe": 0.1732,
+        "annual_return": 1.41,
+        "max_drawdown": -50.83
       },
       {
         "name": "gtja191_029",
@@ -5510,12 +5893,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_032_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.009,
+        "icir": 0.1355,
+        "ic_win_rate": 0.5732,
+        "sharpe": 1.7284,
+        "annual_return": 20.33,
+        "max_drawdown": -29.89
       },
       {
         "name": "gtja191_033",
@@ -5555,9 +5938,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_035_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0182,
-        "icir": 0.2153,
-        "ic_win_rate": 0.4286,
+        "ic_mean": 0.0083,
+        "icir": 0.0845,
+        "ic_win_rate": 0.5406,
         "sharpe": 1.3885,
         "annual_return": 21.76,
         "max_drawdown": -50.91
@@ -5570,9 +5953,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_036_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0203,
-        "icir": 0.2178,
-        "ic_win_rate": 0.5818,
+        "ic_mean": -0.005,
+        "icir": -0.0665,
+        "ic_win_rate": 0.4671,
         "sharpe": -0.9149,
         "annual_return": -11.75,
         "max_drawdown": -84.67
@@ -5615,9 +5998,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_039_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0047,
-        "icir": 0.1143,
-        "ic_win_rate": 0.5,
+        "ic_mean": 0.0069,
+        "icir": 0.075,
+        "ic_win_rate": 0.5445,
         "sharpe": 0.8336,
         "annual_return": 11.59,
         "max_drawdown": -56.67
@@ -5630,9 +6013,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_040_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0207,
-        "icir": -0.2581,
-        "ic_win_rate": 0.3366,
+        "ic_mean": -0.0023,
+        "icir": -0.0288,
+        "ic_win_rate": 0.4724,
         "sharpe": 1.04,
         "annual_return": 16.57,
         "max_drawdown": -62.79
@@ -5660,9 +6043,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_042_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0249,
-        "icir": 0.2884,
-        "ic_win_rate": 0.625,
+        "ic_mean": 0.0035,
+        "icir": 0.0391,
+        "ic_win_rate": 0.5229,
         "sharpe": 0.6732,
         "annual_return": 8.74,
         "max_drawdown": -87.06
@@ -5705,9 +6088,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_045_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0109,
-        "icir": -0.1128,
-        "ic_win_rate": 0.4142,
+        "ic_mean": 0.0053,
+        "icir": 0.0568,
+        "ic_win_rate": 0.5161,
         "sharpe": 1.7929,
         "annual_return": 31.16,
         "max_drawdown": -46.75
@@ -5735,12 +6118,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_047_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.007,
+        "icir": 0.0575,
+        "ic_win_rate": 0.5244,
+        "sharpe": 0.7812,
+        "annual_return": 13.18,
+        "max_drawdown": -40.35
       },
       {
         "name": "gtja191_048",
@@ -5750,9 +6133,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_048_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0261,
-        "icir": 0.1872,
-        "ic_win_rate": 0.5919,
+        "ic_mean": -0.0164,
+        "icir": -0.1396,
+        "ic_win_rate": 0.4517,
         "sharpe": -0.2477,
         "annual_return": -5.61,
         "max_drawdown": -97.85
@@ -5765,9 +6148,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_049_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0116,
-        "icir": 0.1055,
-        "ic_win_rate": 0.5388,
+        "ic_mean": -0.0098,
+        "icir": -0.0819,
+        "ic_win_rate": 0.4579,
         "sharpe": -1.5625,
         "annual_return": -26.13,
         "max_drawdown": -99.73
@@ -5780,9 +6163,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_050_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0116,
-        "icir": -0.1055,
-        "ic_win_rate": 0.4612,
+        "ic_mean": 0.0098,
+        "icir": 0.0819,
+        "ic_win_rate": 0.5421,
         "sharpe": 1.5632,
         "annual_return": 30.89,
         "max_drawdown": -57.89
@@ -5795,9 +6178,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_051_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0116,
-        "icir": -0.1055,
-        "ic_win_rate": 0.4612,
+        "ic_mean": 0.0098,
+        "icir": 0.0819,
+        "ic_win_rate": 0.5421,
         "sharpe": 1.5632,
         "annual_return": 30.89,
         "max_drawdown": -57.89
@@ -5810,9 +6193,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_052_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0113,
-        "icir": -0.0873,
-        "ic_win_rate": 0.4876,
+        "ic_mean": -0.0108,
+        "icir": -0.0943,
+        "ic_win_rate": 0.4662,
         "sharpe": -0.9721,
         "annual_return": -18.48,
         "max_drawdown": -95.16
@@ -5840,9 +6223,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_054_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0227,
-        "icir": 0.1892,
-        "ic_win_rate": 0.5987,
+        "ic_mean": 0.0038,
+        "icir": 0.0402,
+        "ic_win_rate": 0.5386,
         "sharpe": -0.7182,
         "annual_return": -11.06,
         "max_drawdown": -88.61
@@ -5855,12 +6238,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_055_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.001,
+        "icir": -0.0348,
+        "ic_win_rate": 0.4735,
+        "sharpe": -1.1623,
+        "annual_return": -19.63,
+        "max_drawdown": -96.55
       },
       {
         "name": "gtja191_056",
@@ -5885,12 +6268,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_057_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.0059,
+        "icir": -0.0468,
+        "ic_win_rate": 0.4766,
+        "sharpe": -0.2659,
+        "annual_return": -6.24,
+        "max_drawdown": -74.73
       },
       {
         "name": "gtja191_058",
@@ -5930,12 +6313,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_060_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.009,
+        "icir": -0.1314,
+        "ic_win_rate": 0.4354,
+        "sharpe": -1.5764,
+        "annual_return": -20.21,
+        "max_drawdown": -96.92
       },
       {
         "name": "gtja191_061",
@@ -5945,12 +6328,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_061_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.0089,
+        "icir": 0.0918,
+        "ic_win_rate": 0.5395,
+        "sharpe": 1.0024,
+        "annual_return": 15.78,
+        "max_drawdown": -28.25
       },
       {
         "name": "gtja191_062",
@@ -5960,9 +6343,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_062_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0122,
-        "icir": 0.1871,
-        "ic_win_rate": 0.5789,
+        "ic_mean": 0.0082,
+        "icir": 0.1277,
+        "ic_win_rate": 0.5674,
         "sharpe": 1.9013,
         "annual_return": 20.3,
         "max_drawdown": -39.54
@@ -5990,12 +6373,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_064_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.0076,
+        "icir": 0.1131,
+        "ic_win_rate": 0.5609,
+        "sharpe": 1.4639,
+        "annual_return": 16.81,
+        "max_drawdown": -32.91
       },
       {
         "name": "gtja191_065",
@@ -6110,12 +6493,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_072_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.0061,
+        "icir": 0.0515,
+        "ic_win_rate": 0.5229,
+        "sharpe": 0.818,
+        "annual_return": 13.95,
+        "max_drawdown": -38.56
       },
       {
         "name": "gtja191_073",
@@ -6125,9 +6508,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_073_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0054,
-        "icir": -0.1282,
-        "ic_win_rate": 0.6,
+        "ic_mean": 0.0017,
+        "icir": 0.0312,
+        "ic_win_rate": 0.5222,
         "sharpe": 0.4673,
         "annual_return": 3.73,
         "max_drawdown": -27.19
@@ -6140,9 +6523,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_074_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.019,
-        "icir": -0.1945,
-        "ic_win_rate": 0.3636,
+        "ic_mean": -0.0011,
+        "icir": -0.0157,
+        "ic_win_rate": 0.4875,
         "sharpe": -0.0062,
         "annual_return": -0.72,
         "max_drawdown": -75.39
@@ -6155,12 +6538,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_075_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.0162,
+        "icir": -0.1847,
+        "ic_win_rate": 0.4157,
+        "sharpe": -2.3517,
+        "annual_return": -29.89,
+        "max_drawdown": -99.6
       },
       {
         "name": "gtja191_076",
@@ -6170,12 +6553,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_076_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.032,
+        "icir": 0.2876,
+        "ic_win_rate": 0.5638,
+        "sharpe": 1.1836,
+        "annual_return": 13.2,
+        "max_drawdown": -64.46
       },
       {
         "name": "gtja191_077",
@@ -6185,12 +6568,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_077_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.0085,
+        "icir": -0.1357,
+        "ic_win_rate": 0.4426,
+        "sharpe": -2.1675,
+        "annual_return": -20.99,
+        "max_drawdown": -97.07
       },
       {
         "name": "gtja191_078",
@@ -6200,9 +6583,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_078_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0143,
-        "icir": 0.099,
-        "ic_win_rate": 0.5439,
+        "ic_mean": 0.0207,
+        "icir": 0.1611,
+        "ic_win_rate": 0.5759,
         "sharpe": 2.2204,
         "annual_return": 52.4,
         "max_drawdown": -35.46
@@ -6230,9 +6613,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_080_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0495,
-        "icir": -1.524,
-        "ic_win_rate": 0.0,
+        "ic_mean": -0.031,
+        "icir": -0.5546,
+        "ic_win_rate": 0.2812,
         "sharpe": -1.4877,
         "annual_return": -20.13,
         "max_drawdown": -96.53
@@ -6260,12 +6643,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_082_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.0054,
+        "icir": 0.0461,
+        "ic_win_rate": 0.5187,
+        "sharpe": 0.7904,
+        "annual_return": 13.32,
+        "max_drawdown": -37.35
       },
       {
         "name": "gtja191_083",
@@ -6380,9 +6763,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_090_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0214,
-        "icir": -0.242,
-        "ic_win_rate": 0.4018,
+        "ic_mean": 0.002,
+        "icir": 0.0281,
+        "ic_win_rate": 0.5143,
         "sharpe": 0.3064,
         "annual_return": 2.89,
         "max_drawdown": -68.33
@@ -6395,9 +6778,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_091_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0075,
-        "icir": 0.1238,
-        "ic_win_rate": 0.6087,
+        "ic_mean": -0.003,
+        "icir": -0.0443,
+        "ic_win_rate": 0.4699,
         "sharpe": -1.4584,
         "annual_return": -15.48,
         "max_drawdown": -97.01
@@ -6470,12 +6853,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_096_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.0054,
+        "icir": -0.0441,
+        "ic_win_rate": 0.4887,
+        "sharpe": -0.4891,
+        "annual_return": -9.63,
+        "max_drawdown": -80.73
       },
       {
         "name": "gtja191_097",
@@ -6590,12 +6973,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_104_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.0013,
+        "icir": 0.0242,
+        "ic_win_rate": 0.5135,
+        "sharpe": 0.5079,
+        "annual_return": 4.1,
+        "max_drawdown": -51.87
       },
       {
         "name": "gtja191_105",
@@ -6605,9 +6988,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_105_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0072,
-        "icir": 0.1563,
-        "ic_win_rate": 0.5778,
+        "ic_mean": 0.0005,
+        "icir": 0.0072,
+        "ic_win_rate": 0.508,
         "sharpe": -0.1178,
         "annual_return": -2.12,
         "max_drawdown": -92.18
@@ -6650,9 +7033,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_108_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0033,
-        "icir": -0.034,
-        "ic_win_rate": 0.4867,
+        "ic_mean": 0.0079,
+        "icir": 0.1041,
+        "ic_win_rate": 0.5445,
         "sharpe": 1.433,
         "annual_return": 17.56,
         "max_drawdown": -34.91
@@ -6665,9 +7048,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_109_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0287,
-        "icir": -0.2534,
-        "ic_win_rate": 0.3712,
+        "ic_mean": -0.0187,
+        "icir": -0.184,
+        "ic_win_rate": 0.4154,
         "sharpe": -2.5821,
         "annual_return": -35.67,
         "max_drawdown": -99.87
@@ -6680,9 +7063,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_110_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0023,
-        "icir": -0.0205,
-        "ic_win_rate": 0.4688,
+        "ic_mean": -0.0001,
+        "icir": -0.0013,
+        "ic_win_rate": 0.4714,
         "sharpe": 0.2249,
         "annual_return": 2.4,
         "max_drawdown": -45.99
@@ -6695,12 +7078,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_111_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.0073,
+        "icir": 0.097,
+        "ic_win_rate": 0.5531,
+        "sharpe": 0.6036,
+        "annual_return": 8.33,
+        "max_drawdown": -76.71
       },
       {
         "name": "gtja191_112",
@@ -6710,9 +7093,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_112_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0166,
-        "icir": -0.1364,
-        "ic_win_rate": 0.4421,
+        "ic_mean": 0.015,
+        "icir": 0.1209,
+        "ic_win_rate": 0.5558,
         "sharpe": 1.9798,
         "annual_return": 43.75,
         "max_drawdown": -44.3
@@ -6725,12 +7108,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_113_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.0003,
+        "icir": -0.0061,
+        "ic_win_rate": 0.5019,
+        "sharpe": -0.4664,
+        "annual_return": -3.2,
+        "max_drawdown": -59.45
       },
       {
         "name": "gtja191_114",
@@ -6740,9 +7123,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_114_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0266,
-        "icir": 4.9416,
-        "ic_win_rate": 1.0,
+        "ic_mean": 0.0038,
+        "icir": 0.1719,
+        "ic_win_rate": 0.6522,
         "sharpe": 0.7993,
         "annual_return": 10.46,
         "max_drawdown": -33.77
@@ -6755,12 +7138,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_115_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.0027,
+        "icir": 0.0486,
+        "ic_win_rate": 0.5269,
+        "sharpe": 1.6817,
+        "annual_return": 15.72,
+        "max_drawdown": -31.87
       },
       {
         "name": "gtja191_116",
@@ -6800,9 +7183,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_118_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.013,
-        "icir": -0.11,
-        "ic_win_rate": 0.4213,
+        "ic_mean": -0.0125,
+        "icir": -0.106,
+        "ic_win_rate": 0.4419,
         "sharpe": -0.8984,
         "annual_return": -14.5,
         "max_drawdown": -91.94
@@ -6815,9 +7198,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_119_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0048,
-        "icir": 0.1425,
-        "ic_win_rate": 0.4,
+        "ic_mean": 0.0002,
+        "icir": 0.0046,
+        "ic_win_rate": 0.5107,
         "sharpe": -0.0449,
         "annual_return": -0.7,
         "max_drawdown": -46.07
@@ -6860,9 +7243,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_122_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0061,
-        "icir": 0.0525,
-        "ic_win_rate": 0.4393,
+        "ic_mean": 0.0242,
+        "icir": 0.2343,
+        "ic_win_rate": 0.553,
         "sharpe": -0.1946,
         "annual_return": -5.75,
         "max_drawdown": -82.84
@@ -6905,12 +7288,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_125_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.0006,
+        "icir": -0.0245,
+        "ic_win_rate": 0.4733,
+        "sharpe": -0.8848,
+        "annual_return": -10.36,
+        "max_drawdown": -80.91
       },
       {
         "name": "gtja191_126",
@@ -6935,9 +7318,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_127_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0073,
-        "icir": 0.0453,
-        "ic_win_rate": 0.4967,
+        "ic_mean": -0.0037,
+        "icir": -0.0266,
+        "ic_win_rate": 0.4692,
         "sharpe": -1.321,
         "annual_return": -29.31,
         "max_drawdown": -99.73
@@ -6950,9 +7333,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_128_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0021,
-        "icir": -0.0213,
-        "ic_win_rate": 0.5031,
+        "ic_mean": 0.0003,
+        "icir": 0.0038,
+        "ic_win_rate": 0.5128,
         "sharpe": 1.6103,
         "annual_return": 29.41,
         "max_drawdown": -60.84
@@ -6980,12 +7363,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_130_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.0034,
+        "icir": 0.1145,
+        "ic_win_rate": 0.5108,
+        "sharpe": 0.86,
+        "annual_return": 6.58,
+        "max_drawdown": -14.53
       },
       {
         "name": "gtja191_131",
@@ -7070,9 +7453,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_136_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0132,
-        "icir": 0.1617,
-        "ic_win_rate": 0.5852,
+        "ic_mean": -0.0056,
+        "icir": -0.0759,
+        "ic_win_rate": 0.467,
         "sharpe": 0.1428,
         "annual_return": 1.0,
         "max_drawdown": -87.66
@@ -7085,9 +7468,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_137_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0032,
-        "icir": -0.0794,
-        "ic_win_rate": 0.4974,
+        "ic_mean": 0.0012,
+        "icir": 0.0412,
+        "ic_win_rate": 0.5104,
         "sharpe": 2.7627,
         "annual_return": 58.7,
         "max_drawdown": -26.72
@@ -7115,9 +7498,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_139_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0174,
-        "icir": 0.2274,
-        "ic_win_rate": 0.6222,
+        "ic_mean": -0.0015,
+        "icir": -0.0208,
+        "ic_win_rate": 0.4904,
         "sharpe": -0.0256,
         "annual_return": -1.08,
         "max_drawdown": -94.29
@@ -7145,9 +7528,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_141_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0235,
-        "icir": 0.6539,
-        "ic_win_rate": 0.6,
+        "ic_mean": -0.0042,
+        "icir": -0.0828,
+        "ic_win_rate": 0.4713,
         "sharpe": -0.9554,
         "annual_return": -8.7,
         "max_drawdown": -89.81
@@ -7190,9 +7573,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_144_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0152,
-        "icir": 0.1243,
-        "ic_win_rate": 0.5,
+        "ic_mean": -0.0043,
+        "icir": -0.0514,
+        "ic_win_rate": 0.444,
         "sharpe": 0.8283,
         "annual_return": 14.14,
         "max_drawdown": -43.53
@@ -7205,9 +7588,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_145_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.012,
-        "icir": -0.1244,
-        "ic_win_rate": 0.4211,
+        "ic_mean": -0.0096,
+        "icir": -0.1136,
+        "ic_win_rate": 0.4371,
         "sharpe": -0.2869,
         "annual_return": -5.18,
         "max_drawdown": -93.92
@@ -7490,12 +7873,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_164_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.0013,
+        "icir": -0.0339,
+        "ic_win_rate": 0.4518,
+        "sharpe": 0.6777,
+        "annual_return": 4.64,
+        "max_drawdown": -26.08
       },
       {
         "name": "gtja191_165",
@@ -7505,9 +7888,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_165_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0025,
-        "icir": -0.0862,
-        "ic_win_rate": 0.4536,
+        "ic_mean": -0.0031,
+        "icir": -0.11,
+        "ic_win_rate": 0.4385,
         "sharpe": -1.0923,
         "annual_return": -15.11,
         "max_drawdown": -91.53
@@ -7550,9 +7933,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_168_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0409,
-        "icir": 0.3311,
-        "ic_win_rate": 0.7059,
+        "ic_mean": 0.0024,
+        "icir": 0.0215,
+        "ic_win_rate": 0.5316,
         "sharpe": 0.9665,
         "annual_return": 16.13,
         "max_drawdown": -92.31
@@ -7580,9 +7963,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_170_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0259,
-        "icir": -0.2207,
-        "ic_win_rate": 0.3346,
+        "ic_mean": -0.0277,
+        "icir": -0.2843,
+        "ic_win_rate": 0.3636,
         "sharpe": -3.2037,
         "annual_return": -44.17,
         "max_drawdown": -99.99
@@ -7610,12 +7993,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_172_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.0024,
+        "icir": 0.0546,
+        "ic_win_rate": 0.5054,
+        "sharpe": 1.1515,
+        "annual_return": 8.58,
+        "max_drawdown": -26.39
       },
       {
         "name": "gtja191_173",
@@ -7640,9 +8023,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_174_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
+        "ic_mean": 0.0034,
+        "icir": 0.0211,
+        "ic_win_rate": 0.484,
         "sharpe": null,
         "annual_return": null,
         "max_drawdown": null
@@ -7670,9 +8053,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_176_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0028,
-        "icir": -0.0602,
-        "ic_win_rate": 0.52,
+        "ic_mean": -0.0032,
+        "icir": -0.0537,
+        "ic_win_rate": 0.4688,
         "sharpe": -0.2539,
         "annual_return": -2.73,
         "max_drawdown": -65.83
@@ -7715,12 +8098,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_179_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.0006,
+        "icir": -0.0085,
+        "ic_win_rate": 0.4912,
+        "sharpe": 0.1363,
+        "annual_return": 0.9,
+        "max_drawdown": -87.92
       },
       {
         "name": "gtja191_180",
@@ -7730,9 +8113,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_180_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0034,
-        "icir": 0.0564,
-        "ic_win_rate": 0.5422,
+        "ic_mean": 0.0036,
+        "icir": 0.0582,
+        "ic_win_rate": 0.5431,
         "sharpe": -0.9368,
         "annual_return": -12.78,
         "max_drawdown": -89.31
@@ -7775,9 +8158,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_183_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0044,
-        "icir": -0.1211,
-        "ic_win_rate": 0.4076,
+        "ic_mean": -0.0038,
+        "icir": -0.1142,
+        "ic_win_rate": 0.4115,
         "sharpe": -1.0844,
         "annual_return": -14.84,
         "max_drawdown": -91.51
@@ -7790,9 +8173,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_184_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": 0.0047,
-        "icir": 0.0545,
-        "ic_win_rate": 0.5473,
+        "ic_mean": 0.001,
+        "icir": 0.0114,
+        "ic_win_rate": 0.5269,
         "sharpe": -0.0973,
         "annual_return": -2.45,
         "max_drawdown": -62.1
@@ -7820,12 +8203,12 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_186_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.0004,
+        "icir": -0.0099,
+        "ic_win_rate": 0.4694,
+        "sharpe": 0.2157,
+        "annual_return": 1.25,
+        "max_drawdown": -32.96
       },
       {
         "name": "gtja191_187",
@@ -7850,9 +8233,9 @@
         "tag": "raw",
         "report_path": "alpha191/gtja191_188_raw_20100101_20260301.html",
         "category": "alpha191",
-        "ic_mean": -0.0189,
-        "icir": -0.1778,
-        "ic_win_rate": 0.3865,
+        "ic_mean": -0.0273,
+        "icir": -0.2919,
+        "ic_win_rate": 0.3521,
         "sharpe": -3.0792,
         "annual_return": -39.01,
         "max_drawdown": -99.94
@@ -7910,9 +8293,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_001_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": -0.0005,
-        "icir": -0.0044,
-        "ic_win_rate": 0.4934,
+        "ic_mean": -0.0006,
+        "icir": -0.0063,
+        "ic_win_rate": 0.4926,
         "sharpe": 1.2056,
         "annual_return": 22.61,
         "max_drawdown": -48.73
@@ -7925,9 +8308,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_002_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": -0.0245,
-        "icir": -1.5938,
-        "ic_win_rate": 0.0,
+        "ic_mean": 0.0045,
+        "icir": 0.0878,
+        "ic_win_rate": 0.5452,
         "sharpe": 0.9515,
         "annual_return": 7.12,
         "max_drawdown": -33.17
@@ -7940,9 +8323,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_003_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.0072,
-        "icir": 0.1563,
-        "ic_win_rate": 0.5778,
+        "ic_mean": 0.0005,
+        "icir": 0.0072,
+        "ic_win_rate": 0.508,
         "sharpe": -0.1178,
         "annual_return": -2.12,
         "max_drawdown": -92.18
@@ -7985,9 +8368,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_006_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.0174,
-        "icir": 0.2274,
-        "ic_win_rate": 0.6222,
+        "ic_mean": -0.0015,
+        "icir": -0.0208,
+        "ic_win_rate": 0.4904,
         "sharpe": -0.0256,
         "annual_return": -1.08,
         "max_drawdown": -94.29
@@ -8000,9 +8383,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_007_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": -0.0087,
-        "icir": -0.0863,
-        "ic_win_rate": 0.4532,
+        "ic_mean": -0.0088,
+        "icir": -0.0868,
+        "ic_win_rate": 0.4531,
         "sharpe": -1.8462,
         "annual_return": -27.62,
         "max_drawdown": -99.73
@@ -8105,9 +8488,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_014_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.0132,
-        "icir": 0.1617,
-        "ic_win_rate": 0.5852,
+        "ic_mean": -0.0056,
+        "icir": -0.0759,
+        "ic_win_rate": 0.467,
         "sharpe": 0.1428,
         "annual_return": 1.0,
         "max_drawdown": -87.66
@@ -8120,12 +8503,12 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_015_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.009,
+        "icir": 0.1355,
+        "ic_win_rate": 0.5732,
+        "sharpe": 1.7284,
+        "annual_return": 20.33,
+        "max_drawdown": -29.89
       },
       {
         "name": "wq101_016",
@@ -8165,9 +8548,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_018_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.0235,
-        "icir": 0.1989,
-        "ic_win_rate": 0.6053,
+        "ic_mean": 0.0049,
+        "icir": 0.0508,
+        "ic_win_rate": 0.5413,
         "sharpe": -0.6502,
         "annual_return": -10.28,
         "max_drawdown": -87.4
@@ -8225,12 +8608,12 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_022_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.0013,
+        "icir": 0.0242,
+        "ic_win_rate": 0.5135,
+        "sharpe": 0.5079,
+        "annual_return": 4.1,
+        "max_drawdown": -51.87
       },
       {
         "name": "wq101_023",
@@ -8285,12 +8668,12 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_026_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.0116,
+        "icir": 0.1919,
+        "ic_win_rate": 0.5724,
+        "sharpe": 2.3781,
+        "annual_return": 24.58,
+        "max_drawdown": -18.35
       },
       {
         "name": "wq101_027",
@@ -8345,9 +8728,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_030_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": -0.0018,
-        "icir": -0.0182,
-        "ic_win_rate": 0.4743,
+        "ic_mean": -0.0143,
+        "icir": -0.1779,
+        "ic_win_rate": 0.4105,
         "sharpe": -1.6715,
         "annual_return": -23.34,
         "max_drawdown": -98.79
@@ -8405,9 +8788,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_034_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.0059,
-        "icir": 0.0631,
-        "ic_win_rate": 0.55,
+        "ic_mean": -0.0068,
+        "icir": -0.0739,
+        "ic_win_rate": 0.4862,
         "sharpe": -2.6096,
         "annual_return": -35.82,
         "max_drawdown": -99.88
@@ -8435,9 +8818,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_036_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.0104,
-        "icir": 0.1185,
-        "ic_win_rate": 0.5385,
+        "ic_mean": 0.0023,
+        "icir": 0.0378,
+        "ic_win_rate": 0.5242,
         "sharpe": 0.1936,
         "annual_return": 1.49,
         "max_drawdown": -47.13
@@ -8450,9 +8833,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_037_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.0047,
-        "icir": 0.0545,
-        "ic_win_rate": 0.5473,
+        "ic_mean": 0.001,
+        "icir": 0.0114,
+        "ic_win_rate": 0.5269,
         "sharpe": -0.0973,
         "annual_return": -2.45,
         "max_drawdown": -62.1
@@ -8480,9 +8863,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_039_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.0207,
-        "icir": 0.1736,
-        "ic_win_rate": 0.5556,
+        "ic_mean": 0.0037,
+        "icir": 0.0321,
+        "ic_win_rate": 0.5126,
         "sharpe": -0.0507,
         "annual_return": -2.33,
         "max_drawdown": -68.87
@@ -8495,9 +8878,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_040_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.0249,
-        "icir": 0.2884,
-        "ic_win_rate": 0.625,
+        "ic_mean": 0.0035,
+        "icir": 0.0391,
+        "ic_win_rate": 0.5229,
         "sharpe": 0.6732,
         "annual_return": 8.74,
         "max_drawdown": -87.06
@@ -8555,9 +8938,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_044_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.0122,
-        "icir": 0.1871,
-        "ic_win_rate": 0.5789,
+        "ic_mean": 0.0082,
+        "icir": 0.1277,
+        "ic_win_rate": 0.5674,
         "sharpe": 1.9013,
         "annual_return": 20.3,
         "max_drawdown": -39.54
@@ -8570,12 +8953,12 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_045_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.0003,
+        "icir": -0.0061,
+        "ic_win_rate": 0.5019,
+        "sharpe": -0.4664,
+        "annual_return": -3.2,
+        "max_drawdown": -59.45
       },
       {
         "name": "wq101_046",
@@ -8600,9 +8983,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_047_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": -0.0259,
-        "icir": -0.2207,
-        "ic_win_rate": 0.3346,
+        "ic_mean": -0.0277,
+        "icir": -0.2843,
+        "ic_win_rate": 0.3636,
         "sharpe": -3.2037,
         "annual_return": -44.17,
         "max_drawdown": -99.99
@@ -8615,9 +8998,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_048_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.0045,
-        "icir": 0.0434,
-        "ic_win_rate": 0.5235,
+        "ic_mean": 0.0025,
+        "icir": 0.0364,
+        "ic_win_rate": 0.5057,
         "sharpe": 0.9758,
         "annual_return": 18.82,
         "max_drawdown": -37.01
@@ -8645,9 +9028,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_050_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": -0.0125,
-        "icir": -0.1122,
-        "ic_win_rate": 0.5556,
+        "ic_mean": 0.0038,
+        "icir": 0.0553,
+        "ic_win_rate": 0.5338,
         "sharpe": 0.2435,
         "annual_return": 2.09,
         "max_drawdown": -82.4
@@ -8690,12 +9073,12 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_053_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.0182,
+        "icir": -0.5723,
+        "ic_win_rate": 0.4444,
+        "sharpe": -0.7406,
+        "annual_return": -9.85,
+        "max_drawdown": -91.0
       },
       {
         "name": "wq101_054",
@@ -8705,9 +9088,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_054_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.0058,
-        "icir": 0.2708,
-        "ic_win_rate": 0.5,
+        "ic_mean": -0.0008,
+        "icir": -0.0085,
+        "ic_win_rate": 0.5134,
         "sharpe": -1.5462,
         "annual_return": -21.61,
         "max_drawdown": -97.85
@@ -8720,9 +9103,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_055_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.0028,
-        "icir": 0.0602,
-        "ic_win_rate": 0.48,
+        "ic_mean": 0.0032,
+        "icir": 0.0537,
+        "ic_win_rate": 0.5312,
         "sharpe": 0.2538,
         "annual_return": 1.93,
         "max_drawdown": -61.41
@@ -8735,9 +9118,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_056_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.0078,
-        "icir": 0.0917,
-        "ic_win_rate": 0.5168,
+        "ic_mean": -0.011,
+        "icir": -0.1302,
+        "ic_win_rate": 0.4434,
         "sharpe": -3.0111,
         "annual_return": -33.8,
         "max_drawdown": -99.81
@@ -8840,9 +9223,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_063_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": -0.001,
-        "icir": -0.0222,
-        "ic_win_rate": 0.5,
+        "ic_mean": 0.0075,
+        "icir": 0.0791,
+        "ic_win_rate": 0.5434,
         "sharpe": 0.6015,
         "annual_return": 8.17,
         "max_drawdown": -62.74
@@ -8900,9 +9283,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_067_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": -0.0119,
-        "icir": -0.1797,
-        "ic_win_rate": 0.381,
+        "ic_mean": -0.0054,
+        "icir": -0.0768,
+        "ic_win_rate": 0.4852,
         "sharpe": -2.5713,
         "annual_return": -26.58,
         "max_drawdown": -99.31
@@ -8975,12 +9358,12 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_072_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.002,
+        "icir": 0.0823,
+        "ic_win_rate": 0.5205,
+        "sharpe": 0.6284,
+        "annual_return": 4.63,
+        "max_drawdown": -14.13
       },
       {
         "name": "wq101_073",
@@ -9050,12 +9433,12 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_077_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": -0.0085,
+        "icir": -0.1357,
+        "ic_win_rate": 0.4426,
+        "sharpe": -2.1675,
+        "annual_return": -20.99,
+        "max_drawdown": -97.07
       },
       {
         "name": "wq101_078",
@@ -9065,9 +9448,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_078_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.01,
-        "icir": 0.1272,
-        "ic_win_rate": 0.5714,
+        "ic_mean": 0.0011,
+        "icir": 0.0207,
+        "ic_win_rate": 0.5098,
         "sharpe": 0.2692,
         "annual_return": 1.94,
         "max_drawdown": -51.77
@@ -9140,9 +9523,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_083_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": 0.0266,
-        "icir": 4.9416,
-        "ic_win_rate": 1.0,
+        "ic_mean": 0.0038,
+        "icir": 0.1719,
+        "ic_win_rate": 0.6522,
         "sharpe": 0.7993,
         "annual_return": 10.46,
         "max_drawdown": -33.77
@@ -9170,12 +9553,12 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_085_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
+        "ic_mean": 0.0026,
+        "icir": 0.048,
+        "ic_win_rate": 0.5267,
+        "sharpe": 1.6878,
+        "annual_return": 15.81,
+        "max_drawdown": -31.48
       },
       {
         "name": "wq101_086",
@@ -9260,9 +9643,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_091_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": -0.0028,
-        "icir": -0.0711,
-        "ic_win_rate": 0.6,
+        "ic_mean": 0.0015,
+        "icir": 0.0276,
+        "ic_win_rate": 0.5146,
         "sharpe": 0.1874,
         "annual_return": 1.22,
         "max_drawdown": -33.22
@@ -9365,9 +9748,9 @@
         "tag": "raw",
         "report_path": "alpha101/wq101_098_raw_20100101_20260301.html",
         "category": "alpha101",
-        "ic_mean": -0.0089,
-        "icir": -0.2256,
-        "ic_win_rate": 0.6,
+        "ic_mean": -0.0013,
+        "icir": -0.0237,
+        "ic_win_rate": 0.5059,
         "sharpe": -0.3598,
         "annual_return": -3.33,
         "max_drawdown": -57.24
@@ -9418,9 +9801,9 @@
         "max_drawdown": -22.83
       }
     ],
-    "factor_count": 294
+    "factor_count": 291
   },
-  "generated_at": "2026-02-13 13:20:17"
+  "generated_at": "2026-02-13 14:00:40"
 };
 
         // Navigation
@@ -9448,6 +9831,32 @@
         }
 
         // Populate Data Panel
+        let currentDataTypeFilter = 'all';
+        let currentDataQuery = '';
+
+        function filterDataType(type) {
+            currentDataTypeFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.type === type);
+            });
+            applyDataFilters();
+        }
+
+        function applyDataFilters() {
+            const { data } = dashboardData;
+            let filtered = data.tables;
+            if (currentDataTypeFilter !== 'all') {
+                filtered = filtered.filter(t => t.data_type === currentDataTypeFilter);
+            }
+            if (currentDataQuery) {
+                filtered = filtered.filter(t =>
+                    t.name.toLowerCase().includes(currentDataQuery) ||
+                    (t.description && t.description.toLowerCase().includes(currentDataQuery))
+                );
+            }
+            renderDataTables(filtered);
+        }
+
         function populateDataPanel() {
             const { data } = dashboardData;
 
@@ -9464,20 +9873,19 @@
 
             // Search
             document.getElementById('data-search').addEventListener('input', (e) => {
-                const query = e.target.value.toLowerCase();
-                const filtered = data.tables.filter(t =>
-                    t.name.toLowerCase().includes(query) ||
-                    (t.description && t.description.toLowerCase().includes(query))
-                );
-                renderDataTables(filtered);
+                currentDataQuery = e.target.value.toLowerCase();
+                applyDataFilters();
             });
         }
+
+        const typeLabels = { raw_data: 'Raw Data', factor: 'Factor', derived: 'Derived', other: 'Other' };
 
         function renderDataTables(tables) {
             const html = tables.length > 0
                 ? tables.map(t => `
                     <tr>
                         <td><strong>${t.name}</strong></td>
+                        <td><span class="type-badge ${t.data_type || 'other'}">${typeLabels[t.data_type] || t.data_type || 'Other'}</span></td>
                         <td>${t.description || '--'}</td>
                         <td class="num">${formatNumber(t.row_count)}</td>
                         <td class="num">${t.size_mb.toFixed(2)}</td>
@@ -9485,7 +9893,7 @@
                         <td>${t.updated_at || '--'}</td>
                     </tr>
                 `).join('')
-                : '<tr><td colspan="6" style="text-align: center; color: #999; padding: 40px;">No tables found</td></tr>';
+                : '<tr><td colspan="7" style="text-align: center; color: #999; padding: 40px;">No tables found</td></tr>';
 
             document.getElementById('data-table-list').innerHTML = html;
         }
