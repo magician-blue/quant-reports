@@ -402,103 +402,121 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            /* Header */
+            /* Header - compact */
             .header {
-                padding: 24px 16px;
+                padding: 16px;
             }
 
             .header h1 {
-                font-size: 24px;
-                margin-bottom: 8px;
+                font-size: 20px;
+                margin-bottom: 4px;
             }
 
             .header p {
-                font-size: 14px;
+                font-size: 12px;
             }
 
-            /* Navigation */
+            /* Navigation - compact */
             .nav-inner {
-                padding: 0 16px;
+                padding: 0 8px;
             }
 
             .nav-item {
-                padding: 16px 20px;
-                font-size: 14px;
+                padding: 10px 16px;
+                font-size: 13px;
             }
 
             /* Container */
             .container {
-                padding: 16px;
+                padding: 12px;
             }
 
-            /* Stats Cards */
+            /* Stats Cards - 2-column grid */
             .stats-cards {
-                grid-template-columns: 1fr;
-                gap: 12px;
-                margin-bottom: 20px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+                margin-bottom: 12px;
             }
 
             .stat-card {
-                padding: 20px;
+                padding: 12px;
             }
 
             .stat-label {
-                font-size: 11px;
-                margin-bottom: 8px;
+                font-size: 10px;
+                margin-bottom: 4px;
+                letter-spacing: 0.5px;
             }
 
             .stat-value {
-                font-size: 28px;
-                margin-bottom: 4px;
+                font-size: 20px;
+                margin-bottom: 2px;
             }
 
             .stat-subtitle {
-                font-size: 12px;
+                font-size: 10px;
             }
 
             /* Table Container */
             .table-container {
-                margin-bottom: 16px;
+                margin-bottom: 12px;
+                border-radius: 8px;
             }
 
             .table-header {
-                padding: 16px;
+                padding: 12px;
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 12px;
+                gap: 8px;
             }
 
             .factor-controls {
                 width: 100%;
                 flex-direction: column;
                 align-items: stretch;
-                gap: 10px;
+                gap: 8px;
             }
 
             .table-title {
-                font-size: 18px;
+                font-size: 15px;
             }
 
             .table-note {
-                margin-top: 4px;
-                font-size: 11px;
+                margin-top: 2px;
+                font-size: 10px;
             }
 
             .search-box input {
                 width: 100%;
-                font-size: 14px;
-                padding: 10px 14px 10px 38px;
+                font-size: 13px;
+                padding: 8px 12px 8px 34px;
             }
 
             .search-icon {
-                font-size: 14px;
-                left: 12px;
+                font-size: 13px;
+                left: 10px;
             }
 
             .tag-filters {
                 width: 100%;
                 justify-content: flex-start;
                 flex-wrap: wrap;
+                padding: 6px 8px;
+                gap: 6px;
+            }
+
+            .tag-filter-label {
+                font-size: 12px;
+            }
+
+            .tag-select {
+                font-size: 12px;
+                padding: 4px 6px;
+            }
+
+            .filter-btn {
+                padding: 4px 10px;
+                font-size: 11px;
             }
 
             /* Table - Enable horizontal scroll */
@@ -508,76 +526,106 @@
             }
 
             table {
-                min-width: 600px;
-                font-size: 12px;
+                min-width: 580px;
+                font-size: 11px;
             }
 
             th {
-                padding: 12px 16px;
-                font-size: 10px;
+                padding: 8px 10px;
+                font-size: 9px;
+                letter-spacing: 0.5px;
             }
 
             td {
-                padding: 12px 16px;
-                font-size: 12px;
+                padding: 8px 10px;
+                font-size: 11px;
             }
 
             /* Badges */
             .badge {
-                font-size: 10px;
-                padding: 4px 10px;
+                font-size: 9px;
+                padding: 3px 8px;
+            }
+
+            .type-badge {
+                font-size: 9px;
+                padding: 2px 6px;
             }
 
             /* Button */
             .view-report-btn {
-                font-size: 11px;
-                padding: 5px 10px;
+                font-size: 10px;
+                padding: 4px 8px;
             }
 
             /* Footer */
             .footer {
-                font-size: 12px;
-                padding: 20px 16px;
-                margin-top: 40px;
+                font-size: 11px;
+                padding: 16px 12px;
+                margin-top: 24px;
             }
         }
 
-        /* Extra small devices */
+        /* Extra small devices (iPhone SE etc.) */
         @media (max-width: 480px) {
+            .header {
+                padding: 12px;
+            }
+
             .header h1 {
-                font-size: 20px;
+                font-size: 18px;
             }
 
             .header p {
-                font-size: 13px;
+                font-size: 11px;
             }
 
             .nav-item {
-                padding: 14px 16px;
-                font-size: 13px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .stats-cards {
+                gap: 6px;
+            }
+
+            .stat-card {
+                padding: 10px;
             }
 
             .stat-value {
-                font-size: 24px;
+                font-size: 18px;
+            }
+
+            .stat-label {
+                font-size: 9px;
+            }
+
+            .stat-subtitle {
+                font-size: 9px;
+            }
+
+            .container {
+                padding: 8px;
             }
 
             .table-title {
-                font-size: 16px;
+                font-size: 14px;
             }
 
             table {
                 min-width: 500px;
-                font-size: 11px;
+                font-size: 10px;
             }
 
             th {
-                padding: 10px 12px;
-                font-size: 9px;
+                padding: 6px 8px;
+                font-size: 8px;
             }
 
             td {
-                padding: 10px 12px;
-                font-size: 11px;
+                padding: 6px 8px;
+                font-size: 10px;
             }
         }
     </style>
@@ -710,7 +758,7 @@
     </div>
 
     <div class="footer">
-        Generated at 2026-02-13 15:04:13 |
+        Generated at 2026-02-13 18:56:24 |
         Data from metadata.db
     </div>
 
@@ -5436,36 +5484,6 @@
   "factors": {
     "factors": [
       {
-        "name": "alpha101_batch",
-        "display_name": "alpha101_batch (raw)",
-        "base_name": "alpha101_batch",
-        "version_type": "raw",
-        "tag": "raw",
-        "report_path": "",
-        "category": "alpha101",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
-      },
-      {
-        "name": "alpha191_batch",
-        "display_name": "alpha191_batch (raw)",
-        "base_name": "alpha191_batch",
-        "version_type": "raw",
-        "tag": "raw",
-        "report_path": "",
-        "category": "alpha191",
-        "ic_mean": null,
-        "icir": null,
-        "ic_win_rate": null,
-        "sharpe": null,
-        "annual_return": null,
-        "max_drawdown": null
-      },
-      {
         "name": "gtja191_001",
         "display_name": "gtja191_001 (raw)",
         "base_name": "gtja191_001",
@@ -9831,9 +9849,9 @@
         "max_drawdown": -22.83
       }
     ],
-    "factor_count": 293
+    "factor_count": 291
   },
-  "generated_at": "2026-02-13 15:04:13"
+  "generated_at": "2026-02-13 18:56:24"
 };
 
         // Navigation
